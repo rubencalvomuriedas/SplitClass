@@ -1,0 +1,2 @@
+# SplitClass
+Primer proyecto grupal
