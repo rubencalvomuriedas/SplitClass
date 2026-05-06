@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS SplitClass;
 CREATE DATABASE IF NOT EXISTS SplitClass;
 USE SplitClass;
  
@@ -10,13 +11,15 @@ CREATE TABLE CATEGORIA (
 );
  
 CREATE TABLE USUARIO (
-    Id_Usuario INT          NOT NULL AUTO_INCREMENT,
-    Nombre     VARCHAR(100) NOT NULL,
-    Email      VARCHAR(150) NOT NULL UNIQUE,
-    DNI        VARCHAR(20)  UNIQUE,
-    Lenguaje   VARCHAR(10)  DEFAULT 'es',
-    Alias      VARCHAR(50),
-    IBAN       VARCHAR(34),
+    Id_Usuario      INT          NOT NULL AUTO_INCREMENT,
+    Nombre          VARCHAR(100) NOT NULL,
+    Email           VARCHAR(150) NOT NULL UNIQUE,
+    Password        VARCHAR(255) NOT NULL,              -- hash BCrypt
+    Lenguaje        VARCHAR(10)  DEFAULT 'es',
+    Alias           VARCHAR(50),
+    IBAN            VARCHAR(34),
+    Fecha_Creacion  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Fecha_Nacimiento DATE,
     PRIMARY KEY (Id_Usuario)
 );
 
@@ -26,15 +29,15 @@ CREATE TABLE GRUPO (
     Descripcion       TEXT,
     Moneda            VARCHAR(10)  DEFAULT 'EUR',
     Fecha_creacion    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Fecha_eliminacion DATETIME,                   
+    Fecha_eliminacion DATETIME,                         -- NULL = grupo activo (soft delete)
     PRIMARY KEY (Id_Grupo)
 );
- 
+
 CREATE TABLE MIEMBROS_GRUPO (
     Id_Miembros_Grupo INT         NOT NULL AUTO_INCREMENT,
     Id_Usuario        INT         NOT NULL,
     Id_Grupo          INT         NOT NULL,
-    Rol               VARCHAR(20) NOT NULL DEFAULT 'miembro', 
+    Rol               VARCHAR(20) NOT NULL DEFAULT 'miembro',  -- 'admin' | 'miembro'
     PRIMARY KEY (Id_Miembros_Grupo),
     UNIQUE KEY uq_usuario_grupo (Id_Usuario, Id_Grupo),
     CONSTRAINT fk_mg_usuario FOREIGN KEY (Id_Usuario) REFERENCES USUARIO (Id_Usuario),
@@ -42,17 +45,17 @@ CREATE TABLE MIEMBROS_GRUPO (
 );
 
 CREATE TABLE GASTO (
-    Id_Gasto          INT            NOT NULL AUTO_INCREMENT,
-    Concepto          VARCHAR(200)   NOT NULL,
-    Monto_total       DECIMAL(10, 2) NOT NULL,
-    Fecha             DATE           NOT NULL,
-    Id_Grupo          INT            NOT NULL,
-    Id_Categoria      INT,
-    Id_Usuario_Pagador INT           NOT NULL,
+    Id_Gasto           INT            NOT NULL AUTO_INCREMENT,
+    Concepto           VARCHAR(200)   NOT NULL,
+    Monto_total        DECIMAL(10, 2) NOT NULL,
+    Fecha              DATE           NOT NULL,
+    Id_Grupo           INT            NOT NULL,
+    Id_Categoria       INT,
+    Id_Usuario_Pagador INT            NOT NULL,
     PRIMARY KEY (Id_Gasto),
-    CONSTRAINT fk_gasto_grupo    FOREIGN KEY (Id_Grupo)           REFERENCES GRUPO    (Id_Grupo),
-    CONSTRAINT fk_gasto_cat      FOREIGN KEY (Id_Categoria)       REFERENCES CATEGORIA(Id_categoria),
-    CONSTRAINT fk_gasto_pagador  FOREIGN KEY (Id_Usuario_Pagador) REFERENCES USUARIO  (Id_Usuario)
+    CONSTRAINT fk_gasto_grupo   FOREIGN KEY (Id_Grupo)           REFERENCES GRUPO    (Id_Grupo),
+    CONSTRAINT fk_gasto_cat     FOREIGN KEY (Id_Categoria)       REFERENCES CATEGORIA(Id_categoria),
+    CONSTRAINT fk_gasto_pagador FOREIGN KEY (Id_Usuario_Pagador) REFERENCES USUARIO  (Id_Usuario)
 );
  
 CREATE TABLE REPARTO_GASTO (
@@ -67,16 +70,16 @@ CREATE TABLE REPARTO_GASTO (
 );
 
 CREATE TABLE LIQUIDACION (
-    Id_liquidacion  INT            NOT NULL AUTO_INCREMENT,
-    Monto           DECIMAL(10, 2) NOT NULL,
-    Fecha_movimiento DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Concepto        VARCHAR(200),
-    Estado          VARCHAR(20)    NOT NULL DEFAULT 'pendiente', 
-    Id_Emisor       INT            NOT NULL,   
-    Id_Receptor     INT            NOT NULL,   
-    Id_Grupo        INT            NOT NULL,
+    Id_liquidacion   INT            NOT NULL AUTO_INCREMENT,
+    Monto            DECIMAL(10, 2) NOT NULL,
+    Fecha_movimiento DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    Concepto         VARCHAR(200),
+    Estado           VARCHAR(20)    NOT NULL DEFAULT 'pendiente',  -- 'pendiente' | 'completado'
+    Id_Emisor        INT            NOT NULL,
+    Id_Receptor      INT            NOT NULL,
+    Id_Grupo         INT            NOT NULL,
     PRIMARY KEY (Id_liquidacion),
-    CONSTRAINT fk_liq_emisor   FOREIGN KEY (Id_Emisor)  REFERENCES USUARIO (Id_Usuario),
+    CONSTRAINT fk_liq_emisor   FOREIGN KEY (Id_Emisor)   REFERENCES USUARIO (Id_Usuario),
     CONSTRAINT fk_liq_receptor FOREIGN KEY (Id_Receptor) REFERENCES USUARIO (Id_Usuario),
     CONSTRAINT fk_liq_grupo    FOREIGN KEY (Id_Grupo)    REFERENCES GRUPO   (Id_Grupo)
 );
