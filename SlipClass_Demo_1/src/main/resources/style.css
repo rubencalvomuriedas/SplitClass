@@ -1,0 +1,59 @@
+
+.my-background {
+    -fx-background-color: #7E8FB3;
+}
+
+.my-button {
+    -fx-background-color: #4545b1;  /* Color de fondo del botón */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-min-width: 100;
+    -fx-max-width: 100;
+    -fx-max-height: 50;
+    -fx-min-height: 50;
+    -fx-background-radius: 10;
+}
+
+.my-button:hover {
+    -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
+}
+
+.my-button-secondary {
+    -fx-background-color: #4545b1;  /* Color de fondo del botón */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-min-width: 80;
+    -fx-max-width: 80;
+    -fx-max-height: 40;
+    -fx-min-height: 40;
+    -fx-background-radius: 10;
+}
+
+.my-button-secondary:hover {
+    -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
+}
+
+.my-error-text{
+    -fx-border-color: red;
+}
+
+.my-validated-text{
+    -fx-border-color: green;
+}
+
+.mi-title-view{
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #999b9c; /* Color alterno */
+    -fx-text-fill: black;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+.list-view .list-cell:filled:selected {
+    -fx-background-color: #196c77; /* Color de selección */
+    -fx-text-fill: white;
+}
