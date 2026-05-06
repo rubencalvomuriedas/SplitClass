@@ -92,16 +92,16 @@ CREATE TABLE IDIOMA (
 );
 
 INSERT INTO IDIOMA (Nombre, Codigo) VALUES 
-('Español', 'es'),
-('Inglés', 'en'),
-('Francés', 'fr'),
-('Alemán', 'de'),
-('Italiano', 'it'),
-('Portugués', 'pt'),
-('Chino', 'zh'),
-('Japonés', 'ja'),
-('Ruso', 'ru'),
-('Árabe', 'ar');
+('Español', 'ES'),
+('Inglés', 'EN'),
+('Francés', 'FR'),
+('Alemán', 'DE'),
+('Italiano', 'IT'),
+('Portugués', 'PT'),
+('Chino', 'ZH'),
+('Japonés', 'JA'),
+('Ruso', 'RU'),
+('Árabe', 'AR');
 
 INSERT INTO USUARIO (Nombre, Email, Password, Idioma, Alias, IBAN, Fecha_Nacimiento) VALUES 
 ('Alejandro García', 'aaa@email.com', '1234', 'es', 'Ale', 'ES1234567890123456789012', '1990-05-15'),
