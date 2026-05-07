@@ -11,8 +11,7 @@ public class grupo {
     private LocalDate fecha_creacion;
     private LocalDate fecha_eliminacion;
 
-    public grupo(int id_grupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion, LocalDate fecha_eliminacion) {
-        this.id_grupo = id_grupo;
+    public grupo(String titulo, String descripcion, String moneda, LocalDate fecha_creacion, LocalDate fecha_eliminacion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.moneda = moneda;

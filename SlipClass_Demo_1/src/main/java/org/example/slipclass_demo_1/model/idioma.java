@@ -6,8 +6,7 @@ public class idioma {
     private String nombre;
     private String codigo;
 
-    public idioma(int id_idioma, String nombre, String codigo) {
-        this.id_idioma = id_idioma;
+    public idioma(String nombre, String codigo) {
         this.nombre = nombre;
         this.codigo = codigo;
     }

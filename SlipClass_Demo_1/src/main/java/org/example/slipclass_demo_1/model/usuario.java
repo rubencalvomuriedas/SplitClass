@@ -14,8 +14,7 @@ public class usuario {
     private LocalDate fecha_creacion;
     private LocalDate fecha_nacimiento;
 
-    public usuario(int id_categoria, String nombre, String email, String password, String idioma, String alias, String iban, LocalDate fecha_creacion, LocalDate fecha_nacimiento) {
-        this.id_usuario = id_categoria;
+    public usuario(String nombre, String email, String password, String idioma, String alias, String iban, LocalDate fecha_creacion, LocalDate fecha_nacimiento) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -26,16 +25,6 @@ public class usuario {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public usuario(int id_categoria, String nombre, String email, String password, String idioma, String alias, LocalDate fecha_creacion, LocalDate fecha_nacimiento) {
-        this.id_usuario = id_categoria;
-        this.nombre = nombre;
-        this.email = email;
-        this.password = password;
-        this.idioma = idioma;
-        this.alias = alias;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_nacimiento = fecha_nacimiento;
-    }
 
     public int getId_usuario() {
         return id_usuario;
