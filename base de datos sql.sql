@@ -81,5 +81,5 @@ CREATE TABLE LIQUIDACION (
     PRIMARY KEY (Id_liquidacion),
     CONSTRAINT fk_liq_emisor   FOREIGN KEY (Id_Emisor)   REFERENCES USUARIO (Id_Usuario),
     CONSTRAINT fk_liq_receptor FOREIGN KEY (Id_Receptor) REFERENCES USUARIO (Id_Usuario),
-    CONSTRAINT fk_liq_grupo    FOREIGN KEY (Id_Grupo)    REFERENCES GRUPO   (Id_Grupo)
+    CONSTRAINT fk_liq_grupo    FOREIGN KEY (Id_Grupo)    REFERENCES GRUPO   (Id_Grupo) -- aaaaaa
 );
