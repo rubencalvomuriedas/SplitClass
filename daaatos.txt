@@ -13,3 +13,5 @@ gsgagsgasgasgsgsaggasga
 
 
 Corrupto que corrompo
+
+https://github.com/AnuarDecroly/PROG_25-26/blob/main/AppPersonasFX/src/main/resources/com/decroly/apppersonasfx/personas-view.fxml
