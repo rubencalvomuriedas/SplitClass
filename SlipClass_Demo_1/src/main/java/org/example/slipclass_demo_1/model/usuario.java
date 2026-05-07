@@ -1,0 +1,106 @@
+package org.example.slipclass_demo_1.model;
+
+import java.time.LocalDate;
+
+public class usuario {
+
+    private int id_usuario;
+    private String nombre;
+    private String email;
+    private String password;
+    private String idioma;
+    private String alias;
+    private String iban;
+    private LocalDate fecha_creacion;
+    private LocalDate fecha_nacimiento;
+
+    public usuario(int id_categoria, String nombre, String email, String password, String idioma, String alias, String iban, LocalDate fecha_creacion, LocalDate fecha_nacimiento) {
+        this.id_usuario = id_categoria;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.idioma = idioma;
+        this.alias = alias;
+        this.iban = iban;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public usuario(int id_categoria, String nombre, String email, String password, String idioma, String alias, LocalDate fecha_creacion, LocalDate fecha_nacimiento) {
+        this.id_usuario = id_categoria;
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.idioma = idioma;
+        this.alias = alias;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getIdioma() {
+        return idioma;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public String getIban() {
+        return iban;
+    }
+
+    public LocalDate getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public LocalDate getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    @Override
+    public String toString() {
+        return "usuario{" +
+                "id_usuario=" + id_usuario +
+                ", nombre='" + nombre + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", idioma='" + idioma + '\'' +
+                ", alias='" + alias + '\'' +
+                ", iban='" + iban + '\'' +
+                ", fecha_creacion=" + fecha_creacion +
+                ", fecha_nacimiento=" + fecha_nacimiento +
+                '}';
+    }
+}
