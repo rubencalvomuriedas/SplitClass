@@ -14,7 +14,7 @@ CREATE TABLE USUARIO (
     Id_Usuario      INT          NOT NULL AUTO_INCREMENT,
     Nombre          VARCHAR(100) NOT NULL,
     Email           VARCHAR(150) NOT NULL UNIQUE,
-    Password        VARCHAR(255) NOT NULL,              -- hash BCrypt
+    Password        VARCHAR(255) NOT NULL,             
     Lenguaje        VARCHAR(10)  DEFAULT 'es',
     Alias           VARCHAR(50),
     IBAN            VARCHAR(34),
@@ -29,7 +29,7 @@ CREATE TABLE GRUPO (
     Descripcion       TEXT,
     Moneda            VARCHAR(10)  DEFAULT 'EUR',
     Fecha_creacion    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Fecha_eliminacion DATETIME,                         -- NULL = grupo activo (soft delete)
+    Fecha_eliminacion DATETIME,                      
     PRIMARY KEY (Id_Grupo)
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE MIEMBROS_GRUPO (
     Id_Miembros_Grupo INT         NOT NULL AUTO_INCREMENT,
     Id_Usuario        INT         NOT NULL,
     Id_Grupo          INT         NOT NULL,
-    Rol               VARCHAR(20) NOT NULL DEFAULT 'miembro',  -- 'admin' | 'miembro'
+    Rol               VARCHAR(20) NOT NULL DEFAULT 'miembro', 
     PRIMARY KEY (Id_Miembros_Grupo),
     UNIQUE KEY uq_usuario_grupo (Id_Usuario, Id_Grupo),
     CONSTRAINT fk_mg_usuario FOREIGN KEY (Id_Usuario) REFERENCES USUARIO (Id_Usuario),
@@ -74,12 +74,12 @@ CREATE TABLE LIQUIDACION (
     Monto            DECIMAL(10, 2) NOT NULL,
     Fecha_movimiento DATETIME       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     Concepto         VARCHAR(200),
-    Estado           VARCHAR(20)    NOT NULL DEFAULT 'pendiente',  -- 'pendiente' | 'completado'
+    Estado           VARCHAR(20)    NOT NULL DEFAULT 'pendiente', 
     Id_Emisor        INT            NOT NULL,
     Id_Receptor      INT            NOT NULL,
     Id_Grupo         INT            NOT NULL,
     PRIMARY KEY (Id_liquidacion),
     CONSTRAINT fk_liq_emisor   FOREIGN KEY (Id_Emisor)   REFERENCES USUARIO (Id_Usuario),
     CONSTRAINT fk_liq_receptor FOREIGN KEY (Id_Receptor) REFERENCES USUARIO (Id_Usuario),
-    CONSTRAINT fk_liq_grupo    FOREIGN KEY (Id_Grupo)    REFERENCES GRUPO   (Id_Grupo) -- aaaaaa
+    CONSTRAINT fk_liq_grupo    FOREIGN KEY (Id_Grupo)    REFERENCES GRUPO   (Id_Grupo) 
 );
