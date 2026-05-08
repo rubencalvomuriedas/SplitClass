@@ -44,7 +44,7 @@
                 <DropShadow color="#00000026" height="30.0" radius="14.5" width="30.0" />
             </effect>
         </VBox>
-      <ImageView fitHeight="160.0" fitWidth="256.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="180.0" fitWidth="271.0" layoutY="-24.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imágenes/Logo.png" />
          </image>
