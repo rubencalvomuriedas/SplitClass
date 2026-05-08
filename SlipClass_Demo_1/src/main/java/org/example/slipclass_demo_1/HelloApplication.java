@@ -19,6 +19,9 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+
+    
+
 //    public static void main(String[] args) {
 //        SQLDataAccess dataAccess = new SQLDataAccess();
 //        Connection conn = SQLDataAccess.getConnection();

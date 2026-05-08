@@ -23,4 +23,58 @@ public class HelloController {
         alerta.setContentText("Próximamente...");
         alerta.show();
     }
+
+    @FXML
+    public void clickSobreBuscar() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esto es lo que se va a mostar");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Esto es lo que se va a mostar");
+        alerta.show();
+    }
+
+    @FXML
+    public void clickSobreListar() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esto es lo que se va a mostar");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Esto es lo que se va a mostar");
+        alerta.show();
+    }
+
+    @FXML
+    public void clickSobreInsertar() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esto es lo que se va a mostar");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Esto es lo que se va a mostar");
+        alerta.show();
+    }
+
+    @FXML
+    public void clickSobreResgistrar() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esto es lo que se va a mostar");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Esto es lo que se va a mostar");
+        alerta.show();
+    }
+
+    @FXML
+    public void clickSobreMostrar() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esto es lo que se va a mostar");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Esto es lo que se va a mostar");
+        alerta.show();
+    }
+
+    @FXML
+    public void clickSobreEliminar() {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Esto es lo que se va a mostar");
+        alerta.setHeaderText(null);
+        alerta.setContentText("Esto es lo que se va a mostar");
+        alerta.show();
+    }
 }
