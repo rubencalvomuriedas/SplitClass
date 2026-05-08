@@ -1,19 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="main_panel" maxHeight="640.0" maxWidth="640.0" minHeight="635.0" minWidth="637.0" prefHeight="635.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="main_panel" maxHeight="640.0" maxWidth="640.0" minHeight="635.0" minWidth="637.0" prefHeight="635.0" prefWidth="637.0" styleClass="my-background-color" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane fx:id="mainPanel" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" styleClass="my-background" visible="false">
+      <AnchorPane fx:id="mainPanel" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" styleClass="my-background">
          <children>
-            <Label alignment="CENTER" layoutX="118.0" layoutY="78.0" prefHeight="49.0" prefWidth="397.0" styleClass="mi-title-view" text="App Split Class" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0">
+            <Label alignment="CENTER" layoutX="118.0" layoutY="78.0" prefHeight="49.0" prefWidth="397.0" styleClass="mi-title-view" text="App Split Class" textAlignment="CENTER" textFill="#171717" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font size="40.0" />
                </font>
             </Label>
+            <VBox layoutX="151.0" layoutY="459.0" prefHeight="150.0" prefWidth="350.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="134.0" AnchorPane.rightAnchor="134.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Button fx:id="insertButton" mnemonicParsing="false" onAction="#onInsertarButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Insertar" />
+                        <Button fx:id="listadoButton" mnemonicParsing="false" onAction="#onListadoButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Listado" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                     <children>
+                        <Button fx:id="buscarButton" mnemonicParsing="false" onAction="#onBuscarButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Buscar" />
+                        <Button fx:id="listadoButton" mnemonicParsing="false" onAction="#onListadoButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Insertar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <ImageView fitHeight="175.0" fitWidth="270.0" layoutX="189.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="211.0">
+               <image>
+                  <Image url="@Imágenes/Logo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
