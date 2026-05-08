@@ -12,22 +12,22 @@ import java.sql.Connection;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Registro-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
         stage.setTitle("SplitClass");
         stage.setScene(scene);
         stage.show();
     }
 
-    @Override
-    public void stop() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("registro-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
-        Stage stage = new Stage();
-        stage.setTitle("SplitClass");
-        stage.setScene(scene);
-        stage.show();
-    }
+//    @Override
+//    public void stop() throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("registro-view.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+//        Stage stage = new Stage();
+//        stage.setTitle("SplitClass");
+//        stage.setScene(scene);
+//        stage.show();
+//    }
 
 //    public static void main(String[] args) {
 //        SQLDataAccess dataAccess = new SQLDataAccess();
