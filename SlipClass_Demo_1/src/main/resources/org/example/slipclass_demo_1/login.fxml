@@ -13,6 +13,11 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
     <children>
+      <ImageView fitHeight="179.0" fitWidth="276.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imágenes/Logo.png" />
+         </image>
+      </ImageView>
         <VBox alignment="CENTER" layoutX="200.0" layoutY="150.0" prefWidth="400.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 50; -fx-alignment: center;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
             <children>
                 <Label text="Bienvenido" textFill="#2c3e50">
@@ -44,10 +49,5 @@
                 <DropShadow color="#00000033" height="40.0" radius="19.5" width="40.0" />
             </effect>
         </VBox>
-      <ImageView fitHeight="179.0" fitWidth="276.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/Logo.png" />
-         </image>
-      </ImageView>
     </children>
 </AnchorPane>

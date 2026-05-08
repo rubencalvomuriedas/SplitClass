@@ -12,7 +12,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 
 public class HelloController {
@@ -148,11 +151,10 @@ public class HelloController {
             error = "El teléfono debe tener 9 números.";
         }
 
-
         if (!error.isEmpty()) {
-
             mostrarAlerta("Error de Registro", error, Alert.AlertType.ERROR);
         } else {
+            guardarEnArchivo(usuario, email, telefono, pass);
 
             mostrarAlerta("¡Bienvenido!", "Usuario " + usuario + " registrado con éxito.", Alert.AlertType.INFORMATION);
 
@@ -168,17 +170,6 @@ public class HelloController {
         alerta.showAndWait();
     }
 
-    @FXML
-    private void onIrALoginClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     protected void onIniciarSesionClick(ActionEvent event) {
@@ -190,22 +181,63 @@ public class HelloController {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] datos = linea.split(",");
-
                 if (datos[0].equals(userIn) && datos[3].equals(passIn)) {
                     encontrado = true;
                     break;
                 }
             }
         } catch (IOException e) {
-            mostrarAlerta("Error", "No hay usuarios registrados todavía.", Alert.AlertType.WARNING);
+            mostrarAlerta("Error", "No hay usuarios registrados todavía o el archivo no existe.", Alert.AlertType.WARNING);
             return;
         }
 
         if (encontrado) {
             mostrarAlerta("Éxito", "¡Bienvenido de nuevo, " + userIn + "!", Alert.AlertType.INFORMATION);
-            // Aquí podrías mandarlo a una pantalla de "Inicio de App"
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("interfaz_Cliente.fxml"));
+                Parent root = loader.load();
+
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+
+            } catch (IOException e) {
+                System.err.println("Error: No se pudo cargar interfaz_Cliente.fxml");
+                e.printStackTrace();
+                mostrarAlerta("Error de Carga", "No se pudo abrir la pantalla principal del cliente.", Alert.AlertType.ERROR);
+            }
         } else {
             mostrarAlerta("Error", "Usuario o contraseña incorrectos.", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    private void onIrALoginClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Error: No se pudo encontrar el archivo login.fxml");
+            e.printStackTrace();
+        }
+    }
+
+    private void guardarEnArchivo(String user, String mail, String tel, String password) {
+        try (FileWriter fw = new FileWriter("usuarios.txt", true);
+             BufferedWriter bw = new BufferedWriter(fw);
+             PrintWriter out = new PrintWriter(bw)) {
+
+            out.println(user + "," + mail + "," + tel + "," + password);
+            System.out.println("Usuario guardado en el TXT: " + user);
+
+        } catch (IOException e) {
+            System.err.println("Error al escribir en usuarios.txt: " + e.getMessage());
         }
     }
 

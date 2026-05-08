@@ -33,7 +33,7 @@
       </ImageView>
       <HBox alignment="BOTTOM_CENTER" layoutX="98.0" layoutY="634.0" prefHeight="100.0" prefWidth="415.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="175.0" style="-fx-background-color: white; -fx-text-fill: blue; -fx-background-radius: 50; -fx-font-weight: bold; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Inicio">
+            <Button mnemonicParsing="false" onAction="#onIrALoginClick" prefHeight="74.0" prefWidth="175.0" style="-fx-background-color: white; -fx-text-fill: blue; -fx-background-radius: 50; -fx-font-weight: bold; -fx-padding: 10 20 10 20; -fx-cursor: hand;" text="Inicio">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
