@@ -1,17 +1,65 @@
 package org.example.slipclass_demo_1;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import org.example.slipclass_demo_1.model.SQLModelUsuario;
+import org.example.slipclass_demo_1.model.usuario;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class HelloController {
+public class HelloController implements Initializable {
+
+    private usuario usuarioSeleccionado;
+    private ObservableList<usuario> usuariosObservableList = FXCollections.observableArrayList();
+
+    @FXML
+    private ListView<usuario> listViewUsuarios;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.listViewUsuarios.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.usuarioSeleccionado = newValue;
+            if (newValue != null) {
+                System.out.println("Usuario seleccionado: " + newValue.getNombre());
+            }
+        });
+
+        loadUsuariosList();
+    }
+
+    public void loadUsuariosList(){
+        try {
+            this.usuariosObservableList.clear();
+
+            List<usuario> misUsuarios = SQLModelUsuario.getAllUsuarios();
+
+            if (misUsuarios != null){
+                this.usuariosObservableList.addAll(misUsuarios);
+                this.listViewUsuarios.setItems(this.usuariosObservableList);
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Error al cargar la lista de usuarios: " + e.getMessage());
+        }
+
+    }
+
+
+
 
     @FXML
     public void clickDescarga() {
@@ -103,4 +151,24 @@ public class HelloController {
         }
 */
     }
+
+    public void onRegistrarseClick(ActionEvent event) {
+    }
+
+    public void onInsertarButtonClick(ActionEvent event) {
+    }
+
+    public void onListadoButtonClick(ActionEvent event) {
+    }
+
+    public void onEliminarButtonClick(ActionEvent event) {
+    }
+
+    public void onBuscarButtonClick(ActionEvent event) {
+    }
+
+    public void onRegistroButtonClick(ActionEvent event) {
+    }
 }
+
+

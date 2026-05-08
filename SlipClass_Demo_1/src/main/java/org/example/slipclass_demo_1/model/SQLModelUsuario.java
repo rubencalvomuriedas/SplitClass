@@ -2,10 +2,7 @@ package org.example.slipclass_demo_1.model;
 
 import org.example.slipclass_demo_1.configuration.SQLDataAccess;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -23,20 +20,25 @@ public class SQLModelUsuario {
             ResultSet resultSet = stat.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                int id_usuario = resultSet.getInt("1");
-                String nombre = resultSet.getString("2");
-                String email = resultSet.getString("3");
-                String password = resultSet.getString("4");
-                String telefono = resultSet.getString("5");
-                String idioma = resultSet.getString("6");
-                String alias = resultSet.getString("7");
-                String iban = resultSet.getString("8");
+                int id = resultSet.getInt("Id_Usuario");
+                String nombre = resultSet.getString("Nombre");
+                String email = resultSet.getString("Email");
+                String password = resultSet.getString("Password");
+                String telefono = resultSet.getString("Telefono");
+                String idioma = resultSet.getString("Idioma");
+                String alias = resultSet.getString("Alias");
+                String iban = resultSet.getString("IBAN");
 
-                LocalDateTime fecha_creaacion = resultSet.getTimestamp("9").toLocalDateTime();
-                LocalDate fecha_nacimiento = resultSet.getTimestamp("10").toLocalDateTime().toLocalDate();
+                LocalDateTime fecha_creacion = resultSet.getTimestamp("Fecha_Creacion").toLocalDateTime();
+                LocalDate fecha_nac = null;
+                Date sqlDate = resultSet.getDate("Fecha_Nacimiento");
+                if (sqlDate != null) {
+                    fecha_nac = sqlDate.toLocalDate();
+                }
+                usuario us = new usuario(id, nombre, email, password, telefono, idioma, alias, iban, fecha_creacion, fecha_nac);
 
-                usuario us = new usuario(nombre, email, password, telefono, idioma, alias, iban, fecha_creaacion, fecha_nacimiento);
-            }
+
+                usuarios.add(us);}
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }
@@ -44,6 +46,30 @@ public class SQLModelUsuario {
             return usuarios;
     }
 
+    public static List<usuario> insertUsuario(usuario us) {
+        List<usuario> usuarios = new LinkedList<>();
 
+        String sql = "INSERT INTO usuario (Nombre, Email, Password, Telefono) VALUES (?, ?, ?, ?)";
+
+        try(Connection connection = SQLDataAccess.getConnection();
+            PreparedStatement stat = connection.prepareStatement(sql)) {
+
+            stat.setString(1, us.getNombre());
+            stat.setString(2, us.getEmail());
+            stat.setString(3, us.getPassword());
+            stat.setString(4, us.getTelefono());
+
+            int rowsAffected = stat.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Usuario insertado correctamente.");
+            } else {
+                System.out.println("No se pudo insertar el usuario.");
+            }
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+        return usuarios;
+    }
 
 }

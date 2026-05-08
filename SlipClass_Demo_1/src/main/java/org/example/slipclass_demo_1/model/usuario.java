@@ -16,7 +16,8 @@ public class usuario {
     private LocalDateTime fecha_creacion;
     private LocalDate fecha_nacimiento;
 
-    public usuario(String nombre, String email, String password, String telefono, String idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
+    public usuario(int id_usuario, String nombre, String email, String password, String telefono, String idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
+        this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
@@ -26,6 +27,12 @@ public class usuario {
         this.iban = iban;
         this.fecha_creacion = fecha_creacion;
         this.fecha_nacimiento = fecha_nacimiento;
+    }
+    public usuario(String nombre, String email, String password, String telefono){
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
     }
 
 
@@ -88,17 +95,32 @@ public class usuario {
 
     @Override
     public String toString() {
-        return "usuario{" +
-                "id_usuario=" + id_usuario +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", idioma='" + idioma + '\'' +
-                ", alias='" + alias + '\'' +
-                ", iban='" + iban + '\'' +
-                ", fecha_creacion=" + fecha_creacion +
-                ", fecha_nacimiento=" + fecha_nacimiento +
-                '}';
+        return """
+            ╔══════════════════════════════╗
+                    DATOS DEL USUARIO
+            ╠══════════════════════════════╣
+            ║ ID                : %d
+            ║ Nombre            : %s
+            ║ Email             : %s
+            ║ Password          : %s
+            ║ Teléfono          : %s
+            ║ Idioma            : %s
+            ║ Alias             : %s
+            ║ IBAN              : %s
+            ║ Fecha creación    : %s
+            ║ Fecha nacimiento  : %s
+            ╚══════════════════════════════╝
+            """.formatted(
+                id_usuario,
+                nombre,
+                email,
+                password != null ? "********" : "Vacío",
+                telefono,
+                idioma,
+                alias,
+                iban,
+                fecha_creacion,
+                fecha_nacimiento != null ? fecha_nacimiento : "Vacío"
+        );
     }
 }
