@@ -1,6 +1,7 @@
 package org.example.slipclass_demo_1.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class usuario {
 
@@ -8,16 +9,18 @@ public class usuario {
     private String nombre;
     private String email;
     private String password;
+    private String telefono;
     private String idioma;
     private String alias;
     private String iban;
-    private LocalDate fecha_creacion;
+    private LocalDateTime fecha_creacion;
     private LocalDate fecha_nacimiento;
 
-    public usuario(String nombre, String email, String password, String idioma, String alias, String iban, LocalDate fecha_creacion, LocalDate fecha_nacimiento) {
+    public usuario(String nombre, String email, String password, String telefono, String idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
+        this.telefono = telefono;
         this.idioma = idioma;
         this.alias = alias;
         this.iban = iban;
@@ -42,6 +45,10 @@ public class usuario {
         return password;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
     public String getIdioma() {
         return idioma;
     }
@@ -54,7 +61,7 @@ public class usuario {
         return iban;
     }
 
-    public LocalDate getFecha_creacion() {
+    public LocalDateTime getFecha_creacion() {
         return fecha_creacion;
     }
 
@@ -78,6 +85,7 @@ public class usuario {
         this.alias = alias;
     }
 
+
     @Override
     public String toString() {
         return "usuario{" +
@@ -85,6 +93,7 @@ public class usuario {
                 ", nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", telefono='" + telefono + '\'' +
                 ", idioma='" + idioma + '\'' +
                 ", alias='" + alias + '\'' +
                 ", iban='" + iban + '\'' +
