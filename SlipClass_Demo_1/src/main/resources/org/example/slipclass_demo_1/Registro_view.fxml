@@ -24,12 +24,14 @@
                      <children>
                         <Button fx:id="insertButton" mnemonicParsing="false" onAction="#onInsertarButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Insertar" />
                         <Button fx:id="listadoButton" mnemonicParsing="false" onAction="#onListadoButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Listado" />
+                        <Button fx:id="eliminoButton" mnemonicParsing="false" onAction="#onEliminarButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Eliminar" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                      <children>
                         <Button fx:id="buscarButton" mnemonicParsing="false" onAction="#onBuscarButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Buscar" />
-                        <Button fx:id="listadoButton" mnemonicParsing="false" onAction="#onListadoButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Insertar" />
+                        <Button fx:id="registroButton" mnemonicParsing="false" onAction="#onRegistroButtonClick" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Registrar" />
+                        <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="68.0" styleClass="my-button" text="Mostrar" />
                      </children>
                   </HBox>
                </children>
