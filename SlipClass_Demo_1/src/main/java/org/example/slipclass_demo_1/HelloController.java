@@ -7,11 +7,26 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class HelloController {
+
+    @FXML
+    private TextField txtUsuario, txtEmail, txtTelefono;
+    @FXML
+    private PasswordField txtPass, txtPassConfirm;
+    @FXML
+    private DatePicker dpFechaNacimiento;
+    @FXML
+    private TextField loginUsuario;
+    @FXML
+    private PasswordField loginPass;
 
     @FXML
     public void clickDescarga() {
@@ -27,7 +42,7 @@ public class HelloController {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Sección en construcción");
         alerta.setHeaderText(null);
-        alerta.setContentText("Próximamente...");
+        alerta.setContentText("Diego Gomez\nCamilo Arone\n Rubén Calvo");
         alerta.show();
     }
 
@@ -85,25 +100,114 @@ public class HelloController {
         alerta.show();
     }
 
-//    @FXML
-//    protected void onRegistrarseClick(ActionEvent event) {
-//        try {
-//
-//            Parent root = FXMLLoader.load(getClass().getResource("formulario_ingreso.fxml"));
-//
-//
-//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//
-//
-//            Scene scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.show();
-//
-//        } catch (IOException e) {
-//            System.err.println("¡Error! No se encuentra el archivo registro.fxml");
-//            e.printStackTrace();
-//        }
-//    }
+    @FXML
+    private void onRegistrarseClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("registro.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Error: No se pudo encontrar el archivo registro.fxml");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onVolverClick(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void onFinalizarRegistroClick(ActionEvent event) {
+        String usuario = txtUsuario.getText();
+        String email = txtEmail.getText();
+        String telefono = txtTelefono.getText();
+        String pass = txtPass.getText();
+        String passConfirm = txtPassConfirm.getText();
+        LocalDate fecha = dpFechaNacimiento.getValue();
+
+        String error = "";
+
+        if (usuario.isEmpty() || email.isEmpty() || telefono.isEmpty() || pass.isEmpty() || fecha == null) {
+            error = "Por favor, rellena todos los campos.";
+        } else if (!pass.equals(passConfirm)) {
+            error = "Las contraseñas no coinciden.";
+        } else if (telefono.length() != 9) {
+            error = "El teléfono debe tener 9 números.";
+        }
+
+
+        if (!error.isEmpty()) {
+
+            mostrarAlerta("Error de Registro", error, Alert.AlertType.ERROR);
+        } else {
+
+            mostrarAlerta("¡Bienvenido!", "Usuario " + usuario + " registrado con éxito.", Alert.AlertType.INFORMATION);
+
+            onVolverClick(event);
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
+    @FXML
+    private void onIrALoginClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void onIniciarSesionClick(ActionEvent event) {
+        String userIn = loginUsuario.getText();
+        String passIn = loginPass.getText();
+        boolean encontrado = false;
+
+        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader("usuarios.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+
+                if (datos[0].equals(userIn) && datos[3].equals(passIn)) {
+                    encontrado = true;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            mostrarAlerta("Error", "No hay usuarios registrados todavía.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (encontrado) {
+            mostrarAlerta("Éxito", "¡Bienvenido de nuevo, " + userIn + "!", Alert.AlertType.INFORMATION);
+            // Aquí podrías mandarlo a una pantalla de "Inicio de App"
+        } else {
+            mostrarAlerta("Error", "Usuario o contraseña incorrectos.", Alert.AlertType.ERROR);
+        }
+    }
 
     public void onInsertarButtonClick(javafx.event.ActionEvent actionEvent) {
     }
@@ -120,9 +224,4 @@ public class HelloController {
     public void onRegistroButtonClick(javafx.event.ActionEvent actionEvent) {
     }
 
-    public void onRegistrarseClick(javafx.event.ActionEvent actionEvent) {
-    }
-
-    public void onVolverClick(ActionEvent actionEvent) {
-    }
 }
