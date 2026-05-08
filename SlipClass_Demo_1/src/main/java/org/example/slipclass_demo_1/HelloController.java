@@ -1,6 +1,7 @@
 package org.example.slipclass_demo_1;
 
 import javafx.fxml.FXML;
+<<<<<<< HEAD
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,6 +13,15 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class HelloController {
+=======
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+
+public class HelloController  {
+    @FXML
+    private Label welcomeText;
+>>>>>>> main
 
     @FXML
     public void clickDescarga() {
