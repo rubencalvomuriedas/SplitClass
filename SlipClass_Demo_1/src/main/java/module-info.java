@@ -2,6 +2,7 @@ module org.example.slipclass_demo_1 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.desktop;
 
     opens org.example.slipclass_demo_1 to javafx.fxml;
     exports org.example.slipclass_demo_1;
