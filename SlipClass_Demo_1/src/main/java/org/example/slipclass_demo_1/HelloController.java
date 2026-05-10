@@ -45,7 +45,7 @@ public class HelloController {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle("Sección en construcción");
         alerta.setHeaderText(null);
-        alerta.setContentText("Diego Gomez\nCamilo Arone\n Rubén Calvo");
+        alerta.setContentText("Bienvenido a SplitClass, somos una aplicacion que gestionara tus gastos y el de tus amigos.\nEstos son nuestros creadores:\nDiego Gomez\nCamilo Arone\nRubén Calvo");
         alerta.show();
     }
 
