@@ -3,6 +3,7 @@ package org.example.slipclass_demo_1.model;
 public class categoria {
 
     private int id_categoria;
+    private String Cod_Categoria;
     private String nombre;
 
     public categoria(String nombre) {

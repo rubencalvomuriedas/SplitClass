@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class grupo {
 
     private int id_grupo;
+    private String CodGrupo;
     private String titulo;
     private String descripcion;
     private String moneda;

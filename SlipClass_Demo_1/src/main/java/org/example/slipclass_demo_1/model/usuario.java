@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class usuario {
 
     private int id_usuario;
+    private String CodUsuario;
     private String nombre;
     private String email;
     private String password;

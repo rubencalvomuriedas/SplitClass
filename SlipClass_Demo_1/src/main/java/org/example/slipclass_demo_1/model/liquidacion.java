@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class liquidacion {
 
     private int id_liquidacion;
+    private String Cod_Liquidacion;
     private double monto;
     private LocalDate fecha_movimiento;
     private String concepto;

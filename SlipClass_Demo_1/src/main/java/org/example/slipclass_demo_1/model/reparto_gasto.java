@@ -3,6 +3,7 @@ package org.example.slipclass_demo_1.model;
 public class reparto_gasto {
 
     private int id_reparto_gasto;
+    private String Cod_Reparto_Gasto;
     private int id_gasto;
     private int id_usuario;
     private double cuota_deuda;

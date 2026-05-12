@@ -3,6 +3,7 @@ package org.example.slipclass_demo_1.model;
 public class miembros_grupo {
 
     private int id_miembros;
+    private String Cod_Miembros_Grupo;
     private int id_usuario;
     private int id_grupo;
     private String rol;
