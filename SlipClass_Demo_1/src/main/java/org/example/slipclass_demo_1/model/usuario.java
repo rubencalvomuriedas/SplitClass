@@ -29,11 +29,12 @@ public class usuario {
         this.fecha_creacion = fecha_creacion;
         this.fecha_nacimiento = fecha_nacimiento;
     }
-    public usuario(String codUsuario, String nombre, String email, String password, String telefono){
+    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento){
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
 
@@ -93,6 +94,17 @@ public class usuario {
         this.alias = alias;
     }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
 
     @Override
     public String toString() {

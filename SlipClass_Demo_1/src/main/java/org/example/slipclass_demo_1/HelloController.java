@@ -9,35 +9,43 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import org.example.slipclass_demo_1.model.SQLModelUsuario;
 import org.example.slipclass_demo_1.model.usuario;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
-    private usuario usuarioSeleccionado;
+    private usuario us;
+    private boolean isNewUser = true;
     private ObservableList<usuario> usuariosObservableList = FXCollections.observableArrayList();
 
     @FXML
     private ListView<usuario> listViewUsuarios;
 
+    @FXML private TextField txtUsuario, txtEmail, txtTelefono;
+    @FXML private PasswordField txtPass, txtPassConfirm;
+    @FXML private DatePicker dpFechaNacimiento;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.listViewUsuarios.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            this.usuarioSeleccionado = newValue;
-            if (newValue != null) {
-                System.out.println("Usuario seleccionado: " + newValue.getNombre());
-            }
-        });
+        // Solo ejecutamos esto si el FXML cargado tiene la lista (hello-view.fxml)
+        if (this.listViewUsuarios != null) {
+            this.listViewUsuarios.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                this.us = newValue;
+                if (newValue != null) {
+                    System.out.println("Usuario seleccionado: " + newValue.getNombre());
+                }
+            });
 
-        loadUsuariosList();
+            loadUsuariosList();
+        }
     }
 
     public void loadUsuariosList(){
@@ -168,6 +176,69 @@ public class HelloController implements Initializable {
     }
 
     public void onRegistroButtonClick(ActionEvent event) {
+
+
+    }
+    @FXML
+    public void onFinalizarRegistroClick(ActionEvent event) {
+        if (!txtPass.getText().equals(txtPassConfirm.getText())){
+            mostrarAlerta("Error", "Las contraseñas no coinciden");
+            return;
+        }
+
+        if (isNewUser) {
+            this.us = new usuario(
+                    txtUsuario.getText(),
+                    txtEmail.getText(),
+                    txtPass.getText(),
+                    txtTelefono.getText(),
+                    dpFechaNacimiento.getValue()
+            );
+
+            if (SQLModelUsuario.createUsuario(this.us)) {
+                mostrarAlerta("Registro exitoso", "Usuario creado exitosamente");
+                limpiarCampos();
+            }
+        } else {
+            this.us.setNombre(txtUsuario.getText());
+            this.us.setEmail(txtEmail.getText());
+            this.us.setPassword(txtPass.getText());
+            this.us.setTelefono(txtTelefono.getText());
+            this.us.setFecha_nacimiento(dpFechaNacimiento.getValue());
+
+            if (SQLModelUsuario.updateUsuario(this.us)) {
+                mostrarAlerta("Exito", "Usuario actualizado exitosamente");
+            }
+        }
+
+        System.out.println("Usuario registrado.");
+
+    }
+
+    @FXML
+    private void onVolverClick(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void limpiarCampos() {
+        txtUsuario.clear();
+        txtEmail.clear();
+        txtPass.clear();
+        txtPassConfirm.clear();
+        txtTelefono.clear();
+        dpFechaNacimiento.setValue(null);
+    }
+    private void mostrarAlerta(String titulo, String msj) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(msj);
+        alert.show();
     }
 }
 

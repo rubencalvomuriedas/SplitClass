@@ -73,7 +73,8 @@ public class SQLModelUsuario {
 
     public static boolean updateUsuario(usuario us) {
         boolean result = false;
-        String sql = "UPDATE usuario SET nombre = ?, email = ?, password = ?, fecha_nacimiento = ?, telefono WHERE id_usuario = ?";
+        String sql = "UPDATE usuario SET nombre = ?, email = ?, " +
+                "password = ?, fecha_nacimiento = ?, telefono = ? WHERE id_usuario = ?";
 
         try (Connection conn = SQLDataAccess.getConnection();
              PreparedStatement stat = conn.prepareStatement(sql)){
@@ -85,15 +86,16 @@ public class SQLModelUsuario {
             stat.setString(5, us.getTelefono());
 
             stat.setInt(6, us.getId_usuario());
-            stat.executeUpdate();
-            result = true;
+
+            int filasAfectadas = stat.executeUpdate();
+            result = (filasAfectadas > 0);
 
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }
 
 
-        return false;
+        return result;
     }
 
 }
