@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane layoutX="180.0" layoutY="30.0" prefHeight="740.0" prefWidth="855.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="30.0" />
       <ImageView fitHeight="823.0" fitWidth="1044.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-23.0" AnchorPane.leftAnchor="-3.0" AnchorPane.topAnchor="0.0">
@@ -18,7 +19,7 @@
             <Image url="@Imágenes/prueba.png" />
          </image>
       </ImageView>
-      <VBox layoutX="26.0" layoutY="30.0" prefHeight="742.0" prefWidth="977.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+      <VBox layoutX="26.0" layoutY="30.0" prefHeight="60.0" spacing="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -29,33 +30,50 @@
                   </Label>
                </children>
             </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
-               </children>
-            </VBox>
-            <Button mnemonicParsing="false" text="Button" />
-            <Button mnemonicParsing="false" text="Button" />
-            <Button alignment="CENTER" mnemonicParsing="false">
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0">
                <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../../../../Downloads/team-icon-sin-fondo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Button>
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Imágenes/icono_perfil.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false">
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0">
                <graphic>
-                  <ImageView fitHeight="27.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@Imágenes/icono_regreso.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
+            <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="47.0">
+               <graphic>
+                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Imágenes/simbolo%20dolar.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
+      <Text fill="WHITE" layoutX="212.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Casa" />
+      <Text fill="WHITE" layoutX="306.0" layoutY="781.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Solicitudes" />
+      <Text fill="WHITE" layoutX="373.0" layoutY="781.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grupos" />
+      <Text fill="WHITE" layoutX="451.0" layoutY="781.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Perfil" />
    </children>
 </AnchorPane>
