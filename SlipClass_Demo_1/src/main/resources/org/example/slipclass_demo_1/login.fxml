@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+    <children>
+      <ImageView fitHeight="179.0" fitWidth="276.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imágenes/Logo.png" />
+         </image>
+      </ImageView>
+        <VBox alignment="CENTER" layoutX="200.0" layoutY="150.0" prefWidth="400.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 50; -fx-alignment: center;" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="150.0">
+            <children>
+                <Label text="Bienvenido" textFill="#2c3e50">
+                    <font>
+                        <Font name="System Bold" size="36.0" />
+                    </font>
+                </Label>
+                <Label text="Introduce tus credenciales para entrar" textFill="#7f8c8d" translateY="-15.0" />
+
+                <VBox spacing="10.0">
+                    <children>
+                        <Label style="-fx-font-weight: bold;" text="Usuario" textFill="#34495e" />
+                        <TextField fx:id="loginUsuario" promptText="Tu nombre de usuario" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12;" />
+                    </children>
+                </VBox>
+
+                <VBox spacing="10.0">
+                    <children>
+                        <Label style="-fx-font-weight: bold;" text="Contraseña" textFill="#34495e" />
+                        <PasswordField fx:id="loginPass" promptText="••••••••" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12;" />
+                    </children>
+                </VBox>
+
+                <Button onAction="#onIniciarSesionClick" prefHeight="47.0" prefWidth="225.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 25; -fx-font-weight: bold; -fx-padding: 15; -fx-cursor: hand;" text="ENTRAR" />
+
+                <Button onAction="#onVolverClick" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 25; -fx-padding: 15; -fx-font-weight: bold;" text="VOLVER ATRÁS" />
+            </children>
+            <effect>
+                <DropShadow color="#00000033" height="40.0" radius="19.5" width="40.0" />
+            </effect>
+        </VBox>
+    </children>
+</AnchorPane>

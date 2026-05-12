@@ -32,9 +32,12 @@ public class HelloController implements Initializable {
     @FXML private TextField txtUsuario, txtEmail, txtTelefono;
     @FXML private PasswordField txtPass, txtPassConfirm;
     @FXML private DatePicker dpFechaNacimiento;
+    @FXML private TextField loginUsuario;
+    @FXML private PasswordField loginPass;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         // Solo ejecutamos esto si el FXML cargado tiene la lista (hello-view.fxml)
         if (this.listViewUsuarios != null) {
             this.listViewUsuarios.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -181,6 +184,11 @@ public class HelloController implements Initializable {
     }
     @FXML
     public void onFinalizarRegistroClick(ActionEvent event) {
+
+        if (txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPass.getText().isEmpty() || txtTelefono.getText().isEmpty() || dpFechaNacimiento.getValue() == null) {
+            return;
+        }
+
         if (!txtPass.getText().equals(txtPassConfirm.getText())){
             mostrarAlerta("Error", "Las contraseñas no coinciden");
             return;
@@ -239,6 +247,41 @@ public class HelloController implements Initializable {
         alert.setTitle(titulo);
         alert.setContentText(msj);
         alert.show();
+    }
+
+    @FXML
+    public void onIniciarSesionClick(ActionEvent event) {
+        String nombre = loginUsuario.getText();
+        String pass = loginPass.getText();
+
+        if (nombre.isEmpty() || pass.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, rellena todos los campos.");
+            return;
+        }
+
+        // Llamamos al modelo
+        usuario usuarioLogueado = SQLModelUsuario.login(nombre, pass);
+
+        if (usuarioLogueado != null) {
+            System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
+
+            // Aquí puedes redirigir a la pantalla principal
+            irAPantallaPrincipal(event);
+        } else {
+            mostrarAlerta("Error de acceso", "Usuario o contraseña incorrectos.");
+        }
+    }
+
+    private void irAPantallaPrincipal(ActionEvent event) {
+        try {
+            // Cambia "hello-view.fxml" por el nombre de tu vista principal
+            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al cambiar de pantalla: " + e.getMessage());
+        }
     }
 }
 

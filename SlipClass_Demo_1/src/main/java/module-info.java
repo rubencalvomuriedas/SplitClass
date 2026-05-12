@@ -3,6 +3,7 @@ module org.example.slipclass_demo_1 {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires protobuf.java;
 
     opens org.example.slipclass_demo_1 to javafx.fxml;
     exports org.example.slipclass_demo_1;
