@@ -2,11 +2,30 @@ DROP DATABASE IF EXISTS SplitClass;
 CREATE DATABASE IF NOT EXISTS SplitClass;
 USE SplitClass;
 
+
 CREATE TABLE idiomas (
     id_idioma INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
     codigo VARCHAR(10) NOT NULL UNIQUE
 );
+
+CREATE TABLE roles_miembro (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_rol VARCHAR(20) NOT NULL UNIQUE 
+);
+
+CREATE TABLE estados_liquidacion (
+    id_estado INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_estado VARCHAR(20) NOT NULL UNIQUE 
+);
+
+CREATE TABLE categorias (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    cod_categoria VARCHAR(20) UNIQUE NOT NULL,
+    nombre VARCHAR(50) NOT NULL,
+    icono VARCHAR(50)
+);
+
 
 CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
@@ -21,13 +40,6 @@ CREATE TABLE usuarios (
     fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
     fecha_nacimiento DATE,
     FOREIGN KEY (id_idioma) REFERENCES idiomas(id_idioma) ON DELETE SET NULL
-);
-
-CREATE TABLE categorias (
-    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
-    cod_categoria VARCHAR(20) UNIQUE NOT NULL,
-    nombre VARCHAR(50) NOT NULL,
-    icono VARCHAR(50) 
 );
 
 CREATE TABLE grupos (
@@ -45,16 +57,17 @@ CREATE TABLE miembros_grupo (
     cod_miembros_grupo VARCHAR(20) UNIQUE NOT NULL,
     id_usuario INT NOT NULL,
     id_grupo INT NOT NULL,
-    rol VARCHAR(20) DEFAULT 'miembro',
+    id_rol INT NOT NULL, -- Relación con el "Enum" de roles
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (id_grupo) REFERENCES grupos(id_grupo) ON DELETE CASCADE
+    FOREIGN KEY (id_grupo) REFERENCES grupos(id_grupo) ON DELETE CASCADE,
+    FOREIGN KEY (id_rol) REFERENCES roles_miembro(id_rol)
 );
 
 CREATE TABLE gastos (
     id_gasto INT AUTO_INCREMENT PRIMARY KEY,
     cod_gasto VARCHAR(20) UNIQUE NOT NULL,
     concepto VARCHAR(150) NOT NULL,
-    monto_total DOUBLE NOT NULL,
+    monto_total DECIMAL(15, 2) NOT NULL,
     fecha DATE NOT NULL,
     id_grupo INT NOT NULL,
     id_categoria INT,
@@ -69,7 +82,7 @@ CREATE TABLE reparto_gasto (
     cod_reparto_gasto VARCHAR(20) UNIQUE NOT NULL,
     id_gasto INT NOT NULL,
     id_usuario INT NOT NULL,
-    cuota_deuda DOUBLE NOT NULL,
+    cuota_deuda DECIMAL(15, 2) NOT NULL,
     FOREIGN KEY (id_gasto) REFERENCES gastos(id_gasto) ON DELETE CASCADE,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
@@ -77,25 +90,30 @@ CREATE TABLE reparto_gasto (
 CREATE TABLE liquidaciones (
     id_liquidacion INT AUTO_INCREMENT PRIMARY KEY,
     cod_liquidacion VARCHAR(20) UNIQUE NOT NULL,
-    monto DOUBLE NOT NULL,
+    monto DECIMAL(15, 2) NOT NULL,
     fecha_movimiento DATE NOT NULL,
     concepto VARCHAR(150),
-    estado TINYINT(1) DEFAULT 0,
+    id_estado INT NOT NULL,
     id_emisor INT NOT NULL,
     id_receptor INT NOT NULL,
     id_grupo INT NOT NULL,
+    FOREIGN KEY (id_estado) REFERENCES estados_liquidacion(id_estado),
     FOREIGN KEY (id_emisor) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_receptor) REFERENCES usuarios(id_usuario),
     FOREIGN KEY (id_grupo) REFERENCES grupos(id_grupo) ON DELETE CASCADE
 );
 
 
-INSERT INTO idiomas (nombre, codigo) VALUES
-('Español', 'es'), ('Inglés', 'en'), ('Francés', 'fr'), ('Alemán', 'de'), ('Italiano', 'it'),
+INSERT INTO idiomas (nombre, codigo) VALUES 
+('Español', 'es'), ('Inglés', 'en'), ('Francés', 'fr'), ('Alemán', 'de'), ('Italiano', 'it'), 
 ('Portugués', 'pt'), ('Chino', 'zh'), ('Japonés', 'ja'), ('Ruso', 'ru'), ('Árabe', 'ar');
 
-INSERT INTO categorias (cod_categoria, nombre, icono) VALUES
-('CAT001', 'Comida', 'ic_food'), ('CAT002', 'Transporte', 'ic_transport'),
+INSERT INTO roles_miembro (nombre_rol) VALUES ('admin'), ('miembro');
+
+INSERT INTO estados_liquidacion (nombre_estado) VALUES ('pendiente'), ('completado');
+
+INSERT INTO categorias (cod_categoria, nombre, icono) VALUES 
+('CAT001', 'Comida', 'ic_food'), ('CAT002', 'Transporte', 'ic_transport'), 
 ('CAT003', 'Alojamiento', 'ic_hotel'), ('CAT004', 'Ocio', 'ic_leisure'), ('CAT005', 'Otros', 'ic_other');
 
 INSERT INTO usuarios (cod_usuario, nombre, email, password, id_idioma, alias, iban, fecha_nacimiento) VALUES
@@ -140,12 +158,12 @@ INSERT INTO grupos (cod_grupo, titulo, descripcion, moneda, fecha_creacion) VALU
 ('GRP007', 'Cena navidad', 'Cena de empresa navideña', 'EUR', '2025-11-20'),
 ('GRP008', 'Esquí Andorra', 'Fin de semana en la nieve', 'EUR', '2025-12-01');
 
-INSERT INTO miembros_grupo (cod_miembros_grupo, id_usuario, id_grupo, rol) VALUES
-('MBR001', 1, 1, 'admin'), ('MBR002', 2, 1, 'miembro'), ('MBR003', 3, 1, 'miembro'), ('MBR004', 4, 1, 'miembro'),
-('MBR005', 5, 2, 'admin'), ('MBR006', 6, 2, 'miembro'), ('MBR007', 7, 2, 'miembro'),
-('MBR008', 8, 3, 'admin'), ('MBR009', 9, 3, 'miembro'), ('MBR010', 10, 3, 'miembro'), ('MBR011', 11, 3, 'miembro'),
-('MBR012', 12, 4, 'admin'), ('MBR013', 13, 4, 'miembro'), ('MBR014', 14, 4, 'miembro'),
-('MBR015', 15, 5, 'admin'), ('MBR016', 16, 5, 'miembro');
+INSERT INTO miembros_grupo (cod_miembros_grupo, id_usuario, id_grupo, id_rol) VALUES
+('MBR001', 1, 1, 1), ('MBR002', 2, 1, 2), ('MBR003', 3, 1, 2), ('MBR004', 4, 1, 2),
+('MBR005', 5, 2, 1), ('MBR006', 6, 2, 2), ('MBR007', 7, 2, 2),
+('MBR008', 8, 3, 1), ('MBR009', 9, 3, 2), ('MBR010', 10, 3, 2), ('MBR011', 11, 3, 2),
+('MBR012', 12, 4, 1), ('MBR013', 13, 4, 2), ('MBR014', 14, 4, 2),
+('MBR015', 15, 5, 1), ('MBR016', 16, 5, 2);
 
 
 INSERT INTO gastos (cod_gasto, concepto, monto_total, fecha, id_grupo, id_categoria, id_usuario_pagador) VALUES
@@ -167,13 +185,13 @@ INSERT INTO reparto_gasto (cod_reparto_gasto, id_gasto, id_usuario, cuota_deuda)
 ('RPT010', 5, 5, 21.73), ('RPT011', 5, 6, 21.73), ('RPT012', 5, 7, 21.74),
 ('RPT013', 7, 8, 70.00), ('RPT014', 7, 9, 70.00);
 
-INSERT INTO liquidaciones (cod_liquidacion, monto, fecha_movimiento, concepto, estado, id_emisor, id_receptor, id_grupo) VALUES
-('LIQ001', 15.00, '2025-06-05', 'Pago cena Cantabria', 1, 2, 1, 1),
-('LIQ002', 15.00, '2025-06-06', 'Pago cena Cantabria', 1, 3, 1, 1),
-('LIQ003', 15.00, '2025-06-07', 'Pago cena Cantabria', 0, 4, 1, 1),
-('LIQ004', 29.17, '2025-03-10', 'Pago supermercado marzo', 0, 6, 5, 2),
-('LIQ005', 29.16, '2025-03-11', 'Pago supermercado marzo', 0, 7, 5, 2),
-('LIQ006', 70.00, '2025-09-15', 'Pago vuelo Berlín', 0, 9, 8, 3);
+INSERT INTO liquidaciones (cod_liquidacion, monto, fecha_movimiento, concepto, id_estado, id_emisor, id_receptor, id_grupo) VALUES
+('LIQ001', 15.00, '2025-06-05', 'Pago cena Cantabria', 2, 2, 1, 1),
+('LIQ002', 15.00, '2025-06-06', 'Pago cena Cantabria', 2, 3, 1, 1),
+('LIQ003', 15.00, '2025-06-07', 'Pago cena Cantabria', 1, 4, 1, 1),
+('LIQ004', 29.17, '2025-03-10', 'Pago supermercado marzo', 1, 6, 5, 2),
+('LIQ005', 29.16, '2025-03-11', 'Pago supermercado marzo', 1, 7, 5, 2),
+('LIQ006', 70.00, '2025-09-15', 'Pago vuelo Berlín', 1, 9, 8, 3);
 
 -- ============================================================
 -- CONSULTAS
