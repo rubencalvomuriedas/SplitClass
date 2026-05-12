@@ -241,6 +241,26 @@ public class HelloController {
         }
     }
 
+    @FXML
+    private void onClickButtonCasa(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("interfaz-Cliente.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void onSolicitudesClick(ActionEvent event) {
+        try{
+            
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void onInsertarButtonClick(javafx.event.ActionEvent actionEvent) {
     }
 
