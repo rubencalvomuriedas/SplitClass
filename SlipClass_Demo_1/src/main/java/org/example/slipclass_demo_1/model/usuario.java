@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class usuario {
 
     private int id_usuario;
+    private String codUsuario;
     private String nombre;
     private String email;
     private String password;
@@ -28,7 +29,7 @@ public class usuario {
         this.fecha_creacion = fecha_creacion;
         this.fecha_nacimiento = fecha_nacimiento;
     }
-    public usuario(String nombre, String email, String password, String telefono){
+    public usuario(String codUsuario, String nombre, String email, String password, String telefono){
         this.nombre = nombre;
         this.email = email;
         this.password = password;

@@ -46,10 +46,11 @@ public class SQLModelUsuario {
             return usuarios;
     }
 
-    public static List<usuario> insertUsuario(usuario us) {
+    public static boolean createUsuario(usuario us) {
+        boolean result = false;
         List<usuario> usuarios = new LinkedList<>();
 
-        String sql = "INSERT INTO usuario (Nombre, Email, Password, Telefono) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (nombre, email, password, fecha_nacimiento, telefono) VALUES (?, ?, ?, ?, ?)";
 
         try(Connection connection = SQLDataAccess.getConnection();
             PreparedStatement stat = connection.prepareStatement(sql)) {
@@ -57,19 +58,42 @@ public class SQLModelUsuario {
             stat.setString(1, us.getNombre());
             stat.setString(2, us.getEmail());
             stat.setString(3, us.getPassword());
-            stat.setString(4, us.getTelefono());
+            stat.setDate(4, Date.valueOf(us.getFecha_nacimiento()));
+            stat.setString(5, us.getTelefono());
 
-            int rowsAffected = stat.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Usuario insertado correctamente.");
-            } else {
-                System.out.println("No se pudo insertar el usuario.");
-            }
+            stat.execute();
+            result = true;
+
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
         }
 
-        return usuarios;
+        return result;
+    }
+
+    public static boolean updateUsuario(usuario us) {
+        boolean result = false;
+        String sql = "UPDATE usuario SET nombre = ?, email = ?, password = ?, fecha_nacimiento = ?, telefono WHERE id_usuario = ?";
+
+        try (Connection conn = SQLDataAccess.getConnection();
+             PreparedStatement stat = conn.prepareStatement(sql)){
+
+            stat.setString(1, us.getNombre());
+            stat.setString(2, us.getEmail());
+            stat.setString(3, us.getPassword());
+            stat.setDate(4, Date.valueOf(us.getFecha_nacimiento()));
+            stat.setString(5, us.getTelefono());
+
+            stat.setInt(6, us.getId_usuario());
+            stat.executeUpdate();
+            result = true;
+
+        } catch (SQLException e) {
+            System.err.println("SQLException: " + e.getMessage());
+        }
+
+
+        return false;
     }
 
 }
