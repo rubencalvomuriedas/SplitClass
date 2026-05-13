@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="mainPanel" maxHeight="640.0" maxWidth="640.0" minHeight="640.0" minWidth="640.0" prefHeight="640.0" prefWidth="640.0" styleClass="my-background">
          <children>
-            <Label alignment="CENTER" layoutX="118.0" layoutY="78.0" prefHeight="49.0" prefWidth="397.0" styleClass="mi-title-view" text="App Split Class" textAlignment="CENTER" textFill="#171717" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0">
+            <Label alignment="CENTER" layoutX="118.0" layoutY="78.0" prefHeight="49.0" prefWidth="397.0" styleClass="mi-title-view" text="App SplitClass" textAlignment="CENTER" textFill="#171717" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font size="40.0" />
                </font>
