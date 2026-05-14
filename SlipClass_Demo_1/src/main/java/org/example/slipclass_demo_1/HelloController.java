@@ -254,11 +254,7 @@ public class HelloController {
 
     @FXML
     private void onSolicitudesClick(ActionEvent event) {
-        try{
-            
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void onInsertarButtonClick(javafx.event.ActionEvent actionEvent) {
@@ -275,5 +271,7 @@ public class HelloController {
 
     public void onRegistroButtonClick(javafx.event.ActionEvent actionEvent) {
     }
+
+
 
 }
