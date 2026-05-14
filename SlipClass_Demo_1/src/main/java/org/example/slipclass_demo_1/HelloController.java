@@ -3,22 +3,23 @@ package org.example.slipclass_demo_1;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.example.slipclass_demo_1.configuration.SQLDataAccess;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class HelloController {
+public class HelloController implements Initializable {
 
     @FXML
     private TextField txtUsuario, txtEmail, txtTelefono;
@@ -254,6 +255,7 @@ public class HelloController {
         }
     }
 
+<<<<<<< HEAD
 //    @FXML
 //    private void onSolicitudesClick(ActionEvent event) {
 //        try{
@@ -262,6 +264,12 @@ public class HelloController {
 //            e.printStackTrace();
 //        }
 //    }
+=======
+    @FXML
+    private void onSolicitudesClick(ActionEvent event) {
+
+    }
+>>>>>>> cc93a0cae464ab1845adfb21c0e68c3a22a3edd9
 
     public void onInsertarButtonClick(javafx.event.ActionEvent actionEvent) {
     }
@@ -278,4 +286,22 @@ public class HelloController {
     public void onRegistroButtonClick(javafx.event.ActionEvent actionEvent) {
     }
 
+<<<<<<< HEAD
 }
+=======
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        List<Grupo> grupos = SQLDataAccess.getGrupos();
+
+        TreeItem<String> root = new TreeItem<String>("");
+        root.setExpanded(true);
+
+        for(Grupo g : grupos) {
+            TreeItem<String> gupoItem<>(g.getid_grupo());
+
+            grupoItem.expandedProperty
+        }
+    }
+}
+>>>>>>> cc93a0cae464ab1845adfb21c0e68c3a22a3edd9
