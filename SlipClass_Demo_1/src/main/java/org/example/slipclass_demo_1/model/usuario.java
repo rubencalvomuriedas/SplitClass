@@ -6,12 +6,16 @@ import java.time.LocalDateTime;
 public class usuario {
 
     private int id_usuario;
+<<<<<<< HEAD
     private String CodUsuario;
+=======
+    private String codUsuario;
+>>>>>>> 6252e25364fc04059d339fdbb07b54c4802d83ab
     private String nombre;
     private String email;
     private String password;
     private String telefono;
-    private String idioma;
+    private String idioma; // seleccionadoIdioma
     private String alias;
     private String iban;
     private LocalDateTime fecha_creacion;
@@ -29,11 +33,12 @@ public class usuario {
         this.fecha_creacion = fecha_creacion;
         this.fecha_nacimiento = fecha_nacimiento;
     }
-    public usuario(String nombre, String email, String password, String telefono){
+    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento){
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
     }
 
 
@@ -93,6 +98,17 @@ public class usuario {
         this.alias = alias;
     }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
 
     @Override
     public String toString() {
