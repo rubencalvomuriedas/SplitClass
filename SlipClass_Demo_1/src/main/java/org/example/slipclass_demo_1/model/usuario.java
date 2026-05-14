@@ -11,7 +11,7 @@ public class usuario {
     private String email;
     private String password;
     private String telefono;
-    private String idioma;
+    private String idioma; // seleccionadoIdioma
     private String alias;
     private String iban;
     private LocalDateTime fecha_creacion;
