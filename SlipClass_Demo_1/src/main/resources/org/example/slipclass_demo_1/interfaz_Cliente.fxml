@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
@@ -75,13 +74,8 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="407.0" layoutY="65.0" prefHeight="61.0" prefWidth="224.0" text="SplitClass" textFill="WHITE">
-         <font>
-            <Font size="48.0" />
-         </font>
-      </Label>
       <Label layoutX="493.0" layoutY="646.0" prefHeight="25.0" prefWidth="55.0" text="AÑADIR" textFill="WHITE" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="842.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="172.0" fitWidth="259.0" layoutX="364.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imágenes/Logo.png" />
          </image>

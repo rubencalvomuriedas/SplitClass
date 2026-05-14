@@ -162,6 +162,7 @@ public class HelloController {
         }
     }
 
+    @FXML
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
@@ -228,6 +229,7 @@ public class HelloController {
         }
     }
 
+    @FXML
     private void guardarEnArchivo(String user, String mail, String tel, String password) {
         try (FileWriter fw = new FileWriter("usuarios.txt", true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -252,14 +254,14 @@ public class HelloController {
         }
     }
 
-    @FXML
-    private void onSolicitudesClick(ActionEvent event) {
-        try{
-            
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    @FXML
+//    private void onSolicitudesClick(ActionEvent event) {
+//        try{
+//
+//        } catch(IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void onInsertarButtonClick(javafx.event.ActionEvent actionEvent) {
     }
