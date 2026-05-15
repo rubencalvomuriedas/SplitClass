@@ -42,7 +42,7 @@ CREATE TABLE GRUPO (
     Descripcion TEXT,
     Moneda VARCHAR(10) DEFAULT 'EUR',
     Fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    Id_Estado INT NOT NULL, -- Relación con la nueva tabla de estados
+    Id_Estado INT NOT NULL,
     PRIMARY KEY (Id_Grupo),
     CONSTRAINT fk_grupo_estado FOREIGN KEY (Id_Estado) REFERENCES ESTADO_GRUPO (Id_Estado)
 );
