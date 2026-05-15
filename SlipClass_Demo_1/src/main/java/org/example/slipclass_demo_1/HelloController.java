@@ -70,8 +70,6 @@ public class HelloController implements Initializable {
     }
 
 
-
-
     @FXML
     public void clickDescarga() {
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -142,28 +140,18 @@ public class HelloController implements Initializable {
         alerta.setHeaderText(null);
         alerta.setContentText("Esto es lo que se va a mostar");
         alerta.show();
-/*
-    protected void onRegistrarseClick(ActionEvent event) {
-        try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("registro.fxml"));
-
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-
-            Scene scene = new Scene(root);
-
-
-            stage.setScene(scene);
-
-        } catch (IOException e) {
-            System.err.println("No se pudo cargar el formulario: " + e.getMessage());
-        }
-*/
     }
 
     public void onRegistrarseClick(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("registro.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al cambiar de pantalla: " + e.getMessage());
+        }
     }
 
     public void onInsertarButtonClick(ActionEvent event) {
@@ -259,13 +247,11 @@ public class HelloController implements Initializable {
             return;
         }
 
-        // Llamamos al modelo
         usuario usuarioLogueado = SQLModelUsuario.login(nombre, pass);
 
         if (usuarioLogueado != null) {
             System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
 
-            // Aquí puedes redirigir a la pantalla principal
             irAPantallaPrincipal(event);
         } else {
             mostrarAlerta("Error de acceso", "Usuario o contraseña incorrectos.");
@@ -274,14 +260,24 @@ public class HelloController implements Initializable {
 
     private void irAPantallaPrincipal(ActionEvent event) {
         try {
-            // Cambia "hello-view.fxml" por el nombre de tu vista principal
-            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ListaUsuarios.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             System.err.println("Error al cambiar de pantalla: " + e.getMessage());
         }
+    }
+
+    public void onIrALoginClick(ActionEvent event) {
+        try {
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (IOException e) {
+                System.err.println("Error al cambiar de pantalla: " + e.getMessage());
+            }
     }
 }
 
