@@ -255,7 +255,6 @@ public class HelloController implements Initializable {
         }
     }
 
-<<<<<<< HEAD
 //    @FXML
 //    private void onSolicitudesClick(ActionEvent event) {
 //        try{
@@ -264,12 +263,10 @@ public class HelloController implements Initializable {
 //            e.printStackTrace();
 //        }
 //    }
-=======
     @FXML
     private void onSolicitudesClick(ActionEvent event) {
 
     }
->>>>>>> cc93a0cae464ab1845adfb21c0e68c3a22a3edd9
 
     public void onInsertarButtonClick(javafx.event.ActionEvent actionEvent) {
     }
@@ -286,22 +283,11 @@ public class HelloController implements Initializable {
     public void onRegistroButtonClick(javafx.event.ActionEvent actionEvent) {
     }
 
-<<<<<<< HEAD
-}
-=======
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        List<Grupo> grupos = SQLDataAccess.getGrupos();
 
-        TreeItem<String> root = new TreeItem<String>("");
-        root.setExpanded(true);
-
-        for(Grupo g : grupos) {
-            TreeItem<String> gupoItem<>(g.getid_grupo());
-
-            grupoItem.expandedProperty
-        }
     }
 }
->>>>>>> cc93a0cae464ab1845adfb21c0e68c3a22a3edd9
+
+
+
