@@ -6,11 +6,7 @@ import java.time.LocalDateTime;
 public class usuario {
 
     private int id_usuario;
-<<<<<<< HEAD
-    private String CodUsuario;
-=======
     private String codUsuario;
->>>>>>> 6252e25364fc04059d339fdbb07b54c4802d83ab
     private String nombre;
     private String email;
     private String password;
