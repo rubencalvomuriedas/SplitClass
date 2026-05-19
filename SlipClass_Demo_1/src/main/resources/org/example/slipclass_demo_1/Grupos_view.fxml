@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1073.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="437.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imágenes/Logo.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="366.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listado de los grupos" wrappingWidth="341.13671875">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <TableView layoutX="259.0" layoutY="250.0" prefHeight="463.0" prefWidth="535.0">
+        <columns>
+          <TableColumn prefWidth="89.0" text="ID" />
+          <TableColumn prefWidth="89.0" text="NOMBRE" />
+            <TableColumn prefWidth="89.0" text="Nº USUARIOS" />
+            <TableColumn prefWidth="89.0" text="MONEDA" />
+            <TableColumn prefWidth="89.0" text="CREACION" />
+            <TableColumn prefWidth="89.0" text="ELIMINACION" />
+            <TableColumn prefWidth="26.0" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
