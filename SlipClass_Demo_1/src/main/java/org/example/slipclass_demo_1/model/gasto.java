@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public class gasto {
 
     private int id_gasto;
-    private String Cod_Gasto;
+    private String cod_Gasto;
     private String concepto;
     private double monto_total;
     private LocalDate fecha;

@@ -5,11 +5,11 @@ import java.time.LocalDate;
 public class liquidacion {
 
     private int id_liquidacion;
-    private String Cod_Liquidacion;
+    private String codLiquidacion;
     private double monto;
     private LocalDate fecha_movimiento;
     private String concepto;
-    private int estado;
+    private int estado;  // AÑADIR TABLA DE ESTADOS
     private int id_emisor;
     private int id_receptor;
     private int id_grupo;

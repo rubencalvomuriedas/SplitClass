@@ -14,39 +14,42 @@ public class SQLModelUsuario {
     public static List<usuario> getAllUsuarios() {
         List<usuario> usuarios = new LinkedList<>();
 
-        String sql = "SELECT * FROM usuario";
+        // Traemos solo los usuarios que estén activos lógicamente
+        String sql = "SELECT * FROM USUARIO WHERE verificacionActividad = true";
 
-        try(Connection connection = SQLDataAccess.getConnection();
-            Statement stat = connection.createStatement();
-            ResultSet resultSet = stat.executeQuery(sql)) {
+        try (Connection connection = SQLDataAccess.getConnection();
+             Statement stat = connection.createStatement();
+             ResultSet resultSet = stat.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("Id_Usuario");
+                int id = resultSet.getInt("id_Usuario");
+                String codUsuario = resultSet.getString("codUsuario");
                 String nombre = resultSet.getString("Nombre");
                 String email = resultSet.getString("Email");
                 String password = resultSet.getString("Password");
                 String telefono = resultSet.getString("Telefono");
-                String idioma = resultSet.getString("Idioma");
+                int idIdioma = resultSet.getInt("id_idioma"); // Ahora es INT de acuerdo a la FK
                 String alias = resultSet.getString("Alias");
                 String iban = resultSet.getString("IBAN");
 
                 LocalDateTime fecha_creacion = resultSet.getTimestamp("Fecha_Creacion").toLocalDateTime();
+
                 LocalDate fecha_nac = null;
                 Date sqlDate = resultSet.getDate("Fecha_Nacimiento");
                 if (sqlDate != null) {
                     fecha_nac = sqlDate.toLocalDate();
                 }
-                usuario us = new usuario(id, nombre, email, password, telefono, idioma, alias, iban, fecha_creacion, fecha_nac);
 
-
-                usuarios.add(us);}
+                // Asegúrate de que el constructor de tu clase 'usuario' reciba estos parámetros
+                usuario us = new usuario(id, codUsuario, nombre, email, password, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
+                usuarios.add(us);
+            }
         } catch (SQLException e) {
-            System.err.println("SQLException: " + e.getMessage());
+            System.err.println("SQLException en getAllUsuarios: " + e.getMessage());
         }
 
-            return usuarios;
+        return usuarios;
     }
-
     public static boolean createUsuario(usuario us) {
         boolean result = false;
         List<usuario> usuarios = new LinkedList<>();

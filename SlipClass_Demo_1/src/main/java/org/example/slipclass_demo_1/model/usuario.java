@@ -11,23 +11,25 @@ public class usuario {
     private String email;
     private String password;
     private String telefono;
-    private String idioma; // seleccionadoIdioma
+    private int idIdioma; // seleccionadoIdioma
     private String alias;
     private String iban;
     private LocalDateTime fecha_creacion;
     private LocalDate fecha_nacimiento;
+    private boolean verificacionActividad;
 
-    public usuario(int id_usuario, String nombre, String email, String password, String telefono, String idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
+    public usuario(int id_usuario, String codUsuario, String nombre, String email, String password, String telefono, int idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
-        this.idioma = idioma;
+        this.idIdioma = idioma;
         this.alias = alias;
         this.iban = iban;
         this.fecha_creacion = fecha_creacion;
         this.fecha_nacimiento = fecha_nacimiento;
+        this.verificacionActividad = false;
     }
     public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento){
         this.nombre = nombre;
@@ -35,6 +37,7 @@ public class usuario {
         this.password = password;
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
+        this.verificacionActividad = false;
     }
 
 
@@ -58,8 +61,8 @@ public class usuario {
         return telefono;
     }
 
-    public String getIdioma() {
-        return idioma;
+    public int getIdIdioma() {
+        return idIdioma;
     }
 
     public String getAlias() {
@@ -129,7 +132,7 @@ public class usuario {
                 email,
                 password != null ? "********" : "Vacío",
                 telefono,
-                idioma,
+                idIdioma,
                 alias,
                 iban,
                 fecha_creacion,

@@ -2,8 +2,8 @@ package org.example.slipclass_demo_1.model;
 
 public class reparto_gasto {
 
-    private int id_reparto_gasto;
-    private String Cod_Reparto_Gasto;
+    private int idRepartoGasto;
+    private String codRepartoGasto;
     private int id_gasto;
     private int id_usuario;
     private double cuota_deuda;
@@ -14,8 +14,8 @@ public class reparto_gasto {
         this.cuota_deuda = cuota_deuda;
     }
 
-    public int getId_reparto_gasto() {
-        return id_reparto_gasto;
+    public int getIdRepartoGasto() {
+        return idRepartoGasto;
     }
 
     public int getId_gasto() {
@@ -37,7 +37,7 @@ public class reparto_gasto {
     @Override
     public String toString() {
         return "reparto_gasto{" +
-                "id_reparto_gasto=" + id_reparto_gasto +
+                "id_reparto_gasto=" + idRepartoGasto +
                 ", id_gasto=" + id_gasto +
                 ", id_usuario=" + id_usuario +
                 ", cuota_deuda=" + cuota_deuda +
