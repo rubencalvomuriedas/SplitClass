@@ -5,14 +5,21 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: radial-gradient(center 50% 50%, radius 100%, #1a1a1a, #0d0d0d);" styleClass="splitclass-bg" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: radial-gradient(center 50% 50%, radius 100%, #1a1a1a, #0d0d0d);" styleClass="splitclass-bg" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
     <children>
-        <VBox alignment="CENTER_LEFT" layoutX="150.0" layoutY="80.0" prefHeight="518.0" prefWidth="560.0" spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 30; -fx-padding: 50; -fx-alignment: center;" AnchorPane.topAnchor="80.0">
+      <ImageView fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imágenes/fondo.jpg" />
+         </image>
+      </ImageView>
+        <VBox alignment="CENTER_LEFT" layoutX="175.0" layoutY="161.0" prefHeight="518.0" prefWidth="560.0" spacing="15.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 30; -fx-padding: 30; -fx-alignment: center; -fx-max-width: 450;" AnchorPane.topAnchor="161.0">
             <children>
                 <Label styleClass="titulo-premium" text="NUEVO GASTO" textFill="#3498db">
                <font>
@@ -21,7 +28,7 @@
 
                 <VBox prefWidth="40.0" spacing="5.0" style="-fx-background-color: #262626; -fx-text-fill: #ffffff; -fx-border-color: #404040; -fx-border-radius: 5; -fx-background-radius: 5;">
                     <children>
-                        <Label styleClass="label-formulario" text="Concepto o Descripción:" textFill="WHITE" />
+                        <Label styleClass="label-formulario" text="Concepto:" textFill="WHITE" />
                         <TextField fx:id="txtGastoConcepto" prefHeight="40.0" promptText="Ej. Cena restaurante" styleClass="input-premium" />
                     </children>
                     <VBox.margin>
@@ -61,5 +68,10 @@
                 </HBox>
             </children>
         </VBox>
+      <ImageView fitHeight="178.0" fitWidth="242.0" layoutX="255.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Imágenes/Logo.png" />
+         </image>
+      </ImageView>
     </children>
 </AnchorPane>

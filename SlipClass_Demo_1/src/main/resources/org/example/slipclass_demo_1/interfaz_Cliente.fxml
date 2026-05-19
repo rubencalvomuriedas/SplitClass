@@ -10,76 +10,67 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="180.0" layoutY="30.0" prefHeight="740.0" prefWidth="855.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="30.0" />
-      <ImageView fitHeight="823.0" fitWidth="1044.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-23.0" AnchorPane.leftAnchor="-3.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@Imágenes/fondo.jpg" />
-         </image>
-      </ImageView>
-      <Text fill="WHITE" layoutX="60.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CASA" wrappingWidth="45.0" />
-      <Text fill="WHITE" layoutX="334.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOLICITUDES" />
-      <Text fill="WHITE" layoutX="644.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GRUPOS" />
-      <Text fill="WHITE" layoutX="942.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERFIL" />
-      <HBox alignment="CENTER" layoutX="55.0" layoutY="691.0" prefHeight="85.0" prefWidth="930.0" spacing="250.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="691.0">
+      <AnchorPane layoutX="180.0" layoutY="30.0" prefHeight="607.0" prefWidth="437.0" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="30.0">
          <children>
-            <Button fx:id="casa_view" mnemonicParsing="false" onAction="#onClickButtonCasa" prefHeight="47.0" prefWidth="47.0">
-               <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Imágenes/icono_regreso.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="solicitudes_view" mnemonicParsing="false" onAction="#onClickButtonSolicitudes" prefHeight="47.0" prefWidth="47.0">
-               <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Imágenes/simbolo%20dolar.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="grupos_view" mnemonicParsing="false" onAction="#onClickButtonGrupos" prefHeight="47.0" prefWidth="47.0">
-               <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Imágenes/grupo%20(2).png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Button>
-            <Button fx:id="perfil_view" alignment="CENTER" mnemonicParsing="false" onAction="#onClickButtonPerfil" prefHeight="47.0" prefWidth="47.0">
-               <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Imágenes/icono_perfil.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-      </HBox>
-      <Button layoutX="484.0" layoutY="585.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="70.0">
-         <graphic>
-            <ImageView fitHeight="51.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+            <TreeView fx:id="treeView" layoutX="90.0" layoutY="152.0" prefHeight="362.0" prefWidth="314.0" />
+            <Button layoutX="210.0" layoutY="537.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="70.0" />
+            <ImageView fitHeight="172.0" fitWidth="259.0" layoutX="116.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imágenes/Logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="55.0" layoutX="220.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Imágenes/plus-sin-fondo.png" />
                </image>
             </ImageView>
+            <Text fill="WHITE" layoutX="36.0" layoutY="745.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SOLICITUDES" />
+            <HBox alignment="CENTER" layoutX="-55.0" layoutY="622.0" prefHeight="51.0" prefWidth="673.0" spacing="250.0" AnchorPane.bottomAnchor="127.0" AnchorPane.leftAnchor="-55.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="622.0" />
+         </children></AnchorPane>
+      <Text fill="WHITE" layoutX="71.0" layoutY="773.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CASA" wrappingWidth="70.27734375" />
+      <Text fill="WHITE" layoutX="475.0" layoutY="774.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GRUPOS" />
+      <Text fill="WHITE" layoutX="681.0" layoutY="774.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERFIL" />
+      <Button fx:id="casa_view" layoutX="59.0" layoutY="696.0" mnemonicParsing="false" onAction="#onClickButtonCasa" prefHeight="47.0" prefWidth="47.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imágenes/icono_regreso.png" />
+               </image>
+            </ImageView>
          </graphic>
       </Button>
-      <Label layoutX="493.0" layoutY="646.0" prefHeight="25.0" prefWidth="55.0" text="AÑADIR" textFill="WHITE" />
-      <ImageView fitHeight="172.0" fitWidth="259.0" layoutX="364.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/Logo.png" />
-         </image>
-      </ImageView>
-      <TreeView fx:id="treeView" layoutX="353.0" layoutY="175.0" prefHeight="362.0" prefWidth="314.0" />
+      <Button fx:id="perfil_view" alignment="CENTER" layoutX="675.0" layoutY="696.0" mnemonicParsing="false" onAction="#onClickButtonPerfil" prefHeight="47.0" prefWidth="47.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imágenes/icono_perfil.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="grupos_view" layoutX="474.0" layoutY="696.0" mnemonicParsing="false" onAction="#onClickButtonGrupos" prefHeight="47.0" prefWidth="47.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imágenes/grupo%20(2).png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="solicitudes_view" layoutX="227.0" layoutY="696.0" mnemonicParsing="false" onAction="#onClickButtonSolicitudes" prefHeight="47.0" prefWidth="47.0">
+         <graphic>
+            <ImageView fitHeight="29.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imágenes/simbolo%20dolar.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="398.0" layoutY="643.0" prefHeight="25.0" prefWidth="55.0" text="AÑADIR" textFill="WHITE" />
    </children>
 </AnchorPane>
