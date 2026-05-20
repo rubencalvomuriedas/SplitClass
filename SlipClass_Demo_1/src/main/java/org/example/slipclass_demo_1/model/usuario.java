@@ -31,15 +31,32 @@ public class usuario {
         this.fecha_nacimiento = fecha_nacimiento;
         this.verificacionActividad = false;
     }
-    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento){
+    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento, int idIdioma) {
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
-        this.verificacionActividad = false;
+        this.idIdioma = idIdioma;
+        this.verificacionActividad = true;
+    }
+    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.idIdioma = idIdioma;
+        this.verificacionActividad = true;
     }
 
+    public String getCodUsuario() {
+        return codUsuario;
+    }
+
+    public boolean isVerificacionActividad() {
+        return verificacionActividad;
+    }
 
     public int getId_usuario() {
         return id_usuario;
@@ -109,6 +126,10 @@ public class usuario {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
+    public void setIdIdioma(int idIdioma) {
+        this.idIdioma = idIdioma;
+    }
+
     @Override
     public String toString() {
         return """
@@ -139,4 +160,6 @@ public class usuario {
                 fecha_nacimiento != null ? fecha_nacimiento : "Vacío"
         );
     }
+
+
 }

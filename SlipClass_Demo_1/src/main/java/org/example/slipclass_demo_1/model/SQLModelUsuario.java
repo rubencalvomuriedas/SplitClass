@@ -14,7 +14,6 @@ public class SQLModelUsuario {
     public static List<usuario> getAllUsuarios() {
         List<usuario> usuarios = new LinkedList<>();
 
-        // Traemos solo los usuarios que estén activos lógicamente
         String sql = "SELECT * FROM USUARIO WHERE verificacionActividad = true";
 
         try (Connection connection = SQLDataAccess.getConnection();
@@ -28,7 +27,7 @@ public class SQLModelUsuario {
                 String email = resultSet.getString("Email");
                 String password = resultSet.getString("Password");
                 String telefono = resultSet.getString("Telefono");
-                int idIdioma = resultSet.getInt("id_idioma"); // Ahora es INT de acuerdo a la FK
+                int idIdioma = resultSet.getInt("id_idioma");
                 String alias = resultSet.getString("Alias");
                 String iban = resultSet.getString("IBAN");
 
@@ -40,7 +39,6 @@ public class SQLModelUsuario {
                     fecha_nac = sqlDate.toLocalDate();
                 }
 
-                // Asegúrate de que el constructor de tu clase 'usuario' reciba estos parámetros
                 usuario us = new usuario(id, codUsuario, nombre, email, password, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
                 usuarios.add(us);
             }
@@ -52,20 +50,36 @@ public class SQLModelUsuario {
     }
     public static boolean createUsuario(usuario us) {
         boolean result = false;
-        List<usuario> usuarios = new LinkedList<>();
 
-        String sql = "INSERT INTO usuario (nombre, email, password, fecha_nacimiento, telefono) VALUES (?, ?, ?, ?, ?)";
+
+        String sql = "INSERT INTO USUARIO (codUsuario, Nombre, Email, Password, Telefono, id_idioma, Alias, IBAN, Fecha_Nacimiento, verificacionActividad) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = SQLDataAccess.getConnection();
             PreparedStatement stat = connection.prepareStatement(sql)) {
 
-            stat.setString(1, us.getNombre());
+            String nuevoCodigo = CodeGenerator.generarCodigo(connection, "USUARIO", "codUsuario", "USR");
+
+            stat.setString(1, nuevoCodigo);
+            stat.setString(2, us.getNombre());
             stat.setString(2, us.getEmail());
             stat.setString(3, us.getPassword());
-            stat.setDate(4, Date.valueOf(us.getFecha_nacimiento()));
+            stat.setString(5, us.getTelefono());
+            stat.setInt(6, us.getIdIdioma()) ;
+            stat.setString(7, us.getAlias());
+            stat.setString(8, us.getIban());
             stat.setString(5, us.getTelefono());
 
-            stat.execute();
+            stat.setDate(4, Date.valueOf(us.getFecha_nacimiento()));
+
+            if (us.getFecha_nacimiento() != null) {
+                stat.setDate(9, Date.valueOf(us.getFecha_nacimiento()));
+            } else {
+                stat.setNull(9, Types.DATE);
+            }
+            stat.setBoolean(10, true);
+
+            stat.executeUpdate();
             result = true;
 
         } catch (SQLException e) {
@@ -121,7 +135,8 @@ public class SQLModelUsuario {
                         rs.getString("email"),
                         rs.getString("password"),
                         rs.getString("telefono"),
-                        rs.getDate("fecha_nacimiento").toLocalDate()
+                        rs.getDate("fecha_nacimiento").toLocalDate(),
+                        rs.getInt("id_idioma")
                 );
             }
 
