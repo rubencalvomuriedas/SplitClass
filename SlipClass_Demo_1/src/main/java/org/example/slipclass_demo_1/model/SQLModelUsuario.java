@@ -62,15 +62,14 @@ public class SQLModelUsuario {
 
             stat.setString(1, nuevoCodigo);
             stat.setString(2, us.getNombre());
-            stat.setString(2, us.getEmail());
-            stat.setString(3, us.getPassword());
+            stat.setString(3, us.getEmail());
+            stat.setString(4, us.getPassword());
             stat.setString(5, us.getTelefono());
-            stat.setInt(6, us.getIdIdioma()) ;
+            int idiomaAInsertar = (us.getIdIdioma() <= 0) ? 1 : us.getIdIdioma();
+            stat.setInt(6, idiomaAInsertar);
             stat.setString(7, us.getAlias());
             stat.setString(8, us.getIban());
             stat.setString(5, us.getTelefono());
-
-            stat.setDate(4, Date.valueOf(us.getFecha_nacimiento()));
 
             if (us.getFecha_nacimiento() != null) {
                 stat.setDate(9, Date.valueOf(us.getFecha_nacimiento()));
