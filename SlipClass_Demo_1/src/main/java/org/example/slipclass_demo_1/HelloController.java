@@ -11,8 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.example.slipclass_demo_1.model.SQLModelUsuario;
-import org.example.slipclass_demo_1.model.usuario;
+import org.example.slipclass_demo_1.model.*;
 
 import java.io.IOException;
 import java.net.URL;

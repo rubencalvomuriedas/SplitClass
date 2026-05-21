@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.slipclass_demo_1.model.SQLModelGasto;
 import org.example.slipclass_demo_1.model.categoria;
 import org.example.slipclass_demo_1.model.gasto;
+import org.example.slipclass_demo_1.model.grupo;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,6 +28,7 @@ public class newController implements Initializable {
     @FXML private TableColumn<gasto, LocalDate> colFecha;
     @FXML private TableColumn<gasto, String> colConcepto;
     @FXML private TableColumn<gasto, Double> colMonto;
+    @FXML private TableView<grupo>, Double> tablaGrupo
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
