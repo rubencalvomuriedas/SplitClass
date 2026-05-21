@@ -13,6 +13,17 @@ public class gasto {
     private int id_categoria;
     private int id_usuarioPagador;
 
+    public gasto(int id_gasto, String cod_Gasto, String concepto, double monto_total, LocalDate fecha, int id_grupo, int id_categoria, int id_usuarioPagador) {
+        this.id_gasto = id_gasto;
+        this.cod_Gasto = cod_Gasto;
+        this.concepto = concepto;
+        this.monto_total = monto_total;
+        this.fecha = fecha;
+        this.id_grupo = id_grupo;
+        this.id_categoria = id_categoria;
+        this.id_usuarioPagador = id_usuarioPagador;
+    }
+
     public gasto(String concepto, double monto_total, int id_grupo, int id_categoria, int id_usuarioPagador) {
         this.concepto = concepto;
         this.monto_total = monto_total;

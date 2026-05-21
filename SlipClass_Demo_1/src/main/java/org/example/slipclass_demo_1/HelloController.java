@@ -38,7 +38,6 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        // Solo ejecutamos esto si el FXML cargado tiene la lista (hello-view.fxml)
         if (this.listViewUsuarios != null) {
             this.listViewUsuarios.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
                 this.us = newValue;

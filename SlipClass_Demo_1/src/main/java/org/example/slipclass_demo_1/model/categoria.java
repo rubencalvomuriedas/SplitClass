@@ -5,7 +5,7 @@ public class categoria {
     private int id_categoria;
     private String nombre;
 
-    public categoria(String nombre) {
+    public categoria(int id_categoria, String nombre) {
         this.nombre = nombre;
     }
 
@@ -23,9 +23,7 @@ public class categoria {
 
     @Override
     public String toString() {
-        return "categoria{" +
-                "id_categoria=" + id_categoria +
-                ", nombre='" + nombre + '\'' +
-                '}';
+        return
+                nombre;
     }
 }
