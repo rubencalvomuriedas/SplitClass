@@ -27,8 +27,19 @@ public class newController implements Initializable {
     @FXML private TableView<gasto> tablaGastos;
     @FXML private TableColumn<gasto, LocalDate> colFecha;
     @FXML private TableColumn<gasto, String> colConcepto;
+
+
     @FXML private TableColumn<gasto, Double> colMonto;
-    @FXML private TableView<grupo>, Double> tablaGrupo
+    @FXML private TableView<grupo> listado_grupos_view;
+    @FXML private TableColumn<grupo, String> columnId;
+    @FXML private TableColumn<grupo, String> columnNombre;
+    @FXML private TableColumn<grupo, String> columnNºUsuarios;
+    @FXML private TableColumn<grupo, String> columnMoneda;
+    @FXML private TableColumn<grupo, String> columnCreacion;
+    @FXML private TableColumn<grupo, String> columnEliminacion;
+
+
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
