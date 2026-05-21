@@ -11,8 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.example.slipclass_demo_1.model.SQLModelUsuario;
-import org.example.slipclass_demo_1.model.usuario;
+import org.example.slipclass_demo_1.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,6 +33,16 @@ public class HelloController implements Initializable {
     @FXML private DatePicker dpFechaNacimiento;
     @FXML private TextField loginUsuario;
     @FXML private PasswordField loginPass;
+
+    
+//    @FXML private TableColumn<usuario, Double> colMonto;
+//    @FXML private TableView<usuario> listado_grupos_view;
+//    @FXML private TableColumn<usuario, String> columnId;
+//    @FXML private TableColumn<usuario, String> columnNombre;
+//    @FXML private TableColumn<usuario, String> columnNºUsuarios;
+//    @FXML private TableColumn<usuario, String> columnMoneda;
+//    @FXML private TableColumn<usuario, String> columnCreacion;
+//    @FXML private TableColumn<usuario, String> columnEliminacion;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
