@@ -16,5 +16,6 @@
       </TableView>
       <Button layoutX="717.0" layoutY="173.0" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="63.0" prefWidth="106.0" text="Eliminar gasto" />
       <Button layoutX="717.0" layoutY="341.0" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="55.0" prefWidth="106.0" text="Modificar gasto" />
+       <Button layoutX="717.0" layoutY="500.0" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="55.0" prefWidth="106.0" text="Volver" />
    </children>
 </AnchorPane>

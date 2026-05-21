@@ -1,0 +1,2 @@
+En listado de grupo hay que pone 3 botones, 1 editar grupo que te lleve a registro de grupo, otro que sea eliminar grupo y otro que te lleve atras para que vuelva el menu del grupo
+cuando se haga el login me lleve al menu usuario
