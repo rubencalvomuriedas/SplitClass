@@ -132,25 +132,21 @@ public class HelloController implements Initializable {
         alert.show();
     }
 
-    // Métodos heredados obligatorios de tu código original
     @FXML public void onIniciarSesionClick(ActionEvent event) { cambiarPantalla(event, "menuUsuario.fxml"); }
     @FXML public void onFinalizarRegistroClick(ActionEvent event) { cambiarPantalla(event, "menuUsuario.fxml"); }
 
     @FXML
     public void onTablaUsuarioClick(ActionEvent event) {
-        // Al hacer clic, carga y cambia la escena actual a la tabla de usuarios
         cambiarPantalla(event, "ListaUsuarios.fxml");
     }
 
     @FXML
     public void onVolverClick(ActionEvent event) {
-        // Redirige de vuelta al menú de usuarios
         cambiarPantalla(event, "menuUsuario.fxml");
     }
 
     @FXML
     public void onTablaGrupooClick(ActionEvent event) {
-        // Cambia "ListaGrupos.fxml" por el nombre exacto de tu archivo si se llama distinto
         cambiarPantalla(event, "Grupos_view.fxml");
     }
 
@@ -191,6 +187,18 @@ public class HelloController implements Initializable {
     public void onVolverAMenuGasto(ActionEvent event) {
         // Esto te llevará de vuelta al menú de gastos
         cambiarPantalla(event, "menuGasto.fxml");
+    }
+
+    public void clickSobreNosotros(ActionEvent actionEvent) {
+    }
+
+    public void clickDescarga(ActionEvent actionEvent) {
+    }
+
+    public void onIrALoginClick(ActionEvent actionEvent) {
+    }
+
+    public void onRegistrarseClick(ActionEvent actionEvent) {
     }
     // ==========================================
     // NAVEGACIÓN DESDE EL MENÚ GRUPOS

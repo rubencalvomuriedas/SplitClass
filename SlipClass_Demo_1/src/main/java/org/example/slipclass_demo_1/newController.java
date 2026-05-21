@@ -37,10 +37,6 @@ public class newController implements Initializable {
     @FXML private TableColumn<grupo, LocalDate> columnCreacion;
     @FXML private TableColumn<grupo, LocalDate> columnEliminacion;
 
-    
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,8 +46,6 @@ public class newController implements Initializable {
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
 
         tablaGastos.setItems(FXCollections.observableArrayList(SQLModelGasto.getAllGastos()));
-
-//        cargarCategorias();
     }
 
 
@@ -83,8 +77,49 @@ public class newController implements Initializable {
 
 
     public void onEliminarGastoAction(ActionEvent actionEvent) {
+        gasto seleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            System.out.println("Por favor, selecciona un gasto de la tabla para eliminar.");
+            return;
+        }
+
+        // Ejecutar eliminación en base de datos
+        if (SQLModelGasto.deleteGasto(seleccionado.getId_gasto())) {
+            // Remover directamente de la tabla de la interfaz
+            tablaGastos.getItems().remove(seleccionado);
+            System.out.println("Gasto eliminado exitosamente.");
+        } else {
+            System.out.println("Error al intentar eliminar el gasto de la base de datos.");
+        }
     }
 
     public void onModificarGastoAction(ActionEvent actionEvent) {
+        gasto seleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            System.out.println("Por favor, selecciona un gasto de la tabla para editar.");
+            return;
+        }
+
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registerGasto.fxml"));
+            javafx.scene.Parent root = loader.load();
+
+            controllerProvisional formularioController = loader.getController();
+
+            formularioController.cargarGastoParaEditar(seleccionado);
+
+            javafx.scene.Scene scene = new javafx.scene.Scene(root);
+            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            System.err.println("Error al cambiar a la pantalla de edición:");
+            e.printStackTrace();
+        }
+}
+    public void onVolverAMenuGasto(ActionEvent actionEvent) {
     }
 }

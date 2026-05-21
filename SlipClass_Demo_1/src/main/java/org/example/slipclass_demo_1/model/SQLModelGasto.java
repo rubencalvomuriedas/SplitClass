@@ -83,4 +83,37 @@ public class SQLModelGasto {
         }
     }
 
+    public static boolean deleteGasto(int idGasto) {
+        String sql = "DELETE FROM GASTO WHERE Id_Gasto = ?";
+        try (Connection con = SQLDataAccess.getConnection();
+             PreparedStatement stat = con.prepareStatement(sql)) {
+
+            stat.setInt(1, idGasto);
+            return stat.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar gasto: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean updateGasto(gasto g) {
+        String sql = "UPDATE GASTO SET Concepto = ?, Monto_total = ?, Fecha = ?, Id_Grupo = ?, Id_Categoria = ?, Id_Usuario_Pagador = ? WHERE Id_Gasto = ?";
+        try (Connection con = SQLDataAccess.getConnection();
+             PreparedStatement stat = con.prepareStatement(sql)) {
+
+            stat.setString(1, g.getConcepto());
+            stat.setDouble(2, g.getMonto_total());
+            stat.setDate(3, Date.valueOf(g.getFecha()));
+            stat.setInt(4, g.getId_grupo());
+            stat.setInt(5, g.getId_categoria());
+            stat.setInt(6, g.getId_usuarioPagador());
+            stat.setInt(7, g.getId_gasto());
+
+            return stat.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al actualizar gasto: " + e.getMessage());
+            return false;
+        }
+    }
+
 }

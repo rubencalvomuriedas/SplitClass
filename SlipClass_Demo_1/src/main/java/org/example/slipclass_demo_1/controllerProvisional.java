@@ -27,6 +27,8 @@ public class controllerProvisional implements Initializable {
     @FXML private TextField txtGastoConcepto, txtGastoMonto;
     @FXML private DatePicker dpGastoFecha;
 
+    private int idGastoEnEdicion;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -37,7 +39,7 @@ public class controllerProvisional implements Initializable {
 
         } catch (Exception e) {
             System.err.println("¡ERROR crítico en el inicio del controlador!");
-            e.printStackTrace(); // Esto imprimirá el error real en la consola
+            e.printStackTrace();
         }
     }
 
@@ -139,9 +141,29 @@ public class controllerProvisional implements Initializable {
 
             if (SQLModelGasto.createGasto(this.newGasto)) {
                 mostrarAlerta("Éxito", "Gasto creado correctamente.");
-                limpiarCampos(); // Esto borrará todos los campos y los ComboBoxes
+                limpiarCampos();
             } else {
-                mostrarAlerta("Error", "No se pudo crear el gasto. Verifique la conexión a la base de datos.");
+                mostrarAlerta("Error", "No se pudo crear el gasto.");
+            }
+        } else {
+
+            gasto gastoEditado = new gasto(
+                    this.idGastoEnEdicion,
+                    "",
+                    txtGastoConcepto.getText(),
+                    Double.parseDouble(txtGastoMonto.getText()),
+                    dpGastoFecha.getValue(),
+                    idGrp,
+                    idCat,
+                    idUsr
+            );
+
+            if (SQLModelGasto.updateGasto(gastoEditado)) {
+                mostrarAlerta("Éxito", "Gasto actualizado correctamente.");
+                isNewGasto = true;
+                limpiarCampos();
+            } else {
+                mostrarAlerta("Error", "No se pudo actualizar el gasto.");
             }
         }
     }
@@ -163,9 +185,31 @@ public class controllerProvisional implements Initializable {
         comboUsuario.getSelectionModel().clearSelection();
     }
 
-    public void onEliminarGastoAction(ActionEvent actionEvent) {
-    }
+    public void cargarGastoParaEditar(gasto g) {
+        this.isNewGasto = false;
+        this.idGastoEnEdicion = g.getId_gasto();
 
-    public void onModificarGastoAction(ActionEvent actionEvent) {
+        txtGastoConcepto.setText(g.getConcepto());
+        txtGastoMonto.setText(String.valueOf(g.getMonto_total()));
+        dpGastoFecha.setValue(g.getFecha());
+
+        for (categoria cat : comboCategoria.getItems()) {
+            if (cat.getId_categoria() == g.getId_categoria()) {
+                comboCategoria.setValue(cat);
+                break;
+            }
+        }
+        for (grupo grp : comboGrupo.getItems()) {
+            if (grp.getId_grupo() == g.getId_grupo()) {
+                comboGrupo.setValue(grp);
+                break;
+            }
+        }
+        for (usuario usr : comboUsuario.getItems()) {
+            if (usr.getId_usuario() == g.getId_usuarioPagador()) {
+                comboUsuario.setValue(usr);
+                break;
+            }
+        }
     }
 }
