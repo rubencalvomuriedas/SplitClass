@@ -5,13 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.slipclass_demo_1.model.*;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -19,83 +18,154 @@ public class controllerProvisional implements Initializable {
 
     private gasto newGasto;
     private boolean isNewGasto = true;
-    private ObservableList <gasto> gastosObservableList = FXCollections.observableArrayList();
+    private ObservableList<gasto> gastosObservableList = FXCollections.observableArrayList();
 
     @FXML private ComboBox<categoria> comboCategoria;
-
     @FXML private ComboBox<grupo> comboGrupo;
-
     @FXML private ComboBox<usuario> comboUsuario;
 
     @FXML private TextField txtGastoConcepto, txtGastoMonto;
-
     @FXML private DatePicker dpGastoFecha;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
 
-        cargarCategorias();
+            cargarCategorias();
+            cargarUsuarios();
+            cargarGrupos();
 
+        } catch (Exception e) {
+            System.err.println("¡ERROR crítico en el inicio del controlador!");
+            e.printStackTrace(); // Esto imprimirá el error real en la consola
+        }
     }
 
-    private void cargarCategorias(){
+    private void cargarCategorias() {
         List<categoria> lista = SQLModelGasto.getAllCategorias();
-
         ObservableList<categoria> observableLista = FXCollections.observableArrayList(lista);
-
         comboCategoria.setItems(observableLista);
+
+        comboCategoria.setCellFactory(lv -> new ListCell<categoria>() {
+            @Override
+            protected void updateItem(categoria item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre()); // Ajusta a getName() si se llama diferente en tu clase
+            }
+        });
+        comboCategoria.setButtonCell(new ListCell<categoria>() {
+            @Override
+            protected void updateItem(categoria item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+    }
+
+    private void cargarUsuarios() {
+        List<usuario> lista = SQLModelUsuario.getAllUsuarios();
+        ObservableList<usuario> observableList = FXCollections.observableArrayList(lista);
+        comboUsuario.setItems(observableList);
+
+        comboUsuario.setCellFactory(lv -> new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+        comboUsuario.setButtonCell(new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+    }
+
+    private void cargarGrupos() {
+        List<grupo> lista = SQLModelGrupo.getAllGrupos();
+        ObservableList<grupo> observableLista = FXCollections.observableArrayList(lista);
+        comboGrupo.setItems(observableLista);
+
+        comboGrupo.setCellFactory(lv -> new ListCell<grupo>() {
+            @Override
+            protected void updateItem(grupo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getTitulo());
+            }
+        });
+        comboGrupo.setButtonCell(new ListCell<grupo>() {
+            @Override
+            protected void updateItem(grupo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getTitulo());
+            }
+        });
     }
 
     public void onCancelarGasto(ActionEvent actionEvent) {
+        limpiarCampos();
     }
 
     public void onConfirmarGasto(ActionEvent actionEvent) {
-
         if (txtGastoConcepto.getText().isEmpty() || txtGastoMonto.getText().isEmpty() || dpGastoFecha.getValue() == null) {
-            System.out.println("Por favor, complete todos los campos antes de confirmar el gasto.");
+            mostrarAlerta("Campos incompletos", "Por favor, complete todos los campos.");
             return;
         }
 
-        categoria seleccionada = comboCategoria.getValue();
+        categoria catSeleccionada = comboCategoria.getValue();
+        grupo grupoSeleccionado = comboGrupo.getValue();
+        usuario usuarioSeleccionado = comboUsuario.getValue();
 
-        if (seleccionada != null) {
-            System.out.println("Categoría seleccionada: " + seleccionada.getNombre());
-            System.out.println("ID a enviar a la FK de Gastos: " + seleccionada.getId_categoria());
-        } else {
-            System.out.println("No se ha seleccionado ninguna categoría.");
+        if (catSeleccionada == null || grupoSeleccionado == null || usuarioSeleccionado == null) {
+            mostrarAlerta("Error", "Debes seleccionar una categoría, un grupo y un pagador.");
+            return;
         }
+
+        int idCat = catSeleccionada.getId_categoria();
+        int idGrp = grupoSeleccionado.getId_grupo();
+        int idUsr = usuarioSeleccionado.getId_usuario();
 
         if (isNewGasto) {
             this.newGasto = new gasto(
                     txtGastoConcepto.getText(),
                     Double.parseDouble(txtGastoMonto.getText()),
                     dpGastoFecha.getValue(),
-                    seleccionada != null ? seleccionada.getId_categoria() : 0
+                    idCat,
+                    idGrp,
+                    idUsr
             );
 
             if (SQLModelGasto.createGasto(this.newGasto)) {
                 mostrarAlerta("Éxito", "Gasto creado correctamente.");
-                limpiarCampos();
+                limpiarCampos(); // Esto borrará todos los campos y los ComboBoxes
             } else {
-                mostrarAlerta("Error", "No se pudo crear el gasto. Por favor, inténtelo de nuevo.");
+                mostrarAlerta("Error", "No se pudo crear el gasto. Verifique la conexión a la base de datos.");
             }
-
-            System.out.println("Gasto creado.");
         }
-
     }
+
     private void mostrarAlerta(String titulo, String msj) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
+        alert.setHeaderText(null);
         alert.setContentText(msj);
         alert.show();
     }
+
     private void limpiarCampos() {
         txtGastoConcepto.clear();
         txtGastoMonto.clear();
         dpGastoFecha.setValue(null);
         comboCategoria.getSelectionModel().clearSelection();
+        comboGrupo.getSelectionModel().clearSelection();
+        comboUsuario.getSelectionModel().clearSelection();
     }
 
+    public void onEliminarGastoAction(ActionEvent actionEvent) {
+    }
 
+    public void onModificarGastoAction(ActionEvent actionEvent) {
+    }
 }

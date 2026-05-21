@@ -27,9 +27,8 @@ public class newController implements Initializable {
     @FXML private TableView<gasto> tablaGastos;
     @FXML private TableColumn<gasto, LocalDate> colFecha;
     @FXML private TableColumn<gasto, String> colConcepto;
-
-
     @FXML private TableColumn<gasto, Double> colMonto;
+
     @FXML private TableView<grupo> listado_grupos_view;
     @FXML private TableColumn<grupo, String> columnId;
     @FXML private TableColumn<grupo, String> columnNombre;
@@ -83,4 +82,9 @@ public class newController implements Initializable {
     }
 
 
+    public void onEliminarGastoAction(ActionEvent actionEvent) {
+    }
+
+    public void onModificarGastoAction(ActionEvent actionEvent) {
+    }
 }

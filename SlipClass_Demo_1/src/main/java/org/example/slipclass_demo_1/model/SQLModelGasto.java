@@ -36,6 +36,7 @@ public class SQLModelGasto {
 
     public static List<categoria> getAllCategorias() {
         List<categoria> listaCategorias = new LinkedList<>();
+        // Prueba especificando el nombre de la columna tal cual está en el SQL: id_categoria
         String sql = "SELECT id_categoria, Nombre FROM CATEGORIA";
 
         try (Connection conn = SQLDataAccess.getConnection();
@@ -43,28 +44,24 @@ public class SQLModelGasto {
              ResultSet rs = stat.executeQuery(sql)) {
 
             while (rs.next()) {
+                // Asegúrate de que el alias o nombre de columna sea correcto
                 int id = rs.getInt("id_categoria");
                 String nombre = rs.getString("Nombre");
 
                 listaCategorias.add(new categoria(id, nombre));
             }
-
         } catch (SQLException e) {
             System.err.println("Error en getAllCategorias: " + e.getMessage());
         }
-
         return listaCategorias;
     }
 
 
     public static boolean createGasto(gasto g) {
-        boolean result = false;
-
-        String sql = "INSERT INTO GASTO (codGasto, Concepto, Monto_total, Fecha, Id_Grupo, Id_Categoria, Id_Usuario_Pagador) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO GASTO (codGasto, Concepto, Monto_total, Fecha, Id_Grupo, Id_Categoria, Id_Usuario_Pagador) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = SQLDataAccess.getConnection();
-        PreparedStatement stat = con.prepareStatement(sql)){
+             PreparedStatement stat = con.prepareStatement(sql)){
 
             String nuevoCodigo = CodeGenerator.generarCodigo(con, "GASTO", "codGasto", "GST");
 
@@ -72,19 +69,18 @@ public class SQLModelGasto {
             stat.setString(2, g.getConcepto());
             stat.setDouble(3, g.getMonto_total());
             stat.setDate(4, Date.valueOf(g.getFecha()));
-            stat.setInt(5, g.getId_gasto());
+
+            // CORRECCIÓN AQUÍ: Asegúrate de usar los getters correctos de tu modelo gasto
+            stat.setInt(5, g.getId_grupo());
             stat.setInt(6, g.getId_categoria());
             stat.setInt(7, g.getId_usuarioPagador());
 
             stat.executeUpdate();
-            result = true;
-
+            return true;
         } catch (SQLException e) {
             System.err.println("Error al crear gasto: " + e.getMessage());
+            return false;
         }
-
-
-        return result;
     }
 
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane fx:controller="org.example.slipclass_demo_1.HelloController"
+<AnchorPane fx:controller="org.example.slipclass_demo_1.controllerProvisional"
             maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="597.0" prefWidth="760.0"

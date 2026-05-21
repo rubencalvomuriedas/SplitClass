@@ -6,6 +6,7 @@ public class categoria {
     private String nombre;
 
     public categoria(int id_categoria, String nombre) {
+        this.id_categoria = id_categoria;
         this.nombre = nombre;
     }
 

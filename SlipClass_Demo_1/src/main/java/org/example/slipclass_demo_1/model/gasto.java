@@ -24,21 +24,13 @@ public class gasto {
         this.id_usuarioPagador = id_usuarioPagador;
     }
 
-    public gasto(String concepto, double monto_total, int id_grupo, int id_categoria, int id_usuarioPagador) {
+    public gasto(String concepto, double monto_total, LocalDate fecha, int id_categoria, int id_grupo, int id_usuarioPagador) {
         this.concepto = concepto;
         this.monto_total = monto_total;
         this.fecha = fecha;
+        this.id_categoria = id_categoria;
         this.id_grupo = id_grupo;
-        this.id_categoria = id_categoria;
         this.id_usuarioPagador = id_usuarioPagador;
-    }
-    public gasto(String concepto, double monto_total, LocalDate fecha, int id_categoria) {
-        this.concepto = concepto;
-        this.monto_total = monto_total;
-        this.fecha = fecha;
-
-        this.id_categoria = id_categoria;
-
     }
 
 
