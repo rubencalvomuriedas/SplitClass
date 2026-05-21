@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" styleClass="splitclass-bg" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.newController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="819.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" styleClass="splitclass-bg" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.controllerProvisional">
     <children>
-        <VBox alignment="CENTER_LEFT" layoutX="175.0" layoutY="161.0" prefHeight="518.0" prefWidth="560.0" spacing="15.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 30; -fx-padding: 30; -fx-alignment: center; -fx-max-width: 450;" AnchorPane.topAnchor="161.0">
+        <VBox alignment="CENTER_LEFT" layoutX="225.0" layoutY="131.0" prefHeight="590.0" prefWidth="435.0" spacing="15.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 30; -fx-padding: 30; -fx-alignment: center; -fx-max-width: 450;" AnchorPane.topAnchor="131.0">
             <children>
                 <Label styleClass="titulo-premium" text="NUEVO GASTO">
                <font>
@@ -37,7 +37,7 @@
 
                 <VBox prefWidth="40.0" spacing="5.0" style="-fx-text-fill: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;">
                     <children>
-                        <Label styleClass="label-formulario" text="Preacio Total (€):" textFill="#333333">
+                        <Label styleClass="label-formulario" text="Monto total (€):" textFill="#333333">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Label>
@@ -64,6 +64,26 @@
                   <ComboBox fx:id="comboCategoria" prefHeight="25.0" prefWidth="390.0" />
                </children>
             </VBox>
+            <VBox prefWidth="40.0" spacing="5.0" style="-fx-text-fill: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <Label styleClass="label-formulario" text="Grupo" textFill="#333333">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboGrupo" prefHeight="25.0" prefWidth="390.0" />
+               </children>
+            </VBox>
+            <VBox prefWidth="40.0" spacing="5.0" style="-fx-text-fill: #ffffff; -fx-border-radius: 5; -fx-background-radius: 5;">
+               <children>
+                  <Label styleClass="label-formulario" text="Usuario" textFill="#333333">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="comboUsuario" prefHeight="25.0" prefWidth="390.0" />
+               </children>
+            </VBox>
 
                 <HBox alignment="CENTER_RIGHT" spacing="20.0">
                     <children>
@@ -76,7 +96,7 @@
                 </HBox>
             </children>
         </VBox>
-      <ImageView fitHeight="178.0" fitWidth="242.0" layoutX="255.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="178.0" fitWidth="242.0" layoutX="322.0" layoutY="-13.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imágenes/Logo.png" />
          </image>

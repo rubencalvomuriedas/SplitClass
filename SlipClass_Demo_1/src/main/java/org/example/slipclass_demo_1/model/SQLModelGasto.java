@@ -55,4 +55,36 @@ public class SQLModelGasto {
 
         return listaCategorias;
     }
+
+
+    public static boolean createGasto(gasto g) {
+        boolean result = false;
+
+        String sql = "INSERT INTO GASTO (codGasto, Concepto, Monto_total, Fecha, Id_Grupo, Id_Categoria, Id_Usuario_Pagador) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try (Connection con = SQLDataAccess.getConnection();
+        PreparedStatement stat = con.prepareStatement(sql)){
+
+            String nuevoCodigo = CodeGenerator.generarCodigo(con, "GASTO", "codGasto", "GST");
+
+            stat.setString(1, nuevoCodigo);
+            stat.setString(2, g.getConcepto());
+            stat.setDouble(3, g.getMonto_total());
+            stat.setDate(4, Date.valueOf(g.getFecha()));
+            stat.setInt(5, g.getId_gasto());
+            stat.setInt(6, g.getId_categoria());
+            stat.setInt(7, g.getId_usuarioPagador());
+
+            stat.executeUpdate();
+            result = true;
+
+        } catch (SQLException e) {
+            System.err.println("Error al crear gasto: " + e.getMessage());
+        }
+
+
+        return result;
+    }
+
 }

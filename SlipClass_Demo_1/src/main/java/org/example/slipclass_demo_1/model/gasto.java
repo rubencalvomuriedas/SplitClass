@@ -32,6 +32,15 @@ public class gasto {
         this.id_categoria = id_categoria;
         this.id_usuarioPagador = id_usuarioPagador;
     }
+    public gasto(String concepto, double monto_total, LocalDate fecha, int id_categoria) {
+        this.concepto = concepto;
+        this.monto_total = monto_total;
+        this.fecha = fecha;
+
+        this.id_categoria = id_categoria;
+
+    }
+
 
     public int getId_gasto() {
         return id_gasto;
