@@ -34,6 +34,16 @@ public class HelloController implements Initializable {
     @FXML private TextField loginUsuario;
     @FXML private PasswordField loginPass;
 
+    
+//    @FXML private TableColumn<usuario, Double> colMonto;
+//    @FXML private TableView<usuario> listado_grupos_view;
+//    @FXML private TableColumn<usuario, String> columnId;
+//    @FXML private TableColumn<usuario, String> columnNombre;
+//    @FXML private TableColumn<usuario, String> columnNºUsuarios;
+//    @FXML private TableColumn<usuario, String> columnMoneda;
+//    @FXML private TableColumn<usuario, String> columnCreacion;
+//    @FXML private TableColumn<usuario, String> columnEliminacion;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
