@@ -34,12 +34,14 @@ public class newController implements Initializable {
     @FXML private TableColumn<grupo, String> columnId;
     @FXML private TableColumn<grupo, String> columnNombre;
     @FXML private TableColumn<grupo, String> columnNºUsuarios;
-    @FXML private TableColumn<grupo, String> columnMoneda;
-    @FXML private TableColumn<grupo, String> columnCreacion;
-    @FXML private TableColumn<grupo, String> columnEliminacion;
-
+    @FXML private TableColumn<grupo, Double> columnMoneda;
+    @FXML private TableColumn<grupo, LocalDate> columnCreacion;
+    @FXML private TableColumn<grupo, LocalDate> columnEliminacion;
 
     
+
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

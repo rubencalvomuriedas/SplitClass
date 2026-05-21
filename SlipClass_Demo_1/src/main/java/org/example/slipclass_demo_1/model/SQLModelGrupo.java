@@ -14,7 +14,7 @@ public class SQLModelGrupo {
 
     public static List <grupo> getAllGrupos() {
         List<grupo> listaGrupos = new LinkedList<>();
-        String sql = "SELECT Id_Grupo, codGrupo,Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion  FROM GRUPO";
+        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion  FROM GRUPO";
 
         try (Connection con = SQLDataAccess.getConnection();
              Statement stat = con.createStatement();
@@ -22,12 +22,18 @@ public class SQLModelGrupo {
 
             while(rs.next()) {
                 grupo g = new grupo(
-                       rs
-                )
-
+                        rs.getString("Id_grupo"),
+                        rs.getString("codGrupo"),
+                        rs.getString("Titulo"),
+                        rs.getString("Descripcion"),
+                        rs.getDouble("Moneda"),
+                        rs.getDate("Fecha_creacion"),
+                        rs.getDate("fecha_eliminacion")
+                );
+                listaGrupos.add(g);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error al obtener los grupos: " + e.getMessage());
         }
         return listaGrupos;
     }
