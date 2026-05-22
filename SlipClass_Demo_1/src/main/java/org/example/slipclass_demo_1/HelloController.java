@@ -132,8 +132,43 @@ public class HelloController implements Initializable {
         alert.show();
     }
 
-    @FXML public void onIniciarSesionClick(ActionEvent event) { cambiarPantalla(event, "menuUsuario.fxml"); }
-    @FXML public void onFinalizarRegistroClick(ActionEvent event) { cambiarPantalla(event, "menuUsuario.fxml"); }
+
+
+    @FXML public void onIniciarSesionClick(ActionEvent event) {
+        String nombre = loginUsuario.getText();
+        String pass = loginPass.getText();
+
+        if (nombre.isEmpty() || pass.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, rellena todos los campos.");
+            return;
+        }
+
+        usuario usuarioLogueado = SQLModelUsuario.login(nombre, pass);
+
+        if (usuarioLogueado != null) {
+            System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
+
+            irAPantallaPrincipal(event);
+        } else {
+            mostrarAlerta("Error de acceso", "Usuario o contraseña incorrectos.");
+        } }
+
+    private void irAPantallaPrincipal(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MenuGasto.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al cambiar de pantalla: " + e.getMessage());
+        }
+    }
+
+
+
+
+    @FXML public void onFinalizarRegistroClick(ActionEvent event) {
+        cambiarPantalla(event, "menuUsuario.fxml"); }
 
     @FXML
     public void onTablaUsuarioClick(ActionEvent event) {
@@ -189,6 +224,11 @@ public class HelloController implements Initializable {
         cambiarPantalla(event, "menuGasto.fxml");
     }
 
+    @FXML
+    public void onnIrALoginClick(ActionEvent event) {
+
+        cambiarPantalla(event, "login.fxml");
+    }
     public void clickSobreNosotros(ActionEvent actionEvent) {
     }
 
@@ -198,29 +238,8 @@ public class HelloController implements Initializable {
     public void onIrALoginClick(ActionEvent actionEvent) {
     }
 
-    public void onRegistrarseClick(ActionEvent actionEvent) {
+    public void onRegistrarseClick(ActionEvent event) {
+        cambiarPantalla(event, "registro.fxml");
     }
-    // ==========================================
-    // NAVEGACIÓN DESDE EL MENÚ GRUPOS
-    // ==========================================
 
-    // 1. Lleva al formulario para crear un nuevo grupo
-//    @FXML
-//    public void onRegistroGrupoClick(ActionEvent event) {
-//        cambiarPantalla(event, "formularioGrupo.fxml");
-//    }
-//
-//    // 2. Llevará a la tabla de grupos (cuando la crees)
-//    @FXML
-//    public void onTablaGrupoClick(ActionEvent event) {
-//        // Si aún no tienes el FXML de la tabla, dejamos una alerta temporal
-//        mostrarAlerta("Próximamente", "Aquí cargaremos la tabla de Grupos.");
-//        // cambiarPantalla(event, "ListaGrupos.fxml");
-//    }
-//
-//    // 3. La flecha que avanza al siguiente menú principal
-//    @FXML
-//    public void irAMenuGasto(ActionEvent event) {
-//        cambiarPantalla(event, "menuGasto.fxml");
-//    }
 }

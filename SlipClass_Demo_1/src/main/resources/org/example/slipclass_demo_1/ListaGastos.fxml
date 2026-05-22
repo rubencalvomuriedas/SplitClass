@@ -5,17 +5,17 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="914.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.newController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="914.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.newController">
    <children>
-      <TableView fx:id="tablaGastos" layoutX="59.0" layoutY="56.0" prefHeight="400.0" prefWidth="578.0">
+      <TableView fx:id="tablaGastos" layoutX="59.0" layoutY="56.0" prefHeight="457.0" prefWidth="619.0">
          <columns>
             <TableColumn fx:id="colFecha" prefWidth="100" text="Fecha" />
             <TableColumn fx:id="colConcepto" prefWidth="250" text="Concepto" />
             <TableColumn fx:id="colMonto" prefWidth="100" text="Monto (€)" />
          </columns>
       </TableView>
-      <Button layoutX="717.0" layoutY="173.0" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="63.0" prefWidth="106.0" text="Eliminar gasto" />
-      <Button layoutX="717.0" layoutY="341.0" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="55.0" prefWidth="106.0" text="Modificar gasto" />
-       <Button layoutX="717.0" layoutY="500.0" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="55.0" prefWidth="106.0" text="Volver" />
+      <Button layoutX="717.0" layoutY="153.0" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="63.0" prefWidth="106.0" text="Eliminar gasto" />
+      <Button layoutX="717.0" layoutY="244.0" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="55.0" prefWidth="106.0" text="Modificar gasto" />
+       <Button layoutX="717.0" layoutY="329.0" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="55.0" prefWidth="106.0" text="Volver" />
    </children>
 </AnchorPane>
