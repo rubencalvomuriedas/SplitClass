@@ -87,8 +87,9 @@
 
                 <HBox alignment="CENTER_RIGHT" spacing="20.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#onCancelarGasto" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #404040; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-cancelar" text="Cancelar" />
-                        <Button mnemonicParsing="false" onAction="#onConfirmarGasto" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Guardar" />
+                        <Button mnemonicParsing="false" onAction="#onVolverRegisterAction" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Volver" />
+                        <Button mnemonicParsing="false" onAction="#onCancelarGasto" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: #404040; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-cancelar" text="Cancelar" />
+                  <Button mnemonicParsing="false" onAction="#onConfirmarGasto" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Guardar" />
                     </children>
                     <VBox.margin>
                         <Insets top="30.0" />
