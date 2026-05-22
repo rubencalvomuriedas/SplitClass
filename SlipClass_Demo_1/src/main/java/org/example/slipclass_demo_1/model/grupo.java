@@ -87,4 +87,12 @@ public class grupo {
                 ", fecha_eliminacion=" + fecha_eliminacion +
                 '}';
     }
+
+    public String getCodGrupo() {
+        return codGrupo;
+    }
+
+    public void setCodGrupo(String codGrupo) {
+        this.codGrupo = codGrupo;
+    }
 }
