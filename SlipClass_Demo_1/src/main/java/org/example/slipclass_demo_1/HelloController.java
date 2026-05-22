@@ -54,6 +54,68 @@ public class HelloController implements Initializable {
         }
     }
 
+    @FXML
+    public void onFinalizarRegistroClick(ActionEvent event) {
+
+        if (txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPass.getText().isEmpty() || txtTelefono.getText().isEmpty() || dpFechaNacimiento.getValue() == null) {
+            return;
+        }
+
+        if (!txtPass.getText().equals(txtPassConfirm.getText())){
+            mostrarAlerta("Error", "Las contraseñas no coinciden");
+            return;
+        }
+
+        if (isNewUser) {
+            this.us = new usuario(
+                    txtUsuario.getText(),
+                    txtEmail.getText(),
+                    txtPass.getText(),
+                    txtTelefono.getText(),
+                    dpFechaNacimiento.getValue()
+            );
+
+            if (SQLModelUsuario.createUsuario(this.us)) {
+                mostrarAlerta("Registro exitoso", "Usuario creado exitosamente");
+                limpiarCampos();
+            }
+        } else {
+            this.us.setNombre(txtUsuario.getText());
+            this.us.setEmail(txtEmail.getText());
+            this.us.setPassword(txtPass.getText());
+            this.us.setTelefono(txtTelefono.getText());
+            this.us.setFecha_nacimiento(dpFechaNacimiento.getValue());
+
+            if (SQLModelUsuario.updateUsuario(this.us)) {
+                mostrarAlerta("Exito", "Usuario actualizado exitosamente");
+            }
+        }
+
+        System.out.println("Usuario registrado.");
+
+    }
+
+    private void limpiarCampos() {
+        txtUsuario.clear();
+        txtEmail.clear();
+        txtPass.clear();
+        txtPassConfirm.clear();
+        txtTelefono.clear();
+        dpFechaNacimiento.setValue(null);
+    }
+
+
+    @FXML
+    private void onVolver(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     // ========================================================
     // 1. NAVEGACIÓN ENTRE LOS 3 MENÚS (Flecha Siguiente Menú)
     // ========================================================
@@ -155,7 +217,7 @@ public class HelloController implements Initializable {
 
     private void irAPantallaPrincipal(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MenuGasto.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("menuUsuario.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -164,11 +226,6 @@ public class HelloController implements Initializable {
         }
     }
 
-
-
-
-    @FXML public void onFinalizarRegistroClick(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml"); }
 
     @FXML
     public void onTablaUsuarioClick(ActionEvent event) {
