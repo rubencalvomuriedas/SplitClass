@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="listado_grupos_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1073.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane fx:id="listado_grupos_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="797.0" prefWidth="1073.0" style="-fx-background-color: linear-gradient(to bottom right, #7FFFD4, #40E0D0);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.ControllerTable">
     <children>
         <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="437.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -24,14 +24,13 @@
             </font>
         </Text>
 
-        <TableView layoutX="150.0" layoutY="250.0" prefHeight="463.0" prefWidth="635.0">
+        <TableView fx:id="TablaGrupos" layoutX="150.0" layoutY="250.0" prefHeight="463.0" prefWidth="635.0">
             <columns>
-                <TableColumn prefWidth="60.0" text="ID" />
-                <TableColumn prefWidth="120.0" text="NOMBRE" />
-                <TableColumn prefWidth="100.0" text="Nº USUARIOS" />
-                <TableColumn prefWidth="80.0" text="MONEDA" />
-                <TableColumn prefWidth="120.0" text="CREACION" />
-                <TableColumn prefWidth="120.0" text="ELIMINACION" />
+                <TableColumn fx:id="tablaGruposCod" prefWidth="60.0" text="CODIGO" />
+                <TableColumn fx:id="tablaGrupoTitulo" prefWidth="100.0" text="TITULO" />
+                <TableColumn fx:id="tablaGrupoDescrip" prefWidth="120.0" text="DESCRIPCIÓN" />
+                <TableColumn fx:id="tablaGrupoMon" prefWidth="120.0" text="MONEDA" />
+                 <TableColumn fx:id="tablaGrupoCreacion" prefWidth="120.0" text="CREACIÖN" />
             </columns>
         </TableView>
 

@@ -20,6 +20,7 @@ public class usuario {
 
     public usuario(int id_usuario, String codUsuario, String nombre, String email, String password, String telefono, int idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
         this.id_usuario = id_usuario;
+        this.codUsuario = codUsuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;

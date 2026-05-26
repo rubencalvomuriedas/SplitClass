@@ -1,6 +1,5 @@
 package org.example.slipclass_demo_1.model;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class grupo {
         this.estadoSelec = estadoSelec;
     }
 
-    public grupo(String titulo, String descripcion, Date fecha_creacion) {
+    public grupo(int idGrupo, String codGrupo, String string, String titulo, String descripcion, java.sql.Date fechaCreacion, Date fecha_creacion, int idEstado) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.moneda = moneda;
@@ -39,6 +38,14 @@ public class grupo {
         this.id_grupo = id_grupo;
         this.codGrupo = codGrupo;
         this.titulo = titulo;
+    }
+
+    public grupo(String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion) {
+        this.codGrupo = codGrupo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.moneda = moneda;
+        this.fecha_creacion = fecha_creacion;
     }
 
     public int getId_grupo() {
