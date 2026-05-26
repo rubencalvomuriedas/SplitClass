@@ -69,7 +69,6 @@ public class SQLModelUsuario {
             stat.setInt(6, idiomaAInsertar);
             stat.setString(7, us.getAlias());
             stat.setString(8, us.getIban());
-            stat.setString(5, us.getTelefono());
 
             if (us.getFecha_nacimiento() != null) {
                 stat.setDate(9, Date.valueOf(us.getFecha_nacimiento()));
@@ -121,7 +120,7 @@ public class SQLModelUsuario {
         String sql = "SELECT * FROM usuario WHERE email = ? AND password = ?";
 
         try (Connection con = SQLDataAccess.getConnection();
-        PreparedStatement stat = con.prepareStatement(sql)) {
+             PreparedStatement stat = con.prepareStatement(sql)) {
 
             stat.setString(1, email);
             stat.setString(2, password);

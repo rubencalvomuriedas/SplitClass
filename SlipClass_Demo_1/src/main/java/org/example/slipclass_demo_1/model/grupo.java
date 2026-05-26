@@ -40,6 +40,14 @@ public class grupo {
         this.titulo = titulo;
     }
 
+    public grupo(String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion) {
+        this.codGrupo = codGrupo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.moneda = moneda;
+        this.fecha_creacion = fecha_creacion;
+    }
+
     public int getId_grupo() {
         return id_grupo;
     }
