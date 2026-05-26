@@ -49,8 +49,7 @@ public class SQLModelGrupo {
                             rs.getString("Moneda"),
                             rs.getDate("Fecha_creacion"),
                             rs.getDate("fecha_eliminacion"),
-                            rs.getString("Id_Es" +
-                                    "tado")
+                            rs.getInt("Id_Estado")
                         );
                 listaGrupos.add(g);
             }
