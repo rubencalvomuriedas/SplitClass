@@ -59,6 +59,24 @@ public class SQLModelGrupo {
         return listaGrupos;
     }
 
+
+//    public static void crearGrupo (grupo g) {
+//        String sql = "SELECT GRUPO SET Id_Grupo = ?, codGrupo = ?, Titulo = ?, Descripcion = ?, Moneda = ?, Fecha_creacion = ?, fecha_eliminacion = ?, Id_Estado = ? WHERE Id_Grupo = ?";
+//        try(Connection con = SQLDataAccess.getConnection();
+//            PreparedStatement stat = con.prepareStatement(sql)) {
+//            stat.setString(1, g.getId_grupo());
+//            stat.setString(2, g.getCodGrupo());
+//            stat.setString(3, g.getTitulo());
+//            stat.setString(4, g.getDescripcion());
+//            stat.setDouble(5, g.getMoneda());
+//            stat.setDate(6, Date.valueOf(g.getFecha_creacion()));
+//            stat.setDate(7, Date.valueOf(g.getFecha_eliminacion()));
+//            stat.setInt(8, g.getId_Estado());
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
 //
 //    public static boolean editarGrupo(grupo g) {
 //        String sql = "UPDATE GRUPO SET Id_Grupo = ?, codGrupo = ?, Titulo = ?, Descripcion = ?, Moneda = ?, Fecha_creacion = ?, fecha_eliminacion = ?, Id_Estado = ? WHERE Id_Grupo = ?";
