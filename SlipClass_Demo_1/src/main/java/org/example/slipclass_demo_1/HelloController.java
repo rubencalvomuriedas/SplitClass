@@ -116,34 +116,6 @@ public class HelloController implements Initializable {
         }
     }
 
-    // ========================================================
-    // 1. NAVEGACIÓN ENTRE LOS 3 MENÚS (Flecha Siguiente Menú)
-    // ========================================================
-    @FXML
-    public void irAMenuUsuario(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml");
-    }
-
-    @FXML
-    public void irAMenuGrupo(ActionEvent event) {
-        cambiarPantalla(event, "menuGrupo.fxml");
-    }
-
-    @FXML
-    public void irAMenuGasto(ActionEvent event) {
-        cambiarPantalla(event, "menuGasto.fxml");
-    }
-
-    // ========================================================
-    // 2. BOTONES INTERNOS DE CADA MENÚ (Registro y Tablas)
-    // ========================================================
-
-    // --- MENÚ USUARIO ---
-    @FXML
-    public void onRegistroUsuarioClick(ActionEvent event) {
-        cambiarPantalla(event, "registro.fxml"); // Tu pantalla de registrar usuario
-    }
-
     // --- MENÚ GRUPOS ---
     @FXML
     public void onRegistroGrupoClick(ActionEvent event) {
@@ -153,25 +125,6 @@ public class HelloController implements Initializable {
     public void onTablaGrupoClick(ActionEvent event) {
         mostrarAlerta("Tabla Grupos", "Abriendo vista de Tabla/Listado de Grupos...");
         // cambiarPantalla(event, "tablaGrupos.fxml");
-    }
-
-    // --- MENÚ GASTOS ---
-//    @FXML
-//    public void onRegistroGastoClick(ActionEvent event) {
-//        cambiarPantalla(event, "formularioGasto.fxml"); // Tu formulario de nuevo gasto
-//    }
-//    @FXML
-//    public void onTablaGastoClick(ActionEvent event) {
-//        mostrarAlerta("Tabla Gastos", "Abriendo vista de Tabla/Listado de Gastos...");
-//        // cambiarPantalla(event, "tablaGastos.fxml");
-//    }
-
-    // ========================================================
-    // 3. MÉTODOS AUXILIARES
-    // ========================================================
-    @FXML
-    public void onVolverAMenuPrincipal(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml"); // Define cuál quieres que sea tu menú "Home" por defecto
     }
 
     private void cambiarPantalla(ActionEvent event, String archivoFXML) {
@@ -193,8 +146,6 @@ public class HelloController implements Initializable {
         alert.setContentText(msj);
         alert.show();
     }
-
-
 
     @FXML public void onIniciarSesionClick(ActionEvent event) {
         String nombre = loginUsuario.getText();
@@ -228,11 +179,6 @@ public class HelloController implements Initializable {
 
 
     @FXML
-    public void onTablaUsuarioClick(ActionEvent event) {
-        cambiarPantalla(event, "ListaUsuarios.fxml");
-    }
-
-    @FXML
     public void onVolverClick(ActionEvent event) {
         cambiarPantalla(event, "menuUsuario.fxml");
     }
@@ -245,42 +191,6 @@ public class HelloController implements Initializable {
     public void onEliminarButtonClick(ActionEvent actionEvent) {
     }
 
-    // ==========================================
-    // NAVEGACIÓN DESDE EL MENÚ GASTOS
-    // ==========================================
-
-    // 1. Lleva al formulario para añadir un nuevo gasto
-    @FXML
-    public void onRegistroGastoClick(ActionEvent event) {
-        // Cambia "formularioGasto.fxml" por el nombre exacto de tu pantalla de formulario de gastos
-        cambiarPantalla(event, "registerGasto.fxml");
-    }
-
-    // 2. Lleva al listado/tabla de gastos
-    @FXML
-    public void onTablaGastoClick(ActionEvent event) {
-        // Cambia "Gastos_view.fxml" por el nombre de tu fxml de tabla de gastos cuando lo crees
-        cambiarPantalla(event, "Gastos_view.fxml");
-    }
-
-    @FXML
-    public void onCancelarGasto(ActionEvent event) {
-        // Cancela la operación y te devuelve al menú de gastos
-        cambiarPantalla(event, "menuGasto.fxml");
-    }
-
-    @FXML
-    public void onTablaGastoooClick(ActionEvent event) {
-        // Asegúrate de que el nombre del archivo coincida exactamente con tu archivo .fxml
-        cambiarPantalla(event, "ListaGastos.fxml");
-    }
-
-    @FXML
-    public void onVolverAMenuGasto(ActionEvent event) {
-        // Esto te llevará de vuelta al menú de gastos
-        cambiarPantalla(event, "menuGasto.fxml");
-    }
-
     @FXML
     public void onnIrALoginClick(ActionEvent event) {
 
@@ -290,9 +200,6 @@ public class HelloController implements Initializable {
     }
 
     public void clickDescarga(ActionEvent actionEvent) {
-    }
-
-    public void onIrALoginClick(ActionEvent actionEvent) {
     }
 
     public void onRegistrarseClick(ActionEvent event) {
