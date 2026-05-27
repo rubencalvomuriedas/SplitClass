@@ -32,6 +32,7 @@ public class SQLModelGrupo {
     }
 
 
+<<<<<<< HEAD
 //    public static List <grupo> getAllGruposTabla() {
 //        List<grupo> listaGrupos = new LinkedList<>();
 //        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
@@ -60,8 +61,12 @@ public class SQLModelGrupo {
 //        return listaGrupos;
 //    }
     public static List <grupo> getAllGruposTabla() {
+=======
+
+    public static List<grupo> getAllGruposTabla() {
+>>>>>>> ae6003bae02fc00665b4baa2558cf4868376b8b3
         List<grupo> listaGrupos = new LinkedList<>();
-        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
+        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
 
         try (Connection con = SQLDataAccess.getConnection();
              Statement stat = con.createStatement();
@@ -69,15 +74,15 @@ public class SQLModelGrupo {
 
             while(rs.next()) {
                 grupo g = new grupo(
-                            rs.getInt("Id_grupo"),
-                            rs.getString("codGrupo"),
-                            rs.getString("Titulo"),
-                            rs.getString("Descripcion"),
-                            rs.getString("Moneda"),
-                            rs.getDate("Fecha_creacion"),
-                            rs.getDate("fecha_eliminacion"),
-                            rs.getInt("Id_Estado")
-                        );
+                        rs.getInt("Id_Grupo"),
+                        rs.getString("codGrupo"),
+                        rs.getString("Titulo"),
+                        rs.getString("Descripcion"),
+                        rs.getString("Moneda"),
+                        rs.getDate("Fecha_creacion"),
+                        rs.getDate("fecha_eliminacion"),
+                        rs.getInt("Id_Estado")
+                );
                 listaGrupos.add(g);
             }
         } catch (SQLException e) {

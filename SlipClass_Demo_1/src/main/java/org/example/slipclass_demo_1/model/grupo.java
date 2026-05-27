@@ -15,7 +15,7 @@ public class grupo {
     private Date fecha_eliminacion;
     private List<estadoGrupo> estadoSelec; // Nuevo valor que determinara un grupo como realmente activo hasta que reciba un pago o movimiento
 
-    public grupo(int id_grupo, String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion, Date fecha_eliminacion, List<estadoGrupo> estadoSelec) {
+    public grupo(int id_grupo, String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion, Date fecha_eliminacion, int idEstado) {
         this.id_grupo = id_grupo;
         this.codGrupo = codGrupo;
         this.titulo = titulo;
@@ -23,13 +23,11 @@ public class grupo {
         this.moneda = moneda;
         this.fecha_creacion = fecha_creacion;
         this.fecha_eliminacion = fecha_eliminacion;
-        this.estadoSelec = estadoSelec;
     }
 
-    public grupo(int idGrupo, String codGrupo, String string, String titulo, String descripcion, java.sql.Date fechaCreacion, Date fecha_creacion, int idEstado) {
+    public grupo(int idGrupo, String codGrupo, String titulo, String descripcion, java.sql.Date fechaCreacion, Date fecha_creacion, int idEstado) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.moneda = moneda;
         this.fecha_creacion = fecha_creacion;
         this.fecha_eliminacion = null;
     }
@@ -40,16 +38,15 @@ public class grupo {
         this.titulo = titulo;
     }
 
-    public grupo(String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion) {
-        this.codGrupo = codGrupo;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.moneda = moneda;
-        this.fecha_creacion = fecha_creacion;
-    }
+
+
 
     public int getId_grupo() {
         return id_grupo;
+    }
+
+    public String getCodGrupo() {
+        return codGrupo;
     }
 
     public String getTitulo() {
@@ -84,23 +81,6 @@ public class grupo {
         this.moneda = moneda;
     }
 
-    @Override
-    public String toString() {
-        return "grupo{" +
-                "id_grupo=" + id_grupo +
-                ", titulo='" + titulo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", moneda='" + moneda + '\'' +
-                ", fecha_creacion=" + fecha_creacion +
-                ", fecha_eliminacion=" + fecha_eliminacion +
-                '}';
-    }
 
-    public String getCodGrupo() {
-        return codGrupo;
-    }
-
-    public void setCodGrupo(String codGrupo) {
-        this.codGrupo = codGrupo;
-    }
 }
+
