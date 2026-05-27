@@ -103,4 +103,8 @@ public class grupo {
     public void setCodGrupo(String codGrupo) {
         this.codGrupo = codGrupo;
     }
+
+    public Object getId_Estado() {
+        return false;
+    }
 }

@@ -31,8 +31,6 @@ public class SQLModelGrupo {
         return listaGrupos;
     }
 
-
-<<<<<<< HEAD
 //    public static List <grupo> getAllGruposTabla() {
 //        List<grupo> listaGrupos = new LinkedList<>();
 //        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
@@ -60,7 +58,6 @@ public class SQLModelGrupo {
 //        }
 //        return listaGrupos;
 //    }
-=======
     public static List <grupo> getAllGruposTabla() {
         List<grupo> listaGrupos = new LinkedList<>();
         String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
@@ -87,21 +84,21 @@ public class SQLModelGrupo {
         }
         return listaGrupos;
     }
->>>>>>> d8eb80be925a3e2b5c6f68d4cf58ade44b2117d8
+
 
 
 //    public static void crearGrupo (grupo g) {
 //        String sql = "SELECT GRUPO SET Id_Grupo = ?, codGrupo = ?, Titulo = ?, Descripcion = ?, Moneda = ?, Fecha_creacion = ?, fecha_eliminacion = ?, Id_Estado = ? WHERE Id_Grupo = ?";
 //        try(Connection con = SQLDataAccess.getConnection();
 //            PreparedStatement stat = con.prepareStatement(sql)) {
-//            stat.setString(1, g.getId_grupo());
+//            stat.setInt(1, g.getId_grupo());
 //            stat.setString(2, g.getCodGrupo());
 //            stat.setString(3, g.getTitulo());
 //            stat.setString(4, g.getDescripcion());
-//            stat.setDouble(5, g.getMoneda());
-//            stat.setDate(6, Date.valueOf(g.getFecha_creacion()));
-//            stat.setDate(7, Date.valueOf(g.getFecha_eliminacion()));
-//            stat.setInt(8, g.getId_Estado());
+//            stat.setString(5, g.getMoneda());
+//            stat.setDate(Date.valueOf(g.getFecha_creacion()));
+//            stat.setDate(Date.valueOf(g.getFecha_eliminacion()));
+//            stat.setInt(6, g.getId_Estado());
 //        } catch (SQLException e) {
 //            throw new RuntimeException(e);
 //        }
