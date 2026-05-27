@@ -82,19 +82,5 @@ public class grupo {
     }
 
 
-<<<<<<< HEAD
-    public String getCodGrupo() {
-        return codGrupo;
-    }
-
-    public void setCodGrupo(String codGrupo) {
-        this.codGrupo = codGrupo;
-    }
-
-    public Object getId_Estado() {
-        return false;
-    }
-=======
->>>>>>> 0caf623345b5b5ab28d9b4e46a6313f1810f482d
 }
 
