@@ -18,12 +18,9 @@
          <children>
             <Label styleClass="welcome-title" text="Bienvenido" />
             <Label styleClass="welcome-subtitle" text="¿Que desea hacer hoy?" />
-            <Button mnemonicParsing="false" prefHeight="85.0" prefWidth="346.0" styleClass="glass-button" stylesheets="@../../../style.css" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="346.0" styleClass="glass-button" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="105.0" prefWidth="346.0" styleClass="glass-button" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="98.0" prefWidth="338.0" styleClass="glass-button" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="96.0" prefWidth="335.0" styleClass="glass-button" text="Button" />
-            <Button mnemonicParsing="false" prefHeight="87.0" prefWidth="344.0" styleClass="glass-button" text="Button" />
+            <Button mnemonicParsing="false" prefHeight="88.0" prefWidth="346.0" styleClass="glass-button" text="Grupos" />
+            <Button mnemonicParsing="false" prefHeight="118.0" prefWidth="343.0" styleClass="glass-button" text="Gastos" />
+            <Button mnemonicParsing="false" prefHeight="94.0" prefWidth="329.0" styleClass="glass-button" text="Salir" />
          </children>
       </VBox>
    </children>
