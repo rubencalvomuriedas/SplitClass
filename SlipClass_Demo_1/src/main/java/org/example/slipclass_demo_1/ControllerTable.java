@@ -41,10 +41,10 @@ public class ControllerTable implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         tablaGruposCod.setCellValueFactory(new PropertyValueFactory<>("codGrupo"));
-        tablaGrupoTitulo.setCellValueFactory(new PropertyValueFactory<>("Titulo"));
-        tablaGrupoDescrip.setCellValueFactory(new PropertyValueFactory<>("Descripcion"));
-        tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("Moneda"));
-        tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("Fecha_creacion"));
+        tablaGrupoTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tablaGrupoDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("moneda"));
+        tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
 
         TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getAllGruposTabla()));
 
