@@ -40,24 +40,17 @@ public class ControllerTable implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        tablaGruposCod.setCellValueFactory(new PropertyValueFactory<>("codGrupo"));
-        tablaGrupoTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        tablaGrupoDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("moneda"));
-        tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
 
-        TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getAllGruposTabla()));
 
-//
-//        codUsuarios.setCellValueFactory(new PropertyValueFactory<>("codUsuario"));
-//
-//        nombreUsuario.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-//        emailUsuario.setCellValueFactory(new PropertyValueFactory<>("email"));
-//        telUsuario.setCellValueFactory(new PropertyValueFactory<>("telefono"));
-//
-//        fechaUsuario.setCellValueFactory(new PropertyValueFactory<>("fecha_nacimiento"));
-//
-//        tablaUsuarios.setItems(FXCollections.observableArrayList(SQLModelUsuario.getAllUsuarios()));
+        codUsuarios.setCellValueFactory(new PropertyValueFactory<>("codUsuario"));
+
+        nombreUsuario.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        emailUsuario.setCellValueFactory(new PropertyValueFactory<>("email"));
+        telUsuario.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+
+        fechaUsuario.setCellValueFactory(new PropertyValueFactory<>("fecha_nacimiento"));
+
+        tablaUsuarios.setItems(FXCollections.observableArrayList(SQLModelUsuario.getAllUsuarios()));
 
 
     }
