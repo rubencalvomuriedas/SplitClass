@@ -45,9 +45,6 @@ public class grupo {
         return id_grupo;
     }
 
-    public String getCodGrupo() {
-        return codGrupo;
-    }
 
     public String getTitulo() {
         return titulo;
@@ -82,7 +79,6 @@ public class grupo {
     }
 
 
-<<<<<<< HEAD
     public String getCodGrupo() {
         return codGrupo;
     }
@@ -94,7 +90,6 @@ public class grupo {
     public Object getId_Estado() {
         return false;
     }
-=======
->>>>>>> 0caf623345b5b5ab28d9b4e46a6313f1810f482d
+
 }
 

@@ -59,10 +59,7 @@ public class SQLModelGrupo {
 //        return listaGrupos;
 //    }
     public static List <grupo> getAllGruposTabla() {
-=======
 
-    public static List<grupo> getAllGruposTabla() {
->>>>>>> ae6003bae02fc00665b4baa2558cf4868376b8b3
         List<grupo> listaGrupos = new LinkedList<>();
         String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
 
@@ -88,10 +85,7 @@ public class SQLModelGrupo {
         }
         return listaGrupos;
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> 0caf623345b5b5ab28d9b4e46a6313f1810f482d
 
 
 //    public static void crearGrupo (grupo g) {
@@ -128,5 +122,6 @@ public class SQLModelGrupo {
 //            throw new RuntimeException(e);
 //        }
     }
+
 
 
