@@ -58,8 +58,13 @@ public class SQLModelGrupo {
 //        }
 //        return listaGrupos;
 //    }
+<<<<<<< HEAD
     public static List <grupo> getAllGruposTabla() {
 
+=======
+
+    public static List<grupo> getAllGruposTabla() {
+>>>>>>> adef906beecdae2b9ec148f587a468269785d1cf
         List<grupo> listaGrupos = new LinkedList<>();
         String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
 
