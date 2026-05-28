@@ -31,6 +31,7 @@ public class SQLModelGrupo {
         return listaGrupos;
     }
 
+<<<<<<< HEAD
 //    public static List <grupo> getAllGruposTabla() {
 //        List<grupo> listaGrupos = new LinkedList<>();
 //        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
@@ -66,6 +67,12 @@ public class SQLModelGrupo {
             try (Connection con = SQLDataAccess.getConnection();
                  Statement stat = con.createStatement();
                  ResultSet rs = stat.executeQuery(sql)) {
+=======
+
+    public static List<grupo> getAllGruposTabla() {
+        List<grupo> listaGrupos = new LinkedList<>();
+        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
+>>>>>>> 5fb847712056079c9d0deb5aa7d355ee9761ffa9
 
                 while (rs.next()) {
                     grupo g = new grupo(
@@ -83,42 +90,57 @@ public class SQLModelGrupo {
             } catch (SQLException e) {
                 System.err.println("Error al obtener los grupos: " + e.getMessage());
             }
+<<<<<<< HEAD
             return listaGrupos;
+=======
+        } catch (SQLException e) {
+            System.err.println("Error al obtener los grupos: " + e.getMessage());
+        }
+        return listaGrupos;
+    }
+
+    public static boolean createGrupoConCreador(grupo g, int idUsuarioCreador) {
+        String sqlGrupo = "INSERT INTO GRUPO (codGrupo, Titulo, Descripcion, Moneda, Id_Estado) VALUES (?, ?, ?, ?, ?)";
+        String sqlMiembro = "INSERT INTO MIEMBROS_GRUPO (codMiembrosGrupo, id_Usuario, id_Grupo) VALUES (?, ?, ?)";
+
+        Connection conn = null;
+        try {
+            conn = SQLDataAccess.getConnection();
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlGrupo, Statement.RETURN_GENERATED_KEYS)) {
+                ps.setString(1, CodeGenerator.generarCodigo(conn, "GRUPO", "codGrupo", "GRP"));
+                ps.setString(2, g.getTitulo());
+                ps.setString(3, g.getDescripcion());
+                ps.setString(4, g.getMoneda());
+                ps.setInt(5, 1);
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    int idNuevoGrupo = rs.getInt(1);
+
+                    try (PreparedStatement psMiembro = conn.prepareStatement(sqlMiembro)) {
+                        psMiembro.setString(1, CodeGenerator.generarCodigo(conn, "MIEMBROS_GRUPO", "codMiembrosGrupo", "MGR"));
+                        psMiembro.setInt(2, idUsuarioCreador);
+                        psMiembro.setInt(3, idNuevoGrupo);
+                        psMiembro.executeUpdate();
+                    }
+                }
+            }
+            conn.commit();
+            return true;
+        } catch (SQLException e) {
+            if (conn != null) try { conn.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+            System.err.println("Error al crear grupo: " + e.getMessage());
+            return false;
+        }
+    }
+
+>>>>>>> 5fb847712056079c9d0deb5aa7d355ee9761ffa9
 
 
-//    public static void crearGrupo (grupo g) {
-//        String sql = "SELECT GRUPO SET Id_Grupo = ?, codGrupo = ?, Titulo = ?, Descripcion = ?, Moneda = ?, Fecha_creacion = ?, fecha_eliminacion = ?, Id_Estado = ? WHERE Id_Grupo = ?";
-//        try(Connection con = SQLDataAccess.getConnection();
-//            PreparedStatement stat = con.prepareStatement(sql)) {
-//            stat.setInt(1, g.getId_grupo());
-//            stat.setString(2, g.getCodGrupo());
-//            stat.setString(3, g.getTitulo());
-//            stat.setString(4, g.getDescripcion());
-//            stat.setString(5, g.getMoneda());
-//            stat.setDate(Date.valueOf(g.getFecha_creacion()));
-//            stat.setDate(Date.valueOf(g.getFecha_eliminacion()));
-//            stat.setInt(6, g.getId_Estado());
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
-//
-//    public static boolean editarGrupo(grupo g) {
-//        String sql = "UPDATE GRUPO SET Id_Grupo = ?, codGrupo = ?, Titulo = ?, Descripcion = ?, Moneda = ?, Fecha_creacion = ?, fecha_eliminacion = ?, Id_Estado = ? WHERE Id_Grupo = ?";
-//        try (Connection con = SQLDataAccess.getConnection();
-//             PreparedStatement stat = con.prepareStatement(sql)) {
-//            stat.setString(1, g.getId_grupo());
-//            stat.setString(2, g.getCodGrupo());
-//            stat.setString(3, g.getTitulo());
-//            stat.setString(4, g.getDescripcion());
-//            stat.setDouble(5, g.getMoneda());
-//            stat.setDate(6, Date.valueOf(g.getFecha_creacion()));
-//            stat.setDate(7, Date.valueOf(g.getFecha_eliminacion()));
-//            stat.setString(8, g.getId_Estado());
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
     }
 }
 

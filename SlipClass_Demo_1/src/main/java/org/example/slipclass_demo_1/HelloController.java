@@ -119,12 +119,11 @@ public class HelloController implements Initializable {
     // --- MENÚ GRUPOS ---
     @FXML
     public void onRegistroGrupoClick(ActionEvent event) {
-        cambiarPantalla(event, "formularioGrupo.fxml"); // Tu formulario de nuevo grupo
+        cambiarPantalla(event, "formularioGrupo.fxml");
     }
     @FXML
     public void onTablaGrupoClick(ActionEvent event) {
         mostrarAlerta("Tabla Grupos", "Abriendo vista de Tabla/Listado de Grupos...");
-        // cambiarPantalla(event, "tablaGrupos.fxml");
     }
 
     private void cambiarPantalla(ActionEvent event, String archivoFXML) {
