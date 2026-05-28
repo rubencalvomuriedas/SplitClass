@@ -58,39 +58,32 @@ public class SQLModelGrupo {
 //        }
 //        return listaGrupos;
 //    }
-<<<<<<< HEAD
     public static List <grupo> getAllGruposTabla() {
 
-=======
+            List<grupo> listaGrupos = new LinkedList<>();
+            String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
 
-    public static List<grupo> getAllGruposTabla() {
->>>>>>> adef906beecdae2b9ec148f587a468269785d1cf
-        List<grupo> listaGrupos = new LinkedList<>();
-        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
+            try (Connection con = SQLDataAccess.getConnection();
+                 Statement stat = con.createStatement();
+                 ResultSet rs = stat.executeQuery(sql)) {
 
-        try (Connection con = SQLDataAccess.getConnection();
-             Statement stat = con.createStatement();
-             ResultSet rs = stat.executeQuery(sql)) {
-
-            while(rs.next()) {
-                grupo g = new grupo(
-                        rs.getInt("Id_Grupo"),
-                        rs.getString("codGrupo"),
-                        rs.getString("Titulo"),
-                        rs.getString("Descripcion"),
-                        rs.getString("Moneda"),
-                        rs.getDate("Fecha_creacion"),
-                        rs.getDate("fecha_eliminacion"),
-                        rs.getInt("Id_Estado")
-                );
-                listaGrupos.add(g);
+                while (rs.next()) {
+                    grupo g = new grupo(
+                            rs.getInt("Id_Grupo"),
+                            rs.getString("codGrupo"),
+                            rs.getString("Titulo"),
+                            rs.getString("Descripcion"),
+                            rs.getString("Moneda"),
+                            rs.getDate("Fecha_creacion"),
+                            rs.getDate("fecha_eliminacion"),
+                            rs.getInt("Id_Estado")
+                    );
+                    listaGrupos.add(g);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al obtener los grupos: " + e.getMessage());
             }
-        } catch (SQLException e) {
-            System.err.println("Error al obtener los grupos: " + e.getMessage());
-        }
-        return listaGrupos;
-    }
-
+            return listaGrupos;
 
 
 //    public static void crearGrupo (grupo g) {
@@ -127,6 +120,7 @@ public class SQLModelGrupo {
 //            throw new RuntimeException(e);
 //        }
     }
+}
 
 
 

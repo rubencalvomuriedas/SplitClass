@@ -79,7 +79,6 @@ public class grupo {
     }
 
 
-<<<<<<< HEAD
     public String getCodGrupo() {
         return codGrupo;
     }
@@ -92,7 +91,6 @@ public class grupo {
         return false;
     }
 
-=======
->>>>>>> adef906beecdae2b9ec148f587a468269785d1cf
+
 }
 
