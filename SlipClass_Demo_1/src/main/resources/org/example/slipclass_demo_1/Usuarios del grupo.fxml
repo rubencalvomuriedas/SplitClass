@@ -28,24 +28,32 @@
                   <Insets left="120.0" right="100.0" />
                </VBox.margin>
             </Text>
-            <ComboBox fx:id="comboGrupoSelect" prefWidth="150.0" promptText="GRUPO">
-               <VBox.margin>
-                  <Insets left="150.0" right="50.0" />
-               </VBox.margin></ComboBox>
-            <ComboBox fx:id="comboUsuarioSelect" layoutX="160.0" layoutY="42.0" prefWidth="150.0" promptText="USUARIOS">
-               <VBox.margin>
-                  <Insets left="150.0" right="50.0" />
-               </VBox.margin>
-            </ComboBox>
+            <VBox alignment="CENTER" fillWidth="false" spacing="20.0">
+               <children>
+                  <ComboBox fx:id="comboGrupoSelect" maxWidth="-Infinity" prefWidth="150.0" promptText="GRUPO">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ComboBox>
+                  <ComboBox fx:id="comboUsuarioSelect" maxWidth="-Infinity" prefWidth="150.0" promptText="USUARIOS">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="250.0" spacing="20.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onVolverRegisterAction" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Volver" />
-                  <Button mnemonicParsing="false" onAction="#onCancelarGasto" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: #404040; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-cancelar" text="Eliminar" />
-                  <Button mnemonicParsing="false" onAction="#onConfirmarGasto" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Añadir" />
+                  <Button mnemonicParsing="false" onAction="#onCancelarGrupo" prefHeight="25.0" prefWidth="95.0" style="-fx-background-color: #404040; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-cancelar" text="Eliminar" />
+                  <Button mnemonicParsing="false" onAction="#onConfirmarGrupoMiembro" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Añadir" />
                </children>
                <VBox.margin>
                   <Insets left="50.0" right="50.0" top="450.0" />
                </VBox.margin>
+               <padding>
+                  <Insets bottom="20.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>

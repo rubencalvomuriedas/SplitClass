@@ -104,4 +104,6 @@ public class controllerGrupos implements Initializable {
         alert.show();
     }
 
+    public void onConfirmarGrupoMiembro(ActionEvent actionEvent) {
+    }
 }
