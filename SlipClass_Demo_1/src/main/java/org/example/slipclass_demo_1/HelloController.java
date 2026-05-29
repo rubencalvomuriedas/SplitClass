@@ -216,7 +216,7 @@ public class HelloController implements Initializable {
     }
 
     public void onRegistrarseClick(ActionEvent event) {
-        cambiarPantalla(event, "registro.fxml");
+        cambiarPantalla(event, "registroUsuario.fxml");
     }
 
 

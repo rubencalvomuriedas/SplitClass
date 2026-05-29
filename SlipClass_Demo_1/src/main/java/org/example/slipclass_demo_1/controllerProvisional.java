@@ -58,7 +58,7 @@ public class controllerProvisional implements Initializable {
             @Override
             protected void updateItem(categoria item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getNombre()); // Ajusta a getName() si se llama diferente en tu clase
+                setText(empty || item == null ? "" : item.getNombre());
             }
         });
         comboCategoria.setButtonCell(new ListCell<categoria>() {

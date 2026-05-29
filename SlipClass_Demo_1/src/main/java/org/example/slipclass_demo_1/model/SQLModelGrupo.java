@@ -31,33 +31,7 @@ public class SQLModelGrupo {
         return listaGrupos;
     }
 
-//    public static List <grupo> getAllGruposTabla() {
-//        List<grupo> listaGrupos = new LinkedList<>();
-//        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
-//
-//        try (Connection con = SQLDataAccess.getConnection();
-//             Statement stat = con.createStatement();
-//             ResultSet rs = stat.executeQuery(sql)) {
-//
-//            while(rs.next()) {
-//                grupo g = new grupo(
-//                            rs.getInt("Id_grupo"),
-//                            rs.getString("codGrupo"),
-//                            rs.getString("Titulo"),
-//                            rs.getString("Descripcion"),
-//                            rs.getString("Moneda"),
-//                            rs.getDate("Fecha_creacion"),
-//                            rs.getDate("fecha_eliminacion"),
-//                            rs.getString("Id_Es" +
-//                                    "tado")
-//                        );
-//                listaGrupos.add(g);
-//            }
-//        } catch (SQLException e) {
-//            System.err.println("Error al obtener los grupos: " + e.getMessage());
-//        }
-//        return listaGrupos;
-//    }
+
     public static List <grupo> getAllGruposTabla() {
 
             List<grupo> listaGrupos = new LinkedList<>();
@@ -127,7 +101,6 @@ public class SQLModelGrupo {
 
     public static boolean agregarMiembroAlGrupo(int idUsuario, int idGrupo) {
         String sql = "INSERT INTO MIEMBROS_GRUPO (codMiembrosGrupo, id_Usuario, id_Grupo) VALUES (?, ?, ?)";
-
         try (Connection conn = SQLDataAccess.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
@@ -142,7 +115,37 @@ public class SQLModelGrupo {
         }
     }
 
+    public static List<grupo> getGruposPorUsuario(int idUsuario) {
+        List<grupo> listaGrupos = new LinkedList<>();
+        String sql = "SELECT g.* FROM GRUPO g " +
+                "JOIN MIEMBROS_GRUPO mg ON g.Id_Grupo = mg.id_Grupo " +
+                "WHERE mg.id_Usuario = ?";
 
+        try (Connection con = SQLDataAccess.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()) {
+                    grupo g = new grupo(
+                            rs.getInt("Id_Grupo"),
+                            rs.getString("codGrupo"),
+                            rs.getString("Titulo"),
+                            rs.getString("Descripcion"),
+                            rs.getString("Moneda"),
+                            rs.getTimestamp("Fecha_creacion"),
+                            rs.getDate("fecha_eliminacion"),
+                            rs.getInt("Id_Estado")
+                    );
+                    listaGrupos.add(g);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al cargar grupos del usuario: " + e.getMessage());
+        }
+        return listaGrupos;
+    }
 
     }
 
