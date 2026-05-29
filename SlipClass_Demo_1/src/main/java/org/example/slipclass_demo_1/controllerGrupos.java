@@ -51,16 +51,16 @@ public class controllerGrupos implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        tablaGruposCod.setCellValueFactory(new PropertyValueFactory<>("codGrupo"));
-//        tablaGrupoTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-//        tablaGrupoDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-//        tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("moneda"));
-//        tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
-//
-//        TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getAllGruposTabla()));
+        tablaGruposCod.setCellValueFactory(new PropertyValueFactory<>("codGrupo"));
+        tablaGrupoTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tablaGrupoDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
+        tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("moneda"));
+        tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
 
-        cargarUsuarios();
-        cargarGrupos();
+        TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getGruposPorUsuario(3)));
+
+//        cargarUsuarios();
+//        cargarGrupos();
     
     }
 
