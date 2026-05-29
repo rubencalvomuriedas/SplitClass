@@ -36,7 +36,6 @@ public class SQLModelGasto {
 
     public static List<categoria> getAllCategorias() {
         List<categoria> listaCategorias = new LinkedList<>();
-        // Prueba especificando el nombre de la columna tal cual está en el SQL: id_categoria
         String sql = "SELECT id_categoria, Nombre FROM CATEGORIA";
 
         try (Connection conn = SQLDataAccess.getConnection();
@@ -44,7 +43,6 @@ public class SQLModelGasto {
              ResultSet rs = stat.executeQuery(sql)) {
 
             while (rs.next()) {
-                // Asegúrate de que el alias o nombre de columna sea correcto
                 int id = rs.getInt("id_categoria");
                 String nombre = rs.getString("Nombre");
 

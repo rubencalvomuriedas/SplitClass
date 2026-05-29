@@ -1,17 +1,21 @@
 package org.example.slipclass_demo_1;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.example.slipclass_demo_1.model.SQLModelGrupo;
+import org.example.slipclass_demo_1.model.SQLModelUsuario;
 import org.example.slipclass_demo_1.model.grupo;
+import org.example.slipclass_demo_1.model.usuario;
 import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class controllerGrupos implements Initializable {
@@ -26,8 +30,22 @@ public class controllerGrupos implements Initializable {
     @FXML private TableColumn<grupo, String> tablaGrupoMon;
     @FXML private TableColumn<grupo, LocalDate> tablaGrupoCreacion;
 
+
+    @FXML
+    private TableView<grupo> TablaGrupos1;
+
+    @FXML private TableColumn<grupo, String> tablaGruposCod1;
+    @FXML private TableColumn<grupo, String> tablaGrupoTitulo1;
+    @FXML private TableColumn<grupo, String> tablaGrupoDescrip1;
+    @FXML private TableColumn<grupo, String> tablaGrupoMon1;
+    @FXML private TableColumn<grupo, LocalDate> tablaGrupoCreacion1;
+
+
     @FXML private TextField txtGrupoTItulo, txtGrupoDescrip;
     @FXML private ComboBox<String> comboMoneda;
+
+    @FXML private ComboBox<usuario> comboUsuarioSelect;
+    @FXML private ComboBox<grupo> comboGrupoSelect;
 
 
     @Override
@@ -40,7 +58,9 @@ public class controllerGrupos implements Initializable {
 //        tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
 //
 //        TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getAllGruposTabla()));
-    
+
+        cargarUsuarios();
+        cargarGrupos();
     
     }
 
@@ -95,6 +115,47 @@ public class controllerGrupos implements Initializable {
         }
     }
 
+    private void cargarGrupos() {
+        List<grupo> lista = SQLModelGrupo.getAllGrupos();
+        ObservableList<grupo> observableLista = FXCollections.observableArrayList(lista);
+        comboGrupoSelect.setItems(observableLista);
+
+        comboGrupoSelect.setCellFactory(lv -> new ListCell<grupo>() {
+            @Override
+            protected void updateItem(grupo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getTitulo());
+            }
+        });
+        comboGrupoSelect.setButtonCell(new ListCell<grupo>() {
+            @Override
+            protected void updateItem(grupo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getTitulo());
+            }
+        });
+    }
+
+    private void cargarUsuarios() {
+        List<usuario> lista = SQLModelUsuario.getAllUsuarios();
+        ObservableList<usuario> observableList = FXCollections.observableArrayList(lista);
+        comboUsuarioSelect.setItems(observableList);
+
+        comboUsuarioSelect.setCellFactory(lv -> new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+        comboUsuarioSelect.setButtonCell(new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+    }
 
     private void mostrarAlerta(String titulo, String msj) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -104,6 +165,33 @@ public class controllerGrupos implements Initializable {
         alert.show();
     }
 
-    public void onConfirmarGrupoMiembro(ActionEvent actionEvent) {
+
+    public void onConfirmarGrupoMiembro(ActionEvent event) {
+        grupo grupoSeleccionado = comboGrupoSelect.getValue();
+        usuario usuarioSeleccionado = comboUsuarioSelect.getValue();
+
+        if (grupoSeleccionado == null || usuarioSeleccionado == null) {
+            mostrarAlerta("Error", "Debes seleccionar tanto un grupo como un usuario.");
+            return;
+        }
+
+        int idGrupo = grupoSeleccionado.getId_grupo();
+        int idUsuario = usuarioSeleccionado.getId_usuario();
+
+        if (SQLModelGrupo.agregarMiembroAlGrupo(idUsuario, idGrupo)) {
+            mostrarAlerta("Éxito", "Usuario '" + usuarioSeleccionado.getNombre() +
+                    "' añadido al grupo '" + grupoSeleccionado.getTitulo() + "'.");
+
+            comboGrupoSelect.getSelectionModel().clearSelection();
+            comboUsuarioSelect.getSelectionModel().clearSelection();
+        } else {
+            mostrarAlerta("Error", "No se pudo añadir al usuario. ¿Quizás ya pertenece al grupo?");
+        }
+    }
+
+    public void onCargarGruposFiltradoClick(ActionEvent event) {
+
+
+
     }
 }
