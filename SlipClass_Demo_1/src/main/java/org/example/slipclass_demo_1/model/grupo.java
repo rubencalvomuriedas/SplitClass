@@ -25,12 +25,12 @@ public class grupo {
         this.fecha_eliminacion = fecha_eliminacion;
     }
 
-    public grupo(int idGrupo, String codGrupo, String titulo, String descripcion, java.sql.Date fechaCreacion, Date fecha_creacion, int idEstado) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.fecha_creacion = fecha_creacion;
-        this.fecha_eliminacion = null;
-    }
+//    public grupo(int idGrupo, String codGrupo, String titulo, String descripcion, java.sql.Date fechaCreacion, Date fecha_creacion, int idEstado) {
+//        this.titulo = titulo;
+//        this.descripcion = descripcion;
+//        this.fecha_creacion = fecha_creacion;
+//        this.fecha_eliminacion = null;
+//    }
 
     public grupo(int id_grupo, String codGrupo, String titulo) {
         this.id_grupo = id_grupo;
@@ -38,11 +38,13 @@ public class grupo {
         this.titulo = titulo;
     }
 
-    public grupo(String codGrupo, String titulo, String descripcion, String moneda) {
+    public grupo(String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion, Date fecha_eliminacion, int idEstado) {
         this.codGrupo = codGrupo;
         this.titulo = titulo;
         this.descripcion = descripcion;
-
+        this.moneda = moneda;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_eliminacion = fecha_eliminacion;
     }
 
 

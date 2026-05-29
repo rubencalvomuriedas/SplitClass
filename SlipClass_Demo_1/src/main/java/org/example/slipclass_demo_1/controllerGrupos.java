@@ -26,7 +26,7 @@ public class controllerGrupos implements Initializable {
     @FXML private TableColumn<grupo, String> tablaGrupoMon;
     @FXML private TableColumn<grupo, LocalDate> tablaGrupoCreacion;
 
-    @FXML private TextField txtTitulo, txtDescripcion;
+    @FXML private TextField txtGrupoTItulo, txtGrupoDescrip;
     @FXML private ComboBox<String> comboMoneda;
 
 
@@ -61,34 +61,40 @@ public class controllerGrupos implements Initializable {
     }
 
     public void onConfirmarGrupo(ActionEvent event) {
-        if (txtTitulo.getText().isEmpty()) {
+        if (txtGrupoTItulo.getText().isEmpty()) {
             mostrarAlerta("Error", "El título es obligatorio.");
             return;
         }
 
-        // Si la moneda es nula o vacía, le asignamos "EUR" por defecto
         String moneda = "EUR";
 
-        // Creamos el grupo usando el constructor que acepta la moneda
         grupo nuevoGrupo = new grupo(
-                "", // codGrupo se genera solo
-                txtTitulo.getText(),
-                txtDescripcion.getText(),
-                moneda,             // Pasamos "EUR"
-                null, null, 0       // Valores dummy para los campos extra del constructor
+                "",
+                txtGrupoTItulo.getText(),
+                txtGrupoDescrip.getText(),
+                moneda,
+                null, null, 0
         );
 
-        int idUsuarioLogueado = 1;
+        int idUsuarioLogueado = 3;
 
         if (SQLModelGrupo.createGrupoConCreador(nuevoGrupo, idUsuarioLogueado)) {
             mostrarAlerta("Éxito", "Grupo creado y vinculado correctamente.");
-            // Opcional: limpiar campos
-            txtTitulo.clear();
-            txtDescripcion.clear();
+            txtGrupoTItulo.clear();
+            txtGrupoDescrip.clear();
         } else {
             mostrarAlerta("Error", "No se pudo crear el grupo.");
         }
     }
+
+    public void pruebaAgregarUsuario(int idUsuario, int idGrupo) {
+        if (SQLModelGrupo.agregarMiembroAlGrupo(idUsuario, idGrupo)) {
+            System.out.println("¡Éxito! Usuario agregado al grupo.");
+        } else {
+            System.out.println("Error: No se pudo agregar (quizás el usuario ya es miembro).");
+        }
+    }
+
 
     private void mostrarAlerta(String titulo, String msj) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
