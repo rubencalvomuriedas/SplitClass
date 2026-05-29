@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -8,34 +9,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="0.0" maxWidth="0.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #0f0f0f;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
     <children>
-        <AnchorPane layoutX="141.0" layoutY="-54.0" maxHeight="0.0" maxWidth="0.0" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: black;" styleClass="my-background">
+        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
+
+        <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" spacing="20.0" style="-fx-padding: 40; -fx-alignment: center;" styleClass="sidebar-container">
             <children>
 
-                <ImageView fitHeight="158.0" fitWidth="240.0" layoutX="142.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@Imágenes/Logo.png" />
-                    </image>
-                </ImageView>
+                <Label style="-fx-padding: 0 0 10 0;" styleClass="welcome-title" text="Grupos">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+            <Label prefHeight="22.0" prefWidth="212.0" text="Selecciona la opcion deseada">
+               <VBox.margin>
+                  <Insets bottom="45.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
 
-                <VBox alignment="CENTER" layoutX="99.0" layoutY="151.0" prefHeight="387.0" prefWidth="322.0" spacing="25.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 40; -fx-padding: 40; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 0);">
-                    <children>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRegistroGrupoClick" prefHeight="60.0" styleClass="glass-button" text="Registrar Grupo" />
 
-                        <Label style="-fx-text-fill: black; -fx-font-weight: bold;" text="Grupos" textAlignment="CENTER">
-                            <font>
-                                <Font size="26.0" />
-                            </font>
-                        </Label>
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTablaGrupooClick" prefHeight="60.0" styleClass="glass-button" text="Ver Grupos" />
 
-                        <Button mnemonicParsing="false" onAction="#onRegistroGrupoClick" prefHeight="45.0" prefWidth="240.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand;" text="Registrar Grupo" />
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverrClick" prefHeight="50.0" styleClass="glass-button" text="Volver" />
 
-                        <Button mnemonicParsing="false" onAction="#onTablaGrupooClick" prefHeight="45.0" prefWidth="240.0" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand;" text="Ver Grupos" />
-                  <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="145.0" style="-fx-background-color: red; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 15; -fx-cursor: hand;" text="Volver" />
-
-                    </children>
-                </VBox>
             </children>
-        </AnchorPane>
+        </VBox>
     </children>
 </AnchorPane>

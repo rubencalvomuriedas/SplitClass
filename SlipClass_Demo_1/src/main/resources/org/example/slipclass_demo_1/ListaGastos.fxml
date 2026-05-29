@@ -1,28 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="597.0" prefWidth="914.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.newController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.newController">
    <children>
-      <TableView fx:id="tablaGastos" layoutX="57.0" layoutY="112.0" prefHeight="457.0" prefWidth="619.0">
-         <columns>
-            <TableColumn fx:id="colFecha" prefWidth="100" text="Fecha" />
-            <TableColumn fx:id="colConcepto" prefWidth="250" text="Concepto" />
-            <TableColumn fx:id="colMonto" prefWidth="100" text="Monto (€)" />
-         </columns>
-      </TableView>
-      <Button layoutX="717.0" layoutY="153.0" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="63.0" prefWidth="106.0" text="Eliminar gasto" />
-      <Button layoutX="717.0" layoutY="244.0" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="55.0" prefWidth="106.0" text="Modificar gasto" />
-       <Button layoutX="717.0" layoutY="329.0" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="55.0" prefWidth="106.0" text="Volver" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="267.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="500.0" fitWidth="754.0" layoutX="-60.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Imágenes/Logo.png" />
+            <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
          </image>
       </ImageView>
+
+      <VBox layoutX="377.0" prefHeight="500.0" prefWidth="425.0" spacing="20.0" style="-fx-padding: 40; -fx-alignment: center;" styleClass="sidebar-container">
+         <children>
+
+            <Label prefHeight="31.0" prefWidth="335.0" style="-fx-padding: 0 0 10 0;" styleClass="welcome-title" text="Gastos">
+               <font>
+                  <Font size="10.0" />
+               </font></Label>
+      
+            <TableView fx:id="tablaGastos" prefHeight="276.0" prefWidth="348.0" style="-fx-background-color: white; -fx-backdrop-filter: blur(10px); -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
+               <columns>
+                  <TableColumn fx:id="colFecha" prefWidth="85.0" text="Fecha" />
+                  <TableColumn fx:id="colConcepto" prefWidth="150.0" text="Concepto" />
+                  <TableColumn fx:id="colMonto" prefWidth="130.0" text="Monto (€)" />
+               </columns>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TableView>
+
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="57.0" prefWidth="334.0" styleClass="glass-button" text="Nuevo">
+               <VBox.margin>
+                  <Insets left="50.0" right="100.0" />
+               </VBox.margin></Button>
+
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="60.0" styleClass="glass-button" text="Modificar">
+               <VBox.margin>
+                  <Insets left="50.0" right="100.0" />
+               </VBox.margin></Button>
+
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="25.0" prefWidth="117.0" styleClass="glass-button" text="Volver">
+               <VBox.margin>
+                  <Insets left="50.0" right="100.0" />
+               </VBox.margin></Button>
+
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

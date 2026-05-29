@@ -119,11 +119,29 @@ public class HelloController implements Initializable {
     // --- MENÚ GRUPOS ---
     @FXML
     public void onRegistroGrupoClick(ActionEvent event) {
-        cambiarPantalla(event, "formularioGrupo.fxml");
+        cambiarPantalla(event, "registroGrupo.fxml");
     }
     @FXML
     public void onTablaGrupoClick(ActionEvent event) {
         mostrarAlerta("Tabla Grupos", "Abriendo vista de Tabla/Listado de Grupos...");
+    }
+
+    @FXML
+    private void onVolverrClick(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("menuPrincipal.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Error al cargar menuPrincipal.fxml");
+            e.printStackTrace();
+        }
     }
 
     private void cambiarPantalla(ActionEvent event, String archivoFXML) {
@@ -137,7 +155,6 @@ public class HelloController implements Initializable {
             mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
         }
     }
-
     private void mostrarAlerta(String titulo, String msj) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -187,9 +204,6 @@ public class HelloController implements Initializable {
         cambiarPantalla(event, "Grupos_view.fxml");
     }
 
-    public void onEliminarButtonClick(ActionEvent actionEvent) {
-    }
-
     @FXML
     public void onnIrALoginClick(ActionEvent event) {
 
@@ -203,6 +217,82 @@ public class HelloController implements Initializable {
 
     public void onRegistrarseClick(ActionEvent event) {
         cambiarPantalla(event, "registro.fxml");
+    }
+
+
+    //UTILIDAD MENU PRINCIPAL
+    @FXML
+    private void handleGrupos(ActionEvent event) {
+        cambiarEscena(event, "menuGrupo.fxml");
+    }
+
+    @FXML
+    private void handleGastos(ActionEvent event) {
+        cambiarEscena(event, "ListaGastos.fxml");
+    }
+
+    @FXML
+    private void handleSalir(ActionEvent event) {
+        cambiarEscena(event, "hello-view.fxml");
+    }
+
+    @FXML
+    private void handlePerfil(ActionEvent event) {
+        cambiarEscena(event, "Perfil.fxml");
+    }
+
+    private void cambiarEscena(ActionEvent event, String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Error al cargar la pantalla: " + fxmlFile);
+            e.printStackTrace();
+        }
+    }
+
+    //Utilidad Nuevo Grupo
+    @FXML
+    private TextField txtGastoConcepto;
+    @FXML
+    private TextField txtGastoMonto;
+
+    @FXML
+    private void onVolverrrClick(ActionEvent event) {
+        cambiarEscena(event, "menuGrupo.fxml");
+    }
+
+    @FXML
+    private void onCancelarrrClick(ActionEvent event) {
+        txtGastoConcepto.clear();
+        txtGastoMonto.clear();
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Cancelado", "Registro de Grupo cancelado.");
+    }
+
+    @FXML
+    private void onGuardarrrClick(ActionEvent event) {
+        String titulo = txtGastoConcepto.getText().trim();
+        String descripcion = txtGastoMonto.getText().trim();
+
+        if (titulo.isEmpty() || descripcion.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.WARNING, "Campos incompletos", "Hay que rellenar todos los campos");
+        } else {
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Nuevo Grupo creado correctamente.");
+            txtGastoConcepto.clear();
+            txtGastoMonto.clear();
+        }
+    }
+    private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 
 }

@@ -1,53 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
     <children>
-        <VBox alignment="CENTER" layoutX="159.0" layoutY="187.0" prefHeight="528.0" prefWidth="483.0" spacing="20.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 30; -fx-max-width: 450; -fx-alignment: center;" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="158.0" AnchorPane.topAnchor="187.0">
-            <padding>
-                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-            </padding>
+        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
+
+        <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" spacing="10.0" style="-fx-padding: 20 35 20 35; -fx-alignment: center-left;" styleClass="sidebar-container">
             <children>
-                <Label text="Crea tu cuenta" textFill="#34495e">
-                    <font>
-                        <Font name="System Bold" size="32.0" />
-                    </font>
-                </Label>
 
-                <TextField fx:id="txtUsuario" maxWidth="300.0" promptText="Nombre de usuario" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;" />
-                <TextField fx:id="txtEmail" maxWidth="300.0" promptText="Correo electrónico" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;" />
+                <Label style="-fx-padding: 0 0 5 0;" styleClass="welcome-title" text="Crea tu cuenta" />
 
-                <PasswordField fx:id="txtPass" maxWidth="300.0" promptText="Contraseña" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;" />
-                <PasswordField fx:id="txtPassConfirm" maxWidth="300.0" promptText="Confirmar contraseña" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;" />
+                <TextField fx:id="txtUsuario" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Nombre de usuario" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
 
-                <DatePicker fx:id="dpFechaNacimiento" maxWidth="300.0" promptText="Fecha de nacimiento" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;" />
+                <TextField fx:id="txtEmail" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Correo electrónico" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
 
-                <TextField fx:id="txtTelefono" maxWidth="300.0" promptText="Número de teléfono" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 10;" />
+                <PasswordField fx:id="txtPass" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Contraseña" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
 
-                <Button fx:id="finalRegistroEnviar" onAction="#onFinalizarRegistroClick" prefWidth="200.0" style="-fx-background-color: #34495e; -fx-background-radius: 25; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 12 30; -fx-cursor: hand;" text="Finalizar Registro" />
+                <PasswordField fx:id="txtPassConfirm" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Confirmar contraseña" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
 
-                <Button fx:id="btnVolver" onAction="#onVolver" prefWidth="200.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-border-radius: 25; -fx-background-radius: 25; -fx-font-weight: bold; -fx-padding: 12 30; -fx-cursor: hand;" text="Volver al inicio" />
+                <DatePicker fx:id="dpFechaNacimiento" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Fecha de nacimiento" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
+
+                <TextField fx:id="txtTelefono" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Número de teléfono" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
+
+                <VBox spacing="10.0" style="-fx-padding: 10 0 0 0; -fx-alignment: center;">
+                    <children>
+                        <Button fx:id="finalRegistroEnviar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onFinalizarRegistroClick" prefHeight="37.0" prefWidth="324.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Finalizar Registro" />
+                        <Button fx:id="btnVolver" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolver" prefHeight="40.0" styleClass="glass-button" text="Volver al inicio" />
+                    </children>
+                </VBox>
+
             </children>
-            <effect>
-                <DropShadow color="#00000026" height="30.0" radius="14.5" width="30.0" />
-            </effect>
         </VBox>
-      <ImageView fitHeight="180.0" fitWidth="271.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/Logo.png" />
-         </image>
-      </ImageView>
     </children>
 </AnchorPane>

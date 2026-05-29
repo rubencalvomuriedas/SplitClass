@@ -4,50 +4,45 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
     <children>
-      <ImageView fitHeight="179.0" fitWidth="276.0" layoutX="266.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/Logo.png" />
-         </image>
-      </ImageView>
-        <VBox alignment="CENTER" layoutX="200.0" layoutY="185.0" prefWidth="400.0" spacing="25.0" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-background-radius: 30; -fx-padding: 50; -fx-alignment: center;" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="185.0">
+        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
+
+        <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" spacing="15.0" style="-fx-padding: 40; -fx-alignment: center-left;" styleClass="sidebar-container">
             <children>
-                <Label text="Bienvenido" textFill="#2c3e50">
-                    <font>
-                        <Font name="System Bold" size="36.0" />
-                    </font>
-                </Label>
-                <Label text="Introduce tus credenciales para entrar" textFill="#7f8c8d" translateY="-15.0" />
+                <Label styleClass="welcome-title" text="Bienvenido" />
+                <Label style="-fx-padding: 0 0 10 0;" styleClass="welcome-subtitle" text="Introduce tus credenciales para entrar" />
 
-                <VBox spacing="10.0">
+                <VBox spacing="5.0">
                     <children>
-                        <Label style="-fx-font-weight: bold;" text="Usuario" textFill="#34495e" />
-                        <TextField fx:id="loginUsuario" promptText="Tu nombre de usuario" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12;" />
+                        <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Usuario" />
+                        <TextField fx:id="loginUsuario" prefHeight="40.0" promptText="Tu nombre de usuario" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
                     </children>
                 </VBox>
 
-                <VBox spacing="10.0">
+                <VBox spacing="5.0">
                     <children>
-                        <Label style="-fx-font-weight: bold;" text="Contraseña" textFill="#34495e" />
-                        <PasswordField fx:id="loginPass" promptText="••••••••" style="-fx-background-color: #f8f9fa; -fx-border-color: #dcdde1; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12;" />
+                        <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Contraseña" />
+                        <PasswordField fx:id="loginPass" prefHeight="40.0" promptText="••••••••" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
                     </children>
                 </VBox>
 
-                <Button onAction="#onIniciarSesionClick" prefHeight="47.0" prefWidth="225.0" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-background-radius: 25; -fx-font-weight: bold; -fx-padding: 15; -fx-cursor: hand;" text="ENTRAR" />
-
-                <Button onAction="#onVolverClick" style="-fx-background-color: #34495e; -fx-text-fill: white; -fx-cursor: hand; -fx-background-radius: 25; -fx-padding: 15; -fx-font-weight: bold;" text="VOLVER ATRÁS" />
+                <VBox spacing="12.0" style="-fx-padding: 15 0 0 0; -fx-alignment: center;">
+                    <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onIniciarSesionClick" prefHeight="45.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="ENTRAR" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverClick" prefHeight="45.0" styleClass="glass-button" text="VOLVER ATRÁS" />
+                    </children>
+                </VBox>
             </children>
-            <effect>
-                <DropShadow color="#00000033" height="40.0" radius="19.5" width="40.0" />
-            </effect>
         </VBox>
     </children>
 </AnchorPane>
