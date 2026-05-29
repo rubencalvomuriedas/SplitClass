@@ -31,7 +31,6 @@ public class SQLModelGrupo {
         return listaGrupos;
     }
 
-<<<<<<< HEAD
 //    public static List <grupo> getAllGruposTabla() {
 //        List<grupo> listaGrupos = new LinkedList<>();
 //        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado  FROM GRUPO";
@@ -67,12 +66,6 @@ public class SQLModelGrupo {
             try (Connection con = SQLDataAccess.getConnection();
                  Statement stat = con.createStatement();
                  ResultSet rs = stat.executeQuery(sql)) {
-=======
-
-    public static List<grupo> getAllGruposTabla() {
-        List<grupo> listaGrupos = new LinkedList<>();
-        String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
->>>>>>> 5fb847712056079c9d0deb5aa7d355ee9761ffa9
 
                 while (rs.next()) {
                     grupo g = new grupo(
@@ -90,13 +83,8 @@ public class SQLModelGrupo {
             } catch (SQLException e) {
                 System.err.println("Error al obtener los grupos: " + e.getMessage());
             }
-<<<<<<< HEAD
             return listaGrupos;
-=======
-        } catch (SQLException e) {
-            System.err.println("Error al obtener los grupos: " + e.getMessage());
-        }
-        return listaGrupos;
+
     }
 
     public static boolean createGrupoConCreador(grupo g, int idUsuarioCreador) {
@@ -137,12 +125,27 @@ public class SQLModelGrupo {
         }
     }
 
->>>>>>> 5fb847712056079c9d0deb5aa7d355ee9761ffa9
+    public static boolean agregarMiembroAlGrupo(int idUsuario, int idGrupo) {
+        String sql = "INSERT INTO MIEMBROS_GRUPO (codMiembrosGrupo, id_Usuario, id_Grupo) VALUES (?, ?, ?)";
+
+        try (Connection conn = SQLDataAccess.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, CodeGenerator.generarCodigo(conn, "MIEMBROS_GRUPO", "codMiembrosGrupo", "MGR"));
+            ps.setInt(2, idUsuario);
+            ps.setInt(3, idGrupo);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al agregar miembro: " + e.getMessage());
+            return false;
+        }
+    }
 
 
 
     }
-}
+
 
 
 

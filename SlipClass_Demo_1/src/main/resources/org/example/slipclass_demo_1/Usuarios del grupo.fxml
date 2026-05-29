@@ -11,15 +11,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="904.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="158.0" fitWidth="207.0" layoutX="352.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="158.0" fitWidth="207.0" layoutX="349.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Imágenes/Logo.png" />
          </image>
       </ImageView>
-      <VBox layoutX="225.0" layoutY="192.0" prefHeight="545.0" prefWidth="467.0" style="-fx-background-color: white;">
+      <VBox layoutX="219.0" layoutY="138.0" prefHeight="586.0" prefWidth="372.0" style="-fx-background-color: white;">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="USUARIOS DEL GRUPO" wrappingWidth="246.13671875">
                <font>
@@ -29,7 +28,15 @@
                   <Insets left="120.0" right="100.0" />
                </VBox.margin>
             </Text>
-            <ComboBox prefWidth="150.0" promptText="GRUPO" />
+            <ComboBox fx:id="comboGrupoSelect" prefWidth="150.0" promptText="GRUPO">
+               <VBox.margin>
+                  <Insets left="150.0" right="50.0" />
+               </VBox.margin></ComboBox>
+            <ComboBox fx:id="comboUsuarioSelect" layoutX="160.0" layoutY="42.0" prefWidth="150.0" promptText="USUARIOS">
+               <VBox.margin>
+                  <Insets left="150.0" right="50.0" />
+               </VBox.margin>
+            </ComboBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="250.0" spacing="20.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onVolverRegisterAction" prefHeight="29.0" prefWidth="120.0" style="-fx-background-color: #3498db; -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-background-radius: 5;" styleClass="btn-confirmar" text="Volver" />
