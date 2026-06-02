@@ -19,13 +19,16 @@
          </image>
       </ImageView>
 
-      <VBox layoutX="377.0" prefHeight="500.0" prefWidth="425.0" spacing="20.0" style="-fx-padding: 40; -fx-alignment: center;" styleClass="sidebar-container">
+      <VBox layoutX="377.0" layoutY="-24.0" prefHeight="524.0" prefWidth="425.0" spacing="20.0" style="-fx-padding: 40; -fx-alignment: center;" styleClass="sidebar-container">
          <children>
 
-            <Label prefHeight="31.0" prefWidth="335.0" style="-fx-padding: 0 0 10 0;" styleClass="welcome-title" text="Gastos">
+            <Label prefHeight="70.0" prefWidth="353.0" style="-fx-padding: 0 0 10 0;" styleClass="welcome-title" text="Gastos">
                <font>
                   <Font size="10.0" />
-               </font></Label>
+               </font>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
       
             <TableView fx:id="tablaGastos" prefHeight="276.0" prefWidth="348.0" style="-fx-background-color: white; -fx-backdrop-filter: blur(10px); -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
                <columns>
@@ -38,20 +41,29 @@
                </VBox.margin>
             </TableView>
 
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="57.0" prefWidth="334.0" styleClass="glass-button" text="Nuevo">
+            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onNuevoGastoAction" styleClass="glass-button" text="Nuevo">
                <VBox.margin>
-                  <Insets left="50.0" right="100.0" />
-               </VBox.margin></Button>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </Button>
 
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="60.0" styleClass="glass-button" text="Modificar">
+            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onModificarGastoAction" styleClass="glass-button" text="Modificar">
                <VBox.margin>
-                  <Insets left="50.0" right="100.0" />
-               </VBox.margin></Button>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </Button>
 
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="25.0" prefWidth="117.0" styleClass="glass-button" text="Volver">
+            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onEliminarGastoAction" styleClass="glass-button" text="Eliminar">
                <VBox.margin>
-                  <Insets left="50.0" right="100.0" />
-               </VBox.margin></Button>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </Button>
+
+            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onVolverAMenuGasto" styleClass="glass-button" text="Volver">
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </Button>
 
          </children>
       </VBox>

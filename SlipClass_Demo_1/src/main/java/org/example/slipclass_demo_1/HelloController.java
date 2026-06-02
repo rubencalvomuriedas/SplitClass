@@ -25,8 +25,6 @@ public class HelloController implements Initializable {
     private ObservableList<usuario> usuariosObservableList = FXCollections.observableArrayList();
 
     @FXML private ListView<usuario> listViewUsuarios;
-
-    // Campos de texto para los registros (conservados por si los necesitas)
     @FXML private TextField txtUsuario, txtEmail, txtTelefono, loginUsuario;
     @FXML private PasswordField txtPass, txtPassConfirm, loginPass;
     @FXML private DatePicker dpFechaNacimiento;

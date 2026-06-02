@@ -4,15 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.example.slipclass_demo_1.model.SQLModelGrupo;
-import org.example.slipclass_demo_1.model.SQLModelUsuario;
-import org.example.slipclass_demo_1.model.grupo;
-import org.example.slipclass_demo_1.model.usuario;
+import javafx.stage.Stage;
+import org.example.slipclass_demo_1.model.*;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -34,7 +37,6 @@ public class controllerGrupos implements Initializable {
     @FXML
     private TableView<grupo> TablaGrupos1;
 
-    @FXML private TableColumn<grupo, String> tablaGruposCod1;
     @FXML private TableColumn<grupo, String> tablaGrupoTitulo1;
     @FXML private TableColumn<grupo, String> tablaGrupoDescrip1;
     @FXML private TableColumn<grupo, String> tablaGrupoMon1;
@@ -51,7 +53,6 @@ public class controllerGrupos implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        tablaGruposCod.setCellValueFactory(new PropertyValueFactory<>("codGrupo"));
         tablaGrupoTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
         tablaGrupoDescrip.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("moneda"));
@@ -65,7 +66,31 @@ public class controllerGrupos implements Initializable {
     }
 
 
-    public void onRegistroGrupoClick(ActionEvent event) {
+    public void onModificarGrupoClick(ActionEvent actionEvent) {
+        grupo seleccionado = TablaGrupos.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            System.out.println("Por favor, selecciona un gasto de la tabla para editar.");
+            return;
+        }
+
+        try {
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registroGrupo.fxml"));
+            javafx.scene.Parent root = loader.load();
+
+            controllerProvisional formularioController = loader.getController();
+
+            //formularioController.cargarGrupoParaEditar(seleccionado);
+
+            javafx.scene.Scene scene = new javafx.scene.Scene(root);
+            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (Exception e) {
+            System.err.println("Error al cambiar a la pantalla de edición:");
+            e.printStackTrace();
+        }
     }
 
     public void onEliminarButtonClick(ActionEvent event) {

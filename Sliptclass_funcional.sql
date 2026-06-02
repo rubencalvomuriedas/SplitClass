@@ -90,7 +90,7 @@ CREATE TABLE REPARTO_GASTO (
     Cuota_deuda DECIMAL(10, 2) NOT NULL,
     PRIMARY KEY (ID_Reparto_Gasto),
     UNIQUE KEY uq_reparto (Id_Gasto, Id_Usuario),
-    CONSTRAINT fk_reparto_gasto FOREIGN KEY (Id_Gasto) REFERENCES GASTO (Id_Gasto),
+    CONSTRAINT fk_reparto_gasto FOREIGN KEY (Id_Gasto) REFERENCES GASTO (Id_Gasto) ON DELETE CASCADE,
     CONSTRAINT fk_reparto_usuario FOREIGN KEY (Id_Usuario) REFERENCES USUARIO (Id_Usuario)
 );
 

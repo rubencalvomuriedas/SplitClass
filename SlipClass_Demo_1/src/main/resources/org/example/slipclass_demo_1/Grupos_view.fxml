@@ -25,17 +25,16 @@
 
                 <TableView fx:id="TablaGrupos" maxWidth="1.7976931348623157E308" prefHeight="310.0" style="-fx-background-color: #000000; -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
                     <columns>
-                        <TableColumn fx:id="tablaGruposCod" prefWidth="48.0" text="COD." />
-                        <TableColumn fx:id="tablaGrupoTitulo" prefWidth="75.0" text="TÍTULO" />
-                        <TableColumn fx:id="tablaGrupoDescrip" prefWidth="85.0" text="DESC." />
-                        <TableColumn fx:id="tablaGrupoMon" prefWidth="65.0" text="MONEDA" />
-                        <TableColumn fx:id="tablaGrupoCreacion" prefWidth="105.0" text="CREACIÓN" />
+                        <TableColumn fx:id="tablaGrupoTitulo" prefWidth="89.0" text="TÍTULO" />
+                        <TableColumn fx:id="tablaGrupoDescrip" prefWidth="90.0" text="DESC." />
+                        <TableColumn fx:id="tablaGrupoMon" minWidth="0.0" prefWidth="61.0" text="MONEDA" />
+                        <TableColumn fx:id="tablaGrupoCreacion" prefWidth="138.0" text="CREACIÓN" />
                     </columns>
                 </TableView>
 
                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="8.0" style="-fx-padding: 5 0 0 0;">
                     <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRegistroGrupoClick" prefHeight="42.0" styleClass="glass-button" text="Editar" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGrupoClick" prefHeight="42.0" styleClass="glass-button" text="Editar" HBox.hgrow="ALWAYS" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarButtonClick" prefHeight="42.0" styleClass="glass-button" text="Eliminar" HBox.hgrow="ALWAYS" />
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#irAMenuGrupo" prefHeight="42.0" styleClass="glass-button" text="Volver" HBox.hgrow="ALWAYS" />
                     </children>

@@ -29,7 +29,6 @@ public class ControllerTable implements Initializable {
 
     @FXML private TableView<grupo> TablaGrupos;
 
-    @FXML private TableColumn<grupo, String> tablaGruposCod;
     @FXML private TableColumn<grupo, String> tablaGrupoTitulo;
     @FXML private TableColumn<grupo, String> tablaGrupoDescrip;
     @FXML private TableColumn<grupo, String> tablaGrupoMon;

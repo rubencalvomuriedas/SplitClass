@@ -82,6 +82,24 @@ public class newController implements Initializable {
     }
 
 
+    public void onNuevoGastoAction(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("registerGasto.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.println("Error al cargar la vista registerGasto.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void onEliminarGastoAction(ActionEvent actionEvent) {
         gasto seleccionado = tablaGastos.getSelectionModel().getSelectedItem();
 
@@ -125,11 +143,12 @@ public class newController implements Initializable {
             System.err.println("Error al cambiar a la pantalla de edición:");
             e.printStackTrace();
         }
-}
+    }
+
     public void onVolverAMenuGasto(ActionEvent event) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("MenuGasto.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
