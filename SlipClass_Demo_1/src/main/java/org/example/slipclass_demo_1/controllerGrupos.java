@@ -216,7 +216,7 @@ public class controllerGrupos implements Initializable {
 
     public void onCargarGruposFiltradoClick(ActionEvent event) {
 
-
-
     }
+
+
 }

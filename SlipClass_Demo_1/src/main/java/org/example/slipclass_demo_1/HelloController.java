@@ -20,15 +20,36 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
+    // =========================================================================
+    // 1. VARIABLES DE ESTADO VARIABLES GLOBALES
+    // =========================================================================
     private usuario us;
     private boolean isNewUser = true;
     private ObservableList<usuario> usuariosObservableList = FXCollections.observableArrayList();
 
-    @FXML private ListView<usuario> listViewUsuarios;
-    @FXML private TextField txtUsuario, txtEmail, txtTelefono, loginUsuario;
-    @FXML private PasswordField txtPass, txtPassConfirm, loginPass;
+
+    // =========================================================================
+    // 2. INYCCIONES FXML (@FXML) - AGRUPADAS POR PANTALLA
+    // =========================================================================
+
+    // --- [PANTALLA: LOGIN (login.fxml)] ---
+    @FXML private TextField loginUsuario;
+    @FXML private PasswordField loginPass;
+
+    // --- [PANTALLA: REGISTRO USUARIO (registroUsuario.fxml)] ---
+    @FXML private ListView<usuario> listViewUsuarios; // (También usado como panel de gestión)
+    @FXML private TextField txtUsuario, txtEmail, txtTelefono;
+    @FXML private PasswordField txtPass, txtPassConfirm;
     @FXML private DatePicker dpFechaNacimiento;
 
+    // --- [PANTALLA: NUEVO GRUPO / GASTOS (registroGrupo.fxml)] ---
+    @FXML private TextField txtGastoConcepto;
+    @FXML private TextField txtGastoMonto;
+
+
+    // =========================================================================
+    // 3. INICIALIZACIÓN (MÉTODOS DE CARGA)
+    // =========================================================================
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (this.listViewUsuarios != null) {
@@ -52,9 +73,63 @@ public class HelloController implements Initializable {
         }
     }
 
+
+    // =========================================================================
+    // 4. LÓGICA POR PANTALLA (EVENTOS ON ACTION)
+    // =========================================================================
+
+    // -------------------------------------------------------------------------
+    // --- PANTALLA: BIENVENIDA / INICIO (hello-view.fxml)
+    // -------------------------------------------------------------------------
+    @FXML
+    public void onnIrALoginClick(ActionEvent event) {
+        cambiarPantalla(event, "login.fxml");
+    }
+
+    @FXML
+    public void onRegistrarseClick(ActionEvent event) {
+        cambiarPantalla(event, "registroUsuario.fxml");
+    }
+
+    @FXML
+    public void clickSobreNosotros(ActionEvent actionEvent) {
+        mostrarAlerta("Próximamente", "En desarrollo... PROXIMAMENTE");
+    }
+
+    @FXML
+    public void clickDescarga(ActionEvent actionEvent) {
+        mostrarAlerta("Próximamente", "En desarrollo... PROXIMAMENTE");
+    }
+
+    // -------------------------------------------------------------------------
+    // --- PANTALLA: LOGIN (login.fxml)
+    // -------------------------------------------------------------------------
+    @FXML
+    public void onIniciarSesionClick(ActionEvent event) {
+        String nombre = loginUsuario.getText();
+        String pass = loginPass.getText();
+
+        if (nombre.isEmpty() || pass.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, rellena todos los campos.");
+            return;
+        }
+
+        usuario usuarioLogueado = SQLModelUsuario.login(nombre, pass);
+
+        if (usuarioLogueado != null) {
+            System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
+            irAPantallaPrincipal(event);
+        } else {
+            mostrarAlerta("Error de acceso", "Usuario o contraseña incorrectos.");
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // --- PANTALLA: REGISTRO USUARIO (registroUsuario.fxml)
+    // -------------------------------------------------------------------------
+
     @FXML
     public void onFinalizarRegistroClick(ActionEvent event) {
-
         if (txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPass.getText().isEmpty() || txtTelefono.getText().isEmpty() || dpFechaNacimiento.getValue() == null) {
             return;
         }
@@ -88,9 +163,12 @@ public class HelloController implements Initializable {
                 mostrarAlerta("Exito", "Usuario actualizado exitosamente");
             }
         }
-
         System.out.println("Usuario registrado.");
+    }
 
+    @FXML
+    private void onVolver(ActionEvent event) {
+        cambiarPantalla(event, "hello-view.fxml");
     }
 
     private void limpiarCampos() {
@@ -103,95 +181,9 @@ public class HelloController implements Initializable {
     }
 
 
-    @FXML
-    private void onVolver(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // --- MENÚ GRUPOS ---
-    @FXML
-    public void onRegistroGrupoClick(ActionEvent event) {
-        cambiarPantalla(event, "registroGrupo.fxml");
-    }
-    @FXML
-    public void onTablaGrupoClick(ActionEvent event) {
-        mostrarAlerta("Tabla Grupos", "Abriendo vista de Tabla/Listado de Grupos...");
-    }
-
-    @FXML
-    private void onVolverrClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("menuPrincipal.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            System.err.println("Error al cargar menuPrincipal.fxml");
-            e.printStackTrace();
-        }
-    }
-
-    private void cambiarPantalla(ActionEvent event, String archivoFXML) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(archivoFXML));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
-            mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
-        }
-    }
-    private void mostrarAlerta(String titulo, String msj) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(msj);
-        alert.show();
-    }
-
-    @FXML public void onIniciarSesionClick(ActionEvent event) {
-        String nombre = loginUsuario.getText();
-        String pass = loginPass.getText();
-
-        if (nombre.isEmpty() || pass.isEmpty()) {
-            mostrarAlerta("Campos vacíos", "Por favor, rellena todos los campos.");
-            return;
-        }
-
-        usuario usuarioLogueado = SQLModelUsuario.login(nombre, pass);
-
-        if (usuarioLogueado != null) {
-            System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
-
-            irAPantallaPrincipal(event);
-        } else {
-            mostrarAlerta("Error de acceso", "Usuario o contraseña incorrectos.");
-        } }
-
-    private void irAPantallaPrincipal(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("menuUsuario.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error al cambiar de pantalla: " + e.getMessage());
-        }
-    }
-
-
+    // -------------------------------------------------------------------------
+    // --- PANTALLAS: MENÚ USUARIO / MENÚ PRINCIPAL (menuUsuario.fxml / menuPrincipal.fxml)
+    // -------------------------------------------------------------------------
     @FXML
     public void onVolverClick(ActionEvent event) {
         cambiarPantalla(event, "menuUsuario.fxml");
@@ -203,23 +195,6 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    public void onnIrALoginClick(ActionEvent event) {
-
-        cambiarPantalla(event, "login.fxml");
-    }
-    public void clickSobreNosotros(ActionEvent actionEvent) {
-    }
-
-    public void clickDescarga(ActionEvent actionEvent) {
-    }
-
-    public void onRegistrarseClick(ActionEvent event) {
-        cambiarPantalla(event, "registroUsuario.fxml");
-    }
-
-
-    //UTILIDAD MENU PRINCIPAL
-    @FXML
     private void handleGrupos(ActionEvent event) {
         cambiarEscena(event, "menuGrupo.fxml");
     }
@@ -230,38 +205,35 @@ public class HelloController implements Initializable {
     }
 
     @FXML
+    private void handlePerfil(ActionEvent event) {
+        cambiarEscena(event, "Perfil.fxml");
+    }
+
+    @FXML
     private void handleSalir(ActionEvent event) {
         cambiarEscena(event, "hello-view.fxml");
     }
 
     @FXML
-    private void handlePerfil(ActionEvent event) {
-        cambiarEscena(event, "Perfil.fxml");
+    private void onVolverrClick(ActionEvent event) { // ¡Ojo! 2 'r's - Carga menú principal
+        cambiarEscena(event, "menuPrincipal.fxml");
     }
 
-    private void cambiarEscena(ActionEvent event, String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
 
-        } catch (IOException e) {
-            System.err.println("Error al cargar la pantalla: " + fxmlFile);
-            e.printStackTrace();
-        }
+    // -------------------------------------------------------------------------
+    // --- PANTALLA: MENÚ GRUPOS (menuGrupo.fxml)
+    // -------------------------------------------------------------------------
+    @FXML
+    public void onRegistroGrupoClick(ActionEvent event) {
+        cambiarPantalla(event, "registroGrupo.fxml");
     }
 
-    //Utilidad Nuevo Grupo
-    @FXML
-    private TextField txtGastoConcepto;
-    @FXML
-    private TextField txtGastoMonto;
 
+    // -------------------------------------------------------------------------
+    // --- PANTALLA: REGISTRO GRUPO / DETALLE (registroGrupo.fxml)
+    // -------------------------------------------------------------------------
     @FXML
-    private void onVolverrrClick(ActionEvent event) {
+    private void onVolverrrClick(ActionEvent event) { // ¡Ojo! 3 'r's - Vuelve al menú de grupos
         cambiarEscena(event, "menuGrupo.fxml");
     }
 
@@ -285,6 +257,49 @@ public class HelloController implements Initializable {
             txtGastoMonto.clear();
         }
     }
+
+
+    // =========================================================================
+    // 5. NAVEGACIÓN Y UTILIDADES GLOBALES
+    // =========================================================================
+    private void cambiarPantalla(ActionEvent event, String archivoFXML) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(archivoFXML));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
+            mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
+        }
+    }
+
+    private void cambiarEscena(ActionEvent event, String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al cargar la pantalla: " + fxmlFile);
+            e.printStackTrace();
+        }
+    }
+
+    private void irAPantallaPrincipal(ActionEvent event) {
+        cambiarPantalla(event, "menuUsuario.fxml");
+    }
+
+    private void mostrarAlerta(String titulo, String msj) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(msj);
+        alert.show();
+    }
+
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
@@ -292,5 +307,4 @@ public class HelloController implements Initializable {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
-
 }

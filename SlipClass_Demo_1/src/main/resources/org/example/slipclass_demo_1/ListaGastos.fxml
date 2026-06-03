@@ -30,7 +30,7 @@
                   <Insets />
                </VBox.margin></Label>
       
-            <TableView fx:id="tablaGastos" prefHeight="276.0" prefWidth="348.0" style="-fx-background-color: white; -fx-backdrop-filter: blur(10px); -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
+            <TableView fx:id="tablaGastos" prefHeight="292.0" prefWidth="345.0" style="-fx-background-color: black; -fx-backdrop-filter: blur(10px); -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
                <columns>
                   <TableColumn fx:id="colFecha" prefWidth="85.0" text="Fecha" />
                   <TableColumn fx:id="colConcepto" prefWidth="150.0" text="Concepto" />
@@ -41,25 +41,25 @@
                </VBox.margin>
             </TableView>
 
-            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onNuevoGastoAction" styleClass="glass-button" text="Nuevo">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNuevoGastoAction" prefHeight="45.0" styleClass="glass-button" text="Nuevo">
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin>
             </Button>
 
-            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onModificarGastoAction" styleClass="glass-button" text="Modificar">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="45.0" styleClass="glass-button" text="Modificar">
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin>
             </Button>
 
-            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onEliminarGastoAction" styleClass="glass-button" text="Eliminar">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="45.0" styleClass="glass-button" text="Eliminar">
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin>
             </Button>
 
-            <Button maxWidth="1.7976931348623157E308" prefHeight="45.0" mnemonicParsing="false" onAction="#onVolverAMenuGasto" styleClass="glass-button" text="Volver">
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="45.0" styleClass="glass-button" text="Volver">
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin>
