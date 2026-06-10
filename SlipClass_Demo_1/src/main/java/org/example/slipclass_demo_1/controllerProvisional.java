@@ -49,6 +49,17 @@ public class controllerProvisional implements Initializable {
         }
 
         System.out.println("CONTROLLER PROVISIONAL");
+
+        // Al final de tu método initialize(), puedes preseleccionar al usuario actual en el combo:
+        usuario usuarioLogueado = SessionManager.getCurrentUser();
+        if (usuarioLogueado != null && comboUsuario.getItems() != null) {
+            for (usuario usr : comboUsuario.getItems()) {
+                if (usr.getId_usuario() == usuarioLogueado.getId_usuario()) {
+                    comboUsuario.setValue(usr);
+                    break;
+                }
+            }
+        }
     }
 
     private void cargarCategorias() {
@@ -94,10 +105,19 @@ public class controllerProvisional implements Initializable {
     }
 
     private void cargarGrupos() {
-        List<grupo> lista = SQLModelGrupo.getAllGrupos();
-        ObservableList<grupo> observableLista = FXCollections.observableArrayList(lista);
-        comboGrupo.setItems(observableLista);
+        usuario usuarioLogueado = SessionManager.getCurrentUser();
 
+        if (usuarioLogueado != null) {
+            List<grupo> lista = SQLModelGrupo.getGruposPorUsuario(usuarioLogueado.getId_usuario());
+
+            ObservableList<grupo> observableLista = FXCollections.observableArrayList(lista);
+            comboGrupo.setItems(observableLista);
+        } else {
+            System.err.println("Advertencia: No hay ningún usuario logueado en SessionManager.");
+            comboGrupo.setItems(FXCollections.observableArrayList());
+        }
+
+        // Mantienes tus celdas personalizadas intactas para mostrar el título
         comboGrupo.setCellFactory(lv -> new ListCell<grupo>() {
             @Override
             protected void updateItem(grupo item, boolean empty) {
