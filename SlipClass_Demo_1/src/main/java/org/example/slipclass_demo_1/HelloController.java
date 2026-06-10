@@ -1,5 +1,6 @@
 package org.example.slipclass_demo_1;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -207,13 +208,8 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    private void handlePerfil(ActionEvent event) {
-        cambiarEscena(event, "Perfil.fxml");
-    }
-
-    @FXML
-    private void handleSalir(ActionEvent event) {
-        cambiarEscena(event, "hello-view.fxml");
+    private void salir() {
+        Platform.exit();
     }
 
     @FXML
