@@ -144,32 +144,44 @@ public class SQLModelGrupo {
         }
         return listaGrupos;
     }
-    
-    public static boolean insertarGrupo(grupo g){
-        boolean creado = false;
-        
-        String sql = "INSERT INTO GRUPO (Titulo, Descripcion, Moneda) VALUES (?,?,?)";
 
-        try(Connection con = SQLDataAccess.getConnection();
-        PreparedStatement statement = con.prepareStatement(sql)){
+    public static boolean insertarGrupo(grupo g) {
 
-                    statement.setNString(1, g.getTitulo());
-                    statement.setNString(2, g.getDescripcion());
-                    statement.setNString(3, "Moneda");
+        String sql = """
+        INSERT INTO GRUPO (codGrupo, Titulo, Descripcion, Moneda, Id_Estado)
+        VALUES (?,?,?,?,?)
+    """;
 
-                    int filas = statement.executeUpdate();
+        try (Connection con = SQLDataAccess.getConnection();
+             PreparedStatement statement = con.prepareStatement(sql)) {
 
-                    if(filas == 1){
-                        creado = true;
-                    }
+            statement.setString(1, g.getCodGrupo());
+            statement.setString(2, g.getTitulo());
+            statement.setString(3, g.getDescripcion());
+            statement.setString(4, g.getMoneda());
+
+            // 🔥 AQUÍ ESTÁ EL ERROR
+            statement.setInt(5, g.getId_estado());
+
+            return statement.executeUpdate() == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return creado;
     }
-    
 
+    public static boolean deleteGrupo(int idGrupo) {
+        String sql = "DELETE FROM GRUPO WHERE Id_Grupo = ?";
+        try (Connection con = SQLDataAccess.getConnection();
+             PreparedStatement stat = con.prepareStatement(sql)) {
+
+            stat.setInt(1, idGrupo);
+            return stat.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar grupo: " + e.getMessage());
+            return false;
+        }
+    }
     }
 
 

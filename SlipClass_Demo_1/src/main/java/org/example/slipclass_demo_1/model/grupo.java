@@ -14,6 +14,7 @@ public class grupo {
 
     private LocalDate fecha_creacion;
     private LocalDate fecha_eliminacion;
+    private int id_estado;
     private List<estadoGrupo> estadoSelec; // Nuevo valor que determinara un grupo como realmente activo hasta que reciba un pago o movimiento
 
     public grupo(int id_grupo, String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion, LocalDate fecha_eliminacion, int idEstado) {
@@ -57,7 +58,7 @@ public class grupo {
         this.fecha_eliminacion = null;
     }
 
-    public grupo(int idGrupo, String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion) {
+    public grupo(int id_grupo, String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion) {
         this.id_grupo = id_grupo;
         this.codGrupo = codGrupo;
         this.titulo = titulo;
@@ -67,6 +68,21 @@ public class grupo {
         this.fecha_eliminacion = null;
     }
 
+    public grupo(String codGrupo, String titulo, String descripcion) {
+        this.codGrupo = codGrupo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+    }
+
+    public grupo(String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion, int id_estado) {
+        this.codGrupo = codGrupo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.moneda = moneda;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_eliminacion = null;
+        this.id_estado = id_estado;
+    }
 
     public int getId_grupo() {
         return id_grupo;
@@ -113,11 +129,6 @@ public class grupo {
     public void setCodGrupo(String codGrupo) {
         this.codGrupo = codGrupo;
     }
-
-    public Object getId_Estado() {
-        return false;
-    }
-
 
 }
 
