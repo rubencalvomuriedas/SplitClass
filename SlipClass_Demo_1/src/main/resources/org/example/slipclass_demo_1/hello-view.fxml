@@ -18,10 +18,10 @@
             <image><Image url="@Imágenes/Amigos.png" /></image>
         </ImageView>
 
-        <Button layoutX="674.0" layoutY="411.0" mnemonicParsing="false" onAction="#apagarapp" styleClass="power-button">
+        <Button layoutX="674.0" layoutY="411.0" mnemonicParsing="false" onAction="#apagarapp" style="-fx-background-color: transparent;" styleClass="power-button">
             <graphic>
                 <ImageView fitHeight="40.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                    <image><Image url="@Imágenes/power_icon.png" /></image>
+                    <image><Image url="@Imágenes/botonsito.png" /></image>
                 </ImageView>
             </graphic>
         </Button>

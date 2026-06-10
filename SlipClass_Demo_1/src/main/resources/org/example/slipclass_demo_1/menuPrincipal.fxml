@@ -27,14 +27,14 @@
       
               <Button mnemonicParsing="false" onAction="#cerrarSesion" styleClass="home-button">
                   <graphic>
-                      <ImageView fitHeight="33.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                      <ImageView fitHeight="42.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                           <image>
-                              <Image url="@Imágenes/home.png" />
+                              <Image url="@Imágenes/casa.png" />
                           </image>
                       </ImageView>
                   </graphic>
                <VBox.margin>
-                  <Insets left="230.0" />
+                  <Insets left="230.0" top="50.0" />
                </VBox.margin>
               </Button>
             </children>
