@@ -18,7 +18,7 @@ public class SQLDataAccess {
 
     static{
         try (
-            BufferedReader reader = new BufferedReader(new FileReader("src/main/resources/inicio.dat"))){
+            BufferedReader reader = new BufferedReader(new FileReader("SlipClass_Demo_1/src/main/resources/inicio.dat"))){
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split("=");
