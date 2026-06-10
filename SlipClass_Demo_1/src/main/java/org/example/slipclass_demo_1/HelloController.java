@@ -17,6 +17,7 @@ import org.example.slipclass_demo_1.model.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -382,5 +383,70 @@ public class HelloController implements Initializable {
 
     public void apagarapp(ActionEvent Event) {
         Platform.exit();
+    }
+
+    @FXML
+    void onAnadirGrupoClick(ActionEvent event) {
+        // Creamos el diálogo de entrada de texto
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Validación requerida");
+        dialog.setHeaderText("Introduce el código de acceso");
+        dialog.setContentText("Código:");
+
+        // Mostramos el diálogo y esperamos la respuesta
+        Optional<String> result = dialog.showAndWait();
+
+        // Comprobamos si el usuario pulsó OK y si escribió algo
+        result.ifPresent(codigo -> {
+            if (codigo.equals("TU_CODIGO_SECRETO")) { // Cambia esto por tu lógica de validación
+                System.out.println("Código correcto. Accediendo...");
+                // Aquí puedes llamar a otra ventana o realizar la acción
+            } else {
+                System.out.println("Código incorrecto.");
+                // Opcional: mostrar un Alert de error
+            }
+        });
+    }
+
+    @FXML
+    void onAnadirGrupooClick(ActionEvent event) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Unirse a un grupo");
+        dialog.setHeaderText("Introduce el código de invitación");
+        dialog.setContentText("Código del grupo:");
+
+        Optional<String> result = dialog.showAndWait();
+
+        result.ifPresent(codigoIngresado -> {
+            // Llamada a un método que haga la consulta a la BD
+            boolean esValido = verificarYUnirAGrupo(codigoIngresado);
+
+            if (esValido) {
+                mostrarMensaje("Éxito", "Te has unido al grupo correctamente.");
+            } else {
+                mostrarMensaje("Error", "Código inválido o no existente.");
+            }
+        });
+    }
+
+    // Método de ejemplo para tu lógica de BD
+    private boolean verificarYUnirAGrupo(String codigo) {
+        // 1. Conecta a tu BD
+        // 2. Ejecuta un SELECT para ver si el código existe en la tabla de grupos
+        // 3. Si existe, ejecuta un INSERT en la tabla intermedia 'usuario_grupo'
+        //    (o la lógica que tengas para relacionarlos)
+
+        // Ejemplo ficticio:
+        // String consulta = "SELECT id_grupo FROM grupos WHERE codigo_invitacion = ?";
+        // return baseDeDatos.ejecutarInsercion(consulta, codigo);
+
+        return false; // Cambia esto por tu lógica real
+    }
+
+    private void mostrarMensaje(String titulo, String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setContentText(mensaje);
+        alert.showAndWait();
     }
 }
