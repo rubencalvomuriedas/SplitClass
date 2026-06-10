@@ -43,7 +43,7 @@ public class HelloController implements Initializable {
     @FXML private PasswordField txtPass, txtPassConfirm;
     @FXML private DatePicker dpFechaNacimiento;
 
-    // --- [PANTALLA: NUEVO GRUPO / GASTOS (registroGrupo.fxml)] ---
+    // REGISTRO GRUPO ---
     @FXML private TextField txtGastoConcepto;
     @FXML private TextField txtGastoMonto;
 
@@ -76,6 +76,7 @@ public class HelloController implements Initializable {
         }
     }
 
+   
 
     // =========================================================================
     // 4. LÓGICA POR PANTALLA (EVENTOS ON ACTION)
@@ -91,7 +92,7 @@ public class HelloController implements Initializable {
 
     @FXML
     public void onRegistrarseClick(ActionEvent event) {
-        cambiarPantalla(event, "registroUsuario.fxml");
+        cambiarPantalla(event, "registro.fxml");
     }
 
     @FXML
@@ -155,7 +156,7 @@ public class HelloController implements Initializable {
 
             if (SQLModelUsuario.createUsuario(this.us)) {
                 mostrarAlerta("Registro exitoso", "Usuario creado exitosamente");
-                limpiarCampos();
+                limpiarCamposGrupo();
             }
         } else {
             this.us.setNombre(txtUsuario.getText());
@@ -176,13 +177,9 @@ public class HelloController implements Initializable {
         cambiarPantalla(event, "hello-view.fxml");
     }
 
-    private void limpiarCampos() {
-        txtUsuario.clear();
-        txtEmail.clear();
-        txtPass.clear();
-        txtPassConfirm.clear();
-        txtTelefono.clear();
-        dpFechaNacimiento.setValue(null);
+    private void limpiarCamposGrupo() {
+        txtGastoConcepto.clear();
+        txtGastoMonto.clear();
     }
 
 
@@ -268,7 +265,7 @@ public class HelloController implements Initializable {
         // 4. Guardar usando la BD
         if (SQLModelGrupo.createGrupoConCreador(g, userActual.getId_usuario())) {
             mostrarAlerta("Éxito", "Grupo creado exitosamente.");
-            limpiarCampos();
+            limpiarCamposGrupo();
         } else {
             mostrarAlerta("Error", "No se pudo guardar en la base de datos.");
         }

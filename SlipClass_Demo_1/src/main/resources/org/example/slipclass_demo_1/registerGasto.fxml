@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.controllerProvisional">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.controllerProvisional">
     <children>
         <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -48,14 +48,14 @@
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Categoría:" />
-                        <ComboBox fx:id="comboCategoria" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
+                        <ComboBox fx:id="comboCategoria" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Seleccione una Categoria" style="-fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
                     </children>
                 </VBox>
 
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Grupo:" />
-                        <ComboBox fx:id="comboGrupo" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
+                        <ComboBox fx:id="comboGrupo" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
                     </children>
                 </VBox>
 

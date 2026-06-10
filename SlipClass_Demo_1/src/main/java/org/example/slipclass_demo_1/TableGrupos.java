@@ -84,7 +84,7 @@ public class TableGrupos implements Initializable {
             javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registroGrupo.fxml"));
             javafx.scene.Parent root = loader.load();
 
-            controllerProvisional formularioController = loader. getController();
+            HelloController formularioController = loader. getController();
 
             //formularioController.cargarGrupoParaEditar(seleccionado);
 
