@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -8,64 +7,48 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGastos">
-   <children>
-      <ImageView fitHeight="500.0" fitWidth="754.0" layoutX="-60.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
-         </image>
-      </ImageView>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="803.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGastos">
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="754.0" layoutX="-60.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
 
-      <VBox layoutX="377.0" layoutY="-24.0" prefHeight="524.0" prefWidth="425.0" spacing="20.0" style="-fx-padding: 40; -fx-alignment: center;" styleClass="sidebar-container">
-         <children>
+        <VBox layoutX="379.0" layoutY="-3.0" prefHeight="506.0" prefWidth="424.0" spacing="20.0" style="-fx-padding: 30;" styleClass="sidebar-container">
+            <children>
+                <Label styleClass="welcome-title" text="Gastos" />
 
-            <Label prefHeight="70.0" prefWidth="353.0" style="-fx-padding: 0 0 10 0;" styleClass="welcome-title" text="Gastos">
-               <font>
-                  <Font size="10.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin></Label>
-      
-            <TableView fx:id="tablaGastos" prefHeight="292.0" prefWidth="345.0" style="-fx-background-color: black; -fx-backdrop-filter: blur(10px); -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
-               <columns>
-                  <TableColumn fx:id="colFecha" prefWidth="85.0" text="Fecha" />
-                  <TableColumn fx:id="colConcepto" prefWidth="150.0" text="Concepto" />
-                  <TableColumn fx:id="colMonto" prefWidth="130.0" text="Monto (€)" />
-               </columns>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </TableView>
+                <TableView fx:id="tablaGastos" prefHeight="250.0" prefWidth="340.0" styleClass="glass-table">
+                    <columns>
+                        <TableColumn fx:id="colFecha" prefWidth="85.0" text="Fecha" />
+                        <TableColumn fx:id="colConcepto" prefWidth="130.0" text="Concepto" />
+                        <TableColumn fx:id="colMonto" prefWidth="120.0" text="Monto (€)" />
+                    </columns>
+                </TableView>
 
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNuevoGastoAction" prefHeight="45.0" styleClass="glass-button" text="Nuevo">
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" />
-               </VBox.margin>
-            </Button>
-
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGastoAction" prefHeight="45.0" styleClass="glass-button" text="Modificar">
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" />
-               </VBox.margin>
-            </Button>
-
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarGastoAction" prefHeight="45.0" styleClass="glass-button" text="Eliminar">
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" />
-               </VBox.margin>
-            </Button>
-
-            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverAMenuGasto" prefHeight="45.0" styleClass="glass-button" text="Volver">
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" />
-               </VBox.margin>
-            </Button>
-
-         </children>
-      </VBox>
-   </children>
+                <GridPane hgap="10.0" vgap="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onNuevoGastoAction" styleClass="glass-button" text="Nuevo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onModificarGastoAction" styleClass="glass-button" text="Modificar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onEliminarGastoAction" styleClass="glass-button" text="Eliminar" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onVolverAMenuGasto" styleClass="glass-button" text="Volver" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                    </children>
+                </GridPane>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

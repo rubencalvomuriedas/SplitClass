@@ -103,6 +103,27 @@
     -fx-border-color: rgba(255, 255, 255, 0.7);
 }
 
+.glass-button {
+    /* Estética */
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 10;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-radius: 10;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+
+    /* ESTAS SON LAS LÍNEAS QUE CENTRAN EL TEXTO */
+    -fx-alignment: center;         /* Centra el contenido en el área del botón */
+    -fx-text-alignment: center;    /* Centra el texto multilínea si existiera */
+    -fx-content-display: center;   /* Asegura que el contenido sea central */
+
+    /* Padding equilibrado para que no se pegue a los bordes */
+    -fx-padding: 5 10 5 10;
+}
+
+.glass-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
 .power-button {
     -fx-background-color: transparent;
     -fx-cursor: hand;
