@@ -47,6 +47,8 @@ public class controllerProvisional implements Initializable {
             System.err.println("¡ERROR crítico en el inicio del controlador!");
             e.printStackTrace();
         }
+
+        System.out.println("CONTROLLER PROVISIONAL");
     }
 
     private void cargarCategorias() {

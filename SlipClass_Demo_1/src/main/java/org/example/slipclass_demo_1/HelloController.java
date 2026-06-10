@@ -58,6 +58,8 @@ public class HelloController implements Initializable {
             });
             loadUsuariosList();
         }
+
+        System.out.println("HELLO CONTROLLER");
     }
 
     public void loadUsuariosList() {

@@ -4,11 +4,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.example.slipclass_demo_1.model.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -55,6 +61,8 @@ public class TableGrupos implements Initializable {
 
 //        cargarUsuarios();
 //        cargarGrupos();
+
+        System.out.println("AAAAAA");
     
     }
 
@@ -89,10 +97,10 @@ public class TableGrupos implements Initializable {
     public void onEliminarButtonClick(ActionEvent event) {
     }
 
-    public void irAMenuGrupo(ActionEvent event) {
-    }
 
-    public void onVolverRegisterAction(ActionEvent event) {
+    public void irAMenuGrupo(ActionEvent event) {
+        cambiarPantalla(event, "menuGrupo.fxml");
+        System.out.println("Volviendo al menú de grupos...");
     }
 
     public void onCancelarGrupo(ActionEvent event) {
@@ -211,5 +219,15 @@ public class TableGrupos implements Initializable {
 
     }
 
-
+    private void cambiarPantalla(ActionEvent event, String archivoFXML) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(archivoFXML));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
+            mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
+        }
+    }
 }
