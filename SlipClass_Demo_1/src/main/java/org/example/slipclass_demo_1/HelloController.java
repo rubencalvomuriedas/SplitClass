@@ -341,8 +341,7 @@ public class HelloController implements Initializable {
         alerta.showAndWait();
     }
 
-
-
+    
     private grupo grupoEnEdicion = null;
 
 
