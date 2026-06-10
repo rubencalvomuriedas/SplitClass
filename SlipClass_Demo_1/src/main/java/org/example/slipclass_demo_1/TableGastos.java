@@ -76,8 +76,10 @@ public class TableGastos implements Initializable {
 
         categoria seleccionada = comboCategoria.getValue();
 
+
         if (seleccionada != null) {
             System.out.println("Categoría seleccionada: " + seleccionada.getNombre());
+            comboCategoria.getSelectionModel().select(seleccionada);
             System.out.println("ID a enviar a la FK de Gastos: " + seleccionada.getId_categoria());
         } else {
             System.out.println("No se ha seleccionado ninguna categoría.");

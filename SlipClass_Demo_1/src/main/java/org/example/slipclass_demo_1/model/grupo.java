@@ -48,6 +48,25 @@ public class grupo {
         this.fecha_eliminacion = fecha_eliminacion;
     }
 
+    public grupo(String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion) {
+        this.codGrupo = codGrupo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.moneda = moneda;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_eliminacion = null;
+    }
+
+    public grupo(int idGrupo, String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion) {
+        this.id_grupo = id_grupo;
+        this.codGrupo = codGrupo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.moneda = moneda;
+        this.fecha_creacion = fecha_creacion;
+        this.fecha_eliminacion = null;
+    }
+
 
     public int getId_grupo() {
         return id_grupo;

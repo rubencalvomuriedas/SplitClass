@@ -134,9 +134,7 @@ public class SQLModelGrupo {
                             rs.getString("Titulo"),
                             rs.getString("Descripcion"),
                             rs.getString("Moneda"),
-                            rs.getDate("Fecha_creacion").toLocalDate(),
-                            rs.getDate("fecha_eliminacion").toLocalDate(),
-                            rs.getInt("Id_Estado")
+                            rs.getDate("Fecha_creacion").toLocalDate()
                     );
                     listaGrupos.add(g);
                 }

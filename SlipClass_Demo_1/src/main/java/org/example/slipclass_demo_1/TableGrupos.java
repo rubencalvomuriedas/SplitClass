@@ -60,7 +60,6 @@ public class TableGrupos implements Initializable {
         tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
 
         TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getGruposPorUsuario(3)));
-
 //        cargarUsuarios();
 //        cargarGrupos();
     
