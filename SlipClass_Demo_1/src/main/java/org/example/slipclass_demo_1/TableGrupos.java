@@ -96,7 +96,7 @@ public class TableGrupos implements Initializable {
 
             String fxml = "registroGrupo.fxml";
 
-            String titulo = "Registrar grupo";
+            String titulo = "Modificar grupo";
 
             Navigator.arbrirVentanaSecundaria(fxml, titulo, getClass());
 
@@ -113,9 +113,9 @@ public class TableGrupos implements Initializable {
     private void abrirVentanaCrearGrupo() {
         try {
 
-            String fxml = "usuarios-formIntegrantes.fxml";
+            String fxml = "registroGrupo.fxml";
 
-            String titulo = "Gestionar usuarios";
+            String titulo = "Crear grupo";
 
             Navigator.arbrirVentanaSecundaria(fxml, titulo, getClass());
 
@@ -126,6 +126,18 @@ public class TableGrupos implements Initializable {
     }
 
     public void onVolverRegisterAction(ActionEvent event) {
+        try {
+
+            String fxml = "menuPrincipal.fxml";
+
+            String titulo = "SplitClass";
+
+            Navigator.arbrirVentanaSecundaria(fxml, titulo, getClass());
+
+
+        } catch (IOException e) {
+            Alertas.showAlert("No se puede crear grupos", String.valueOf(e), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -180,6 +192,7 @@ public class TableGrupos implements Initializable {
         }
     }
 
+    @FXML
     private void cargarGrupos() {
         List<grupo> lista = SQLModelGrupo.getAllGrupos();
         ObservableList<grupo> observableLista = FXCollections.observableArrayList(lista);

@@ -1,5 +1,6 @@
 package org.example.slipclass_demo_1;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -233,13 +234,7 @@ public class HelloController implements Initializable {
 //
     @FXML
     private void handleSalir(ActionEvent event) {
-//        cambiarEscena(event, "hello-view.fxml");
-Stage stage = (Stage) root.getScene().getWindow();
-        try {
-        Navigator.changeScene(stage, "/org/example/slipclass_demo_1/ListaGastos.fxml");
-    } catch (Exception ex) {
-        Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
-    }
+        Platform.exit();
     }
 //
 //    @FXML
@@ -353,7 +348,7 @@ Stage stage = (Stage) root.getScene().getWindow();
     public void onTablaGrupooClick(ActionEvent actionEvent) {
         Stage stage = (Stage) root.getScene().getWindow();
         try {
-            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/Grupos-view.fxml");
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/Grupos_view.fxml");
         } catch (Exception ex) {
             Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
         }
@@ -362,7 +357,7 @@ Stage stage = (Stage) root.getScene().getWindow();
     public void onVolverrClick(ActionEvent actionEvent) {
         Stage stage = (Stage) root.getScene().getWindow();
         try {
-            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/menuGrupo.fxml");
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/menuPrincipal.fxml");
         } catch (Exception ex) {
             Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
         }

@@ -1,53 +1,58 @@
-/* --- LA IMAGEN RESPONSIVA --- */
+/* --- IMAGEN --- */
 .image-container {
-    /* REEMPLAZA 'tu-imagen.jpg' CON EL NOMBRE DE TU FOTO */
-    -fx-background-image: url("tu-imagen.jpg");
-    -fx-background-size: cover; /* Esto hace que la imagen se adapte sin achatarse */
+    -fx-background-size: cover;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
 }
 
-/* El degradado azulado por encima de la foto */
+/* --- OVERLAY --- */
 .gradient-overlay {
-    -fx-background-color: linear-gradient(to right, rgba(6, 16, 43, 0.3), rgba(6, 16, 43, 0.95));
+    -fx-background-color: linear-gradient(
+            to right,
+            rgba(6, 16, 43, 0.3),
+            rgba(6, 16, 43, 0.95)
+    );
 }
 
-/* --- EL MENÚ LATERAL --- */
+/* --- SIDEBAR --- */
 .sidebar-container {
     -fx-background-color: #06102b;
-    -fx-background-radius: 60 0 0 60; /* Curvatura izquierda */
+    -fx-background-radius: 60 0 0 60;
     -fx-padding: 50 40 40 40;
     -fx-spacing: 15;
-    -fx-border-color: rgba(255, 255, 255, 0.05) none none none;
-    -fx-border-width: 1.5;
+
+    /* FIX JAVAFX: no "none" */
+    -fx-border-color: rgba(255, 255, 255, 0.05);
+    -fx-border-width: 1.5 0 0 0;
 }
 
-/* Textos */
+/* --- TEXTOS --- */
 .welcome-title {
-    -fx-text-fill: #ffffff;
-    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI";
     -fx-font-size: 26px;
     -fx-font-weight: bold;
     -fx-alignment: center;
-    -fx-pref-width: 350; /* Centra el texto en el panel */
+    -fx-pref-width: 350;
 }
 
 .welcome-subtitle {
     -fx-text-fill: #7282a1;
-    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-font-family: "Segoe UI";
     -fx-font-size: 14px;
     -fx-alignment: center;
     -fx-pref-width: 350;
 }
 
-/* Botones Premium */
+/* --- BOTONES --- */
 .glass-button {
     -fx-background-color: rgba(14, 33, 79, 0.4);
     -fx-background-radius: 12;
     -fx-border-radius: 12;
     -fx-border-width: 1.5;
     -fx-border-color: rgba(30, 68, 153, 0.4);
-    -fx-text-fill: #ffffff;
+
+    -fx-text-fill: white;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
     -fx-alignment: center-left;

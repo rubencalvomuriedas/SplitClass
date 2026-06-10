@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Gestiona la navegación entre escenas y ventanas secundarias de la aplicación.
@@ -51,7 +52,7 @@ public class Navigator {
      * @param clase la clase desde la que se resuelve el recurso FXML
      * @throws IOException si el fichero FXML no se encuentra o no puede cargarse
      */
-    public static void arbrirVentanaSecundaria(String fxml, String title, Class clase) throws IOException {
+    public static void arbrirVentanaSecundaria(String fxml, String title, Class<?> clase) throws IOException {
         if(ventanaSecundaria != null && ventanaSecundaria.isShowing()){
             Alertas.showAlert("Sesión no válida", "No se puede volver a abrir, hay una sesión existente", Alert.AlertType.INFORMATION);
             System.out.println("No se puede volver a abrir, hay una sesion existente");
@@ -59,6 +60,12 @@ public class Navigator {
         }
 
         FXMLLoader loader = new FXMLLoader(clase.getResource(fxml));
+        URL resource = clase.getResource(fxml);
+
+        if(resource == null){
+            throw new IOException("No se encontró el FXML: " + fxml);
+        }
+
         Parent root = loader.load();
 
         ventanaSecundaria = new Stage();
