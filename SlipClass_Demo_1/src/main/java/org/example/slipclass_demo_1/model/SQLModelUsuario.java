@@ -125,22 +125,34 @@ public class SQLModelUsuario {
             stat.setString(1, email);
             stat.setString(2, password);
 
-            ResultSet rs = stat.executeQuery();
+            try (ResultSet rs = stat.executeQuery()) {
+                if (rs.next()) {
+                    // 1. Extraemos el ID y todos los campos requeridos por el constructor completo
+                    int id = rs.getInt("id_Usuario");
+                    String codUsuario = rs.getString("codUsuario");
+                    String nombre = rs.getString("Nombre");
+                    String mail = rs.getString("Email");
+                    String pass = rs.getString("Password");
+                    String telefono = rs.getString("Telefono");
+                    int idIdioma = rs.getInt("id_idioma");
+                    String alias = rs.getString("Alias");
+                    String iban = rs.getString("IBAN");
 
-            if (rs.next()) {
-                user = new usuario(
-                        rs.getString("nombre"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("telefono"),
-                        rs.getDate("fecha_nacimiento").toLocalDate(),
-                        rs.getInt("id_idioma")
-                );
+                    LocalDateTime fecha_creacion = rs.getTimestamp("Fecha_Creacion").toLocalDateTime();
+
+                    LocalDate fecha_nac = null;
+                    Date sqlDate = rs.getDate("Fecha_Nacimiento");
+                    if (sqlDate != null) {
+                        fecha_nac = sqlDate.toLocalDate();
+                    }
+
+                    // 2. Usamos el constructor que incluye el 'id' para que no se quede en 0
+                    user = new usuario(id, codUsuario, nombre, mail, pass, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
+                }
             }
 
         } catch (SQLException e) {
-            System.err.println("SQLException: " + e.getMessage());
-
+            System.err.println("SQLException en login: " + e.getMessage());
         }
 
         return user;

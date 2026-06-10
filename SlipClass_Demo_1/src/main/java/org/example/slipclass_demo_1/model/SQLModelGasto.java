@@ -114,4 +114,37 @@ public class SQLModelGasto {
         }
     }
 
+    public static List<gasto> getGastosPorUsuario(int idUsuario) {
+        List<gasto> listaGastos = new LinkedList<>();
+        // Trae los gastos si el usuario pertenece al grupo donde se registró el gasto
+        String sql = "SELECT DISTINCT g.* FROM GASTO g " +
+                "JOIN MIEMBROS_GRUPO mg ON g.Id_Grupo = mg.id_Grupo " +
+                "WHERE mg.id_Usuario = ?";
+
+        try (Connection conn = SQLDataAccess.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    gasto g = new gasto(
+                            rs.getInt("Id_Gasto"),
+                            rs.getString("codGasto"),
+                            rs.getString("Concepto"),
+                            rs.getDouble("Monto_total"),
+                            rs.getDate("Fecha").toLocalDate(),
+                            rs.getInt("Id_Grupo"),
+                            rs.getInt("Id_Categoria"),
+                            rs.getInt("Id_Usuario_Pagador")
+                    );
+                    listaGastos.add(g);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al obtener gastos filtrados por usuario: " + e.getMessage());
+        }
+        return listaGastos;
+    }
+
 }

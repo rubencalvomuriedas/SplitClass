@@ -26,7 +26,6 @@ public class TableGrupos implements Initializable {
     @FXML
     private TableView<grupo> TablaGrupos;
 
-    @FXML private TableColumn<grupo, String> tablaGruposCod;
     @FXML private TableColumn<grupo, String> tablaGrupoTitulo;
     @FXML private TableColumn<grupo, String> tablaGrupoDescrip;
     @FXML private TableColumn<grupo, String> tablaGrupoMon;
@@ -57,13 +56,19 @@ public class TableGrupos implements Initializable {
         tablaGrupoMon.setCellValueFactory(new PropertyValueFactory<>("moneda"));
         tablaGrupoCreacion.setCellValueFactory(new PropertyValueFactory<>("fecha_creacion"));
 
-        TablaGrupos.setItems(FXCollections.observableArrayList(SQLModelGrupo.getGruposPorUsuario(3)));
-
 //        cargarUsuarios();
 //        cargarGrupos();
 
         System.out.println("AAAAAA");
-    
+
+        usuario u = SessionManager.getCurrentUser();
+        System.out.println("Usuario en sesión: " + (u != null ? u.getNombre() : "NULL"));
+        if (u != null) {
+            System.out.println("ID Usuario: " + u.getId_usuario()); // ¿Es 1?
+            List<grupo> lista = SQLModelGrupo.getGruposPorUsuario(u.getId_usuario());
+            System.out.println("Grupos encontrados: " + lista.size());
+            TablaGrupos.setItems(FXCollections.observableArrayList(lista));
+        }
     }
 
 

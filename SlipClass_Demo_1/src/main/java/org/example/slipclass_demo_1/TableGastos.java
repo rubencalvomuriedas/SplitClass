@@ -51,7 +51,17 @@ public class TableGastos implements Initializable {
         colMonto.setCellValueFactory(new PropertyValueFactory<>("monto_total"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
 
-        tablaGastos.setItems(FXCollections.observableArrayList(SQLModelGasto.getAllGastos()));
+        // Recuperamos el usuario logueado de la sesión
+        org.example.slipclass_demo_1.model.usuario u = org.example.slipclass_demo_1.SessionManager.getCurrentUser();
+
+        if (u != null) {
+            // Cargamos únicamente sus gastos relacionados
+            List<gasto> gastosFiltrados = SQLModelGasto.getGastosPorUsuario(u.getId_usuario());
+            tablaGastos.setItems(FXCollections.observableArrayList(gastosFiltrados));
+            System.out.println("Gastos cargados para el usuario actual: " + gastosFiltrados.size());
+        } else {
+            System.out.println("No hay ningún usuario activo en sesión.");
+        }
     }
 
 

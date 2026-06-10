@@ -120,6 +120,8 @@ public class HelloController implements Initializable {
         usuario usuarioLogueado = SQLModelUsuario.login(nombre, pass);
 
         if (usuarioLogueado != null) {
+            SessionManager.setCurrentUser(usuarioLogueado);
+
             System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
             irAPantallaPrincipal(event);
         } else {
@@ -287,7 +289,7 @@ public class HelloController implements Initializable {
     }
 
     private void irAPantallaPrincipal(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml");
+        cambiarPantalla(event, "menuPrincipal.fxml");
     }
 
     private void mostrarAlerta(String titulo, String msj) {
