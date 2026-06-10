@@ -11,15 +11,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.controllerProvisional">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.controllerProvisional">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="500.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="false">
             <image>
-                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+                <Image url="@Imágenes/fondo3.png" />
             </image>
         </ImageView>
 
-        <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" spacing="8.0" style="-fx-padding: 20 30 20 30; -fx-alignment: center-left;" styleClass="sidebar-container">
+        <VBox layoutX="0.0" prefHeight="500.0" prefWidth="400.0" spacing="8.0"
+              style="-fx-padding: 20 30 20 30; -fx-alignment: center-left;"
+              styleClass="form-panel">
             <children>
 
                 <Label style="-fx-padding: 0 0 5 0;" styleClass="welcome-title" text="NUEVO GASTO" />
@@ -27,42 +29,42 @@
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Concepto:" />
-                        <TextField fx:id="txtGastoConcepto" prefHeight="35.0" promptText="Ej. Cena restaurante" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
+                        <TextField fx:id="txtGastoConcepto" prefHeight="35.0" promptText="Ej. Cena restaurante" styleClass="input-field" />
                     </children>
                 </VBox>
 
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Monto total (€):" />
-                        <TextField fx:id="txtGastoMonto" prefHeight="35.0" promptText="0.00" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
+                        <TextField fx:id="txtGastoMonto" prefHeight="35.0" promptText="0.00" styleClass="input-field" />
                     </children>
                 </VBox>
 
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Fecha:" />
-                        <DatePicker fx:id="dpGastoFecha" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Selecciona la fecha" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
+                        <DatePicker fx:id="dpGastoFecha" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Selecciona la fecha" styleClass="input-field" />
                     </children>
                 </VBox>
 
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Categoría:" />
-                        <ComboBox fx:id="comboCategoria" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Seleccione una Categoria" style="-fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
+                        <ComboBox fx:id="comboCategoria" maxWidth="1.7976931348623157E308" prefHeight="35.0" promptText="Seleccione una Categoria" styleClass="input-field" />
                     </children>
                 </VBox>
 
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Grupo:" />
-                        <ComboBox fx:id="comboGrupo" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
+                        <ComboBox fx:id="comboGrupo" maxWidth="1.7976931348623157E308" prefHeight="35.0" styleClass="input-field" />
                     </children>
                 </VBox>
 
                 <VBox spacing="3.0">
                     <children>
                         <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="Usuario:" />
-                        <ComboBox fx:id="comboUsuario" maxWidth="1.7976931348623157E308" prefHeight="35.0" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10;" />
+                        <ComboBox fx:id="comboUsuario" maxWidth="1.7976931348623157E308" prefHeight="35.0" styleClass="input-field" />
                     </children>
                 </VBox>
 

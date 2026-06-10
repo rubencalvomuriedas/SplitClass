@@ -10,45 +10,46 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
-   <children>
-      <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
-         </image>
-      </ImageView>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="false">
+            <image>
+                <Image url="@Imágenes/fondo3.png" />
+            </image>
+        </ImageView>
 
-      <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" spacing="20.0" style="-fx-padding: 30; -fx-alignment: center-left;" styleClass="sidebar-container">
-         <children>
+        <VBox layoutX="0.0" prefHeight="500.0" prefWidth="400.0" spacing="20.0" styleClass="form-panel" style="-fx-padding: 30; -fx-alignment: center-left;">
+            <children>
 
-            <Label styleClass="welcome-title" text="NUEVO GRUPO">
-               <VBox.margin>
-                  <Insets bottom="30.0" />
-               </VBox.margin></Label>
+                <Label styleClass="welcome-title" text="NUEVO GRUPO">
+                    <VBox.margin>
+                        <Insets bottom="30.0" />
+                    </VBox.margin>
+                </Label>
 
-            <VBox spacing="8.0">
-               <children>
-                  <Label styleClass="welcome-subtitle" text="Título" />
-                  <TextField fx:id="txtGastoTitulo" prefHeight="40.0" promptText="Ej. Cena restaurante" style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
-               </children>
-            </VBox>
+                <VBox spacing="8.0">
+                    <children>
+                        <Label styleClass="welcome-subtitle" text="Título" />
+                        <TextField fx:id="txtGastoTitulo" prefHeight="40.0" promptText="Ej. Cena restaurante" styleClass="input-field" />
+                    </children>
+                </VBox>
 
-            <VBox spacing="8.0">
-               <children>
-                  <Label styleClass="welcome-subtitle" text="Descripción" />
-                  <TextField fx:id="txtGastoDescript" prefHeight="40.0" promptText="Ej. Hemos ido a..." style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
-               </children>
-            </VBox>
+                <VBox spacing="8.0">
+                    <children>
+                        <Label styleClass="welcome-subtitle" text="Descripción" />
+                        <TextField fx:id="txtGastoDescript" prefHeight="40.0" promptText="Ej. Hemos ido a..." styleClass="input-field" />
+                    </children>
+                </VBox>
 
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="334.0" spacing="12.0">
-               <children>
-                  <Button fx:id="volver" mnemonicParsing="false" onAction="#onVolverrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Volver" />
-                  <Button fx:id="limpiar" mnemonicParsing="false" onAction="#onCancelarrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Cancelar" />
-                  <Button fx:id="guardar" mnemonicParsing="false" onAction="#onGuardarrrClick" prefHeight="45.0" prefWidth="110.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Guardar" />
-               </children>
-            </HBox>
+                <HBox alignment="CENTER" prefHeight="80.0" prefWidth="334.0" spacing="12.0">
+                    <children>
+                        <Button fx:id="volver" mnemonicParsing="false" onAction="#onVolverrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Volver" />
+                        <Button fx:id="limpiar" mnemonicParsing="false" onAction="#onCancelarrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Cancelar" />
+                        <Button fx:id="guardar" mnemonicParsing="false" onAction="#onGuardarrrClick" prefHeight="45.0" prefWidth="110.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Guardar" />
+                    </children>
+                </HBox>
 
-         </children>
-      </VBox>
-   </children>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

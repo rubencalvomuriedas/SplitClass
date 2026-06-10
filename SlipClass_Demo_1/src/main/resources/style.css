@@ -134,3 +134,16 @@
 .power-button:hover {
     -fx-background-color: rgba(255, 255, 255, 0.1);
 }
+
+.form-panel {
+    -fx-background-color: rgba(15, 23, 42, 0.9);
+
+    /* [top-right, bottom-right, bottom-left, top-left] */
+    /* Aquí definimos que la derecha sea curva (radius 0 a la izq) */
+    -fx-background-radius: 0 40 40 0;
+
+    /* Si quieres un borde más definido: */
+    -fx-border-color: rgba(255, 255, 255, 0.1);
+    -fx-border-width: 0 2 0 0;
+    -fx-border-radius: 0 40 40 0;
+}
