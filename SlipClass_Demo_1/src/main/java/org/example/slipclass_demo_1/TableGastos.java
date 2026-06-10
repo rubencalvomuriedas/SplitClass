@@ -9,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.slipclass_demo_1.model.SQLModelGasto;
@@ -111,21 +109,41 @@ public class TableGastos implements Initializable {
     }
 
     public void onEliminarGastoAction(ActionEvent actionEvent) {
+
         gasto seleccionado = tablaGastos.getSelectionModel().getSelectedItem();
 
         if (seleccionado == null) {
-            System.out.println("Por favor, selecciona un gasto de la tabla para eliminar.");
+            mostrarAlerta("Aviso", "Selecciona un gasto de la tabla primero.");
             return;
         }
 
-        // Ejecutar eliminación en base de datos
-        if (SQLModelGasto.deleteGasto(seleccionado.getId_gasto())) {
-            // Remover directamente de la tabla de la interfaz
-            tablaGastos.getItems().remove(seleccionado);
-            System.out.println("Gasto eliminado exitosamente.");
-        } else {
-            System.out.println("Error al intentar eliminar el gasto de la base de datos.");
-        }
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirmar borrado");
+        confirm.setHeaderText(null);
+        confirm.setContentText(
+                "¿Seguro que quieres borrar el gasto '" +
+                        seleccionado.getConcepto() + "'?"
+        );
+
+        confirm.showAndWait().ifPresent(respuesta -> {
+
+            if (respuesta == ButtonType.OK) {
+
+                if (SQLModelGasto.deleteGasto(seleccionado.getId_gasto())) {
+
+                    mostrarAlerta("Éxito", "Gasto eliminado correctamente.");
+
+                    // Opción 1: eliminar directamente de la tabla
+                    tablaGastos.getItems().remove(seleccionado);
+
+                    // Opción 2 (más recomendable):
+                    // cargarTabla();
+
+                } else {
+                    mostrarAlerta("Error", "No se pudo eliminar el gasto.");
+                }
+            }
+        });
     }
 
     public void onModificarGastoAction(ActionEvent actionEvent) {
@@ -166,5 +184,13 @@ public class TableGastos implements Initializable {
         }
 
 
+    }
+
+    private void mostrarAlerta(String titulo, String msj) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(msj);
+        alert.show();
     }
 }

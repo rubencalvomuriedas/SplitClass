@@ -71,6 +71,18 @@ public class TableGrupos implements Initializable {
         }
     }
 
+    private void cargarTabla() {
+        usuario u = SessionManager.getCurrentUser();
+
+        if (u != null) {
+            List<grupo> lista =
+                    SQLModelGrupo.getGruposPorUsuario(u.getId_usuario());
+
+            TablaGrupos.setItems(
+                    FXCollections.observableArrayList(lista)
+            );
+        }
+    }
 
     public void onModificarGrupoClick(ActionEvent actionEvent) {
         grupo seleccionado = TablaGrupos.getSelectionModel().getSelectedItem();
@@ -235,24 +247,38 @@ public class TableGrupos implements Initializable {
 
     @FXML
     public void onEliminarButtonClick(ActionEvent event) {
-        // 1. Obtener lo que el usuario seleccionó en la tabla
+
         grupo seleccionado = TablaGrupos.getSelectionModel().getSelectedItem();
 
         if (seleccionado == null) {
-            mostrarAlerta("Error", "Por favor, selecciona un grupo de la tabla primero.");
+            mostrarAlerta("Aviso", "Selecciona un grupo de la tabla primero.");
             return;
         }
 
-        // 2. Obtener el usuario actual
-        int idUsuario = SessionManager.getCurrentUser().getId_usuario();
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Confirmar borrado");
+        confirm.setHeaderText(null);
+        confirm.setContentText("¿Seguro que quieres borrar el grupo '" +
+                seleccionado.getTitulo() + "'?");
 
-        // 3. Llamar al modelo para borrar (usando el ID del grupo y del usuario por seguridad)
-        if (SQLModelGrupo.eliminarGrupo(seleccionado.getId_grupo(), idUsuario)) {
-            // 4. Si se borró en BD, lo quitamos de la lista que muestra la tabla
-            TablaGrupos.getItems().remove(seleccionado);
-            mostrarAlerta("Éxito", "Grupo eliminado correctamente.");
-        } else {
-            mostrarAlerta("Error", "No se pudo eliminar el grupo.");
-        }
+        confirm.showAndWait().ifPresent(respuesta -> {
+
+            if (respuesta == ButtonType.OK) {
+
+                int idUsuario = SessionManager.getCurrentUser().getId_usuario();
+
+                if (SQLModelGrupo.eliminarGrupo(
+                        seleccionado.getId_grupo(),
+                        idUsuario)) {
+
+                    mostrarAlerta("Éxito", "Grupo eliminado correctamente.");
+
+                    cargarTabla();
+
+                } else {
+                    mostrarAlerta("Error", "No se pudo eliminar el grupo.");
+                }
+            }
+        });
     }
 }
