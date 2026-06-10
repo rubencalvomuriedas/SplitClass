@@ -23,19 +23,7 @@
             <Button mnemonicParsing="false" onAction="#handleGrupos" prefHeight="88.0" prefWidth="346.0" styleClass="glass-button" text="Grupos" />
             <Button mnemonicParsing="false" onAction="#handleGastos" prefHeight="118.0" prefWidth="343.0" styleClass="glass-button" text="Gastos" />
             <Button mnemonicParsing="false" onAction="#salir" prefHeight="94.0" prefWidth="329.0" styleClass="glass-button" text="Salir" />
-      
-            <Button mnemonicParsing="false" onAction="#handlePerfil" prefHeight="90.0" prefWidth="91.0" styleClass="glass-button">
-               <graphic>
-                  <ImageView fitHeight="57.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Imágenes/descarga.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <VBox.margin>
-                  <Insets left="220.0" />
-               </VBox.margin>
-            </Button>
+
          </children>
       </VBox>
    </children>
