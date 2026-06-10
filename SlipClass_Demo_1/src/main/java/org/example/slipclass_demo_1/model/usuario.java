@@ -6,28 +6,58 @@ import java.time.LocalDateTime;
 public class usuario {
 
     private int id_usuario;
+    private String codUsuario;
     private String nombre;
     private String email;
     private String password;
     private String telefono;
-    private String idioma;
+    private int idIdioma; // seleccionadoIdioma
     private String alias;
     private String iban;
     private LocalDateTime fecha_creacion;
     private LocalDate fecha_nacimiento;
+    private boolean verificacionActividad;
 
-    public usuario(String nombre, String email, String password, String telefono, String idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
+    public usuario(int id_usuario, String codUsuario, String nombre, String email, String password, String telefono, int idioma, String alias, String iban, LocalDateTime fecha_creacion, LocalDate fecha_nacimiento) {
+        this.id_usuario = id_usuario;
+        this.codUsuario = codUsuario;
         this.nombre = nombre;
         this.email = email;
         this.password = password;
         this.telefono = telefono;
-        this.idioma = idioma;
+        this.idIdioma = idioma;
         this.alias = alias;
         this.iban = iban;
         this.fecha_creacion = fecha_creacion;
         this.fecha_nacimiento = fecha_nacimiento;
+        this.verificacionActividad = false;
+    }
+    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento, int idIdioma) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.idIdioma = idIdioma;
+        this.verificacionActividad = true;
+    }
+    public usuario(String nombre, String email, String password, String telefono, LocalDate fecha_nacimiento) {
+        this.nombre = nombre;
+        this.email = email;
+        this.password = password;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.idIdioma = idIdioma;
+        this.verificacionActividad = true;
     }
 
+    public String getCodUsuario() {
+        return codUsuario;
+    }
+
+    public boolean isVerificacionActividad() {
+        return verificacionActividad;
+    }
 
     public int getId_usuario() {
         return id_usuario;
@@ -49,8 +79,8 @@ public class usuario {
         return telefono;
     }
 
-    public String getIdioma() {
-        return idioma;
+    public int getIdIdioma() {
+        return idIdioma;
     }
 
     public String getAlias() {
@@ -85,20 +115,52 @@ public class usuario {
         this.alias = alias;
     }
 
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setFecha_creacion(LocalDateTime fecha_creacion) {
+        this.fecha_creacion = fecha_creacion;
+    }
+
+    public void setFecha_nacimiento(LocalDate fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public void setIdIdioma(int idIdioma) {
+        this.idIdioma = idIdioma;
+    }
 
     @Override
     public String toString() {
-        return "usuario{" +
-                "id_usuario=" + id_usuario +
-                ", nombre='" + nombre + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", idioma='" + idioma + '\'' +
-                ", alias='" + alias + '\'' +
-                ", iban='" + iban + '\'' +
-                ", fecha_creacion=" + fecha_creacion +
-                ", fecha_nacimiento=" + fecha_nacimiento +
-                '}';
+        return """
+            ╔══════════════════════════════╗
+                    DATOS DEL USUARIO
+            ╠══════════════════════════════╣
+            ║ ID                : %d
+            ║ Nombre            : %s
+            ║ Email             : %s
+            ║ Password          : %s
+            ║ Teléfono          : %s
+            ║ Idioma            : %s
+            ║ Alias             : %s
+            ║ IBAN              : %s
+            ║ Fecha creación    : %s
+            ║ Fecha nacimiento  : %s
+            ╚══════════════════════════════╝
+            """.formatted(
+                id_usuario,
+                nombre,
+                email,
+                password != null ? "********" : "Vacío",
+                telefono,
+                idIdioma,
+                alias,
+                iban,
+                fecha_creacion,
+                fecha_nacimiento != null ? fecha_nacimiento : "Vacío"
+        );
     }
+
+
 }

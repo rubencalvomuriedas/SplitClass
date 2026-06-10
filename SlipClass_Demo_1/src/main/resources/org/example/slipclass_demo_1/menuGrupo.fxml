@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
+
+        <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" spacing="20.0" style="-fx-padding: 40; -fx-alignment: center;" styleClass="sidebar-container">
+            <children>
+
+                <Label style="-fx-padding: 0 0 10 0;" styleClass="welcome-title" text="Grupos">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin></Label>
+            <Label prefHeight="22.0" prefWidth="212.0" text="Selecciona la opcion deseada">
+               <VBox.margin>
+                  <Insets bottom="45.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRegistroGrupoClick" prefHeight="60.0" styleClass="glass-button" text="Registrar Grupo" />
+
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onTablaGrupooClick" prefHeight="60.0" styleClass="glass-button" text="Ver Grupos" />
+
+                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolverrClick" prefHeight="50.0" styleClass="glass-button" text="Volver" />
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

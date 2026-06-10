@@ -1,50 +1,63 @@
-.my-background {
-    -fx-background-color: #7E8FB3;
+/* --- LA IMAGEN RESPONSIVA --- */
+.image-container {
+    /* REEMPLAZA 'tu-imagen.jpg' CON EL NOMBRE DE TU FOTO */
+    -fx-background-image: url("tu-imagen.jpg");
+    -fx-background-size: cover; /* Esto hace que la imagen se adapte sin achatarse */
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
 }
-.my-button {
-    -fx-background-color: #4545b1;  /* Color de fondo del botón */
-    -fx-text-fill: white; /* Color del texto */
-    -fx-min-width: 100;
-    -fx-max-width: 100;
-    -fx-max-height: 50;
-    -fx-min-height: 50;
-    -fx-background-radius: 10;
-}
-.my-button:hover {
-    -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
-}
-.my-button-secondary {
-    -fx-background-color: #4545b1;  /* Color de fondo del botón */
-    -fx-text-fill: white; /* Color del texto */
-    -fx-min-width: 80;
-    -fx-max-width: 80;
-    -fx-max-height: 40;
-    -fx-min-height: 40;
-    -fx-background-radius: 10;
-}
-.my-button-secondary:hover {
-    -fx-background-color: #196c77; /* Color de fondo al pasar el mouse */
-}
-.my-error-text{
-    -fx-border-color: red;
-}
-.my-validated-text{
-    -fx-border-color: green;
-}
-.mi-title-view{
-    -fx-text-fill: white;
-    -fx-font-size: 40;
 
+/* El degradado azulado por encima de la foto */
+.gradient-overlay {
+    -fx-background-color: linear-gradient(to right, rgba(6, 16, 43, 0.3), rgba(6, 16, 43, 0.95));
 }
-.list-view .list-cell:even {
-    -fx-background-color: #999b9c; /* Color alterno */
-    -fx-text-fill: black;
+
+/* --- EL MENÚ LATERAL --- */
+.sidebar-container {
+    -fx-background-color: #06102b;
+    -fx-background-radius: 60 0 0 60; /* Curvatura izquierda */
+    -fx-padding: 50 40 40 40;
+    -fx-spacing: 15;
+    -fx-border-color: rgba(255, 255, 255, 0.05) none none none;
+    -fx-border-width: 1.5;
 }
-.list-view .list-cell:odd {
-    -fx-background-color: white;
-    -fx-text-fill: black;
+
+/* Textos */
+.welcome-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-pref-width: 350; /* Centra el texto en el panel */
 }
-.list-view .list-cell:filled:selected {
-    -fx-background-color: #196c77; /* Color de selección */
-    -fx-text-fill: white;
+
+.welcome-subtitle {
+    -fx-text-fill: #7282a1;
+    -fx-font-family: "Segoe UI", system-ui, sans-serif;
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+    -fx-pref-width: 350;
+}
+
+/* Botones Premium */
+.glass-button {
+    -fx-background-color: rgba(14, 33, 79, 0.4);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-width: 1.5;
+    -fx-border-color: rgba(30, 68, 153, 0.4);
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 25;
+    -fx-pref-height: 55;
+    -fx-cursor: hand;
+}
+
+.glass-button:hover {
+    -fx-background-color: rgba(20, 48, 115, 0.7);
+    -fx-border-color: rgba(0, 224, 255, 0.6);
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 224, 255, 0.2), 12, 0, 0, 0);
 }

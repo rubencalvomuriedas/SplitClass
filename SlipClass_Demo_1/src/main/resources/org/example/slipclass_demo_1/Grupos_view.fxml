@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="listado_grupos_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGrupos">
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
+
+        <VBox layoutX="386.0" prefHeight="500.0" prefWidth="416.0" spacing="15.0" style="-fx-padding: 25 18 25 18; -fx-alignment: top-center;" styleClass="sidebar-container">
+            <children>
+
+                <Label style="-fx-padding: 0 0 5 0;" styleClass="welcome-title" text="Grupos" />
+
+                <TableView fx:id="TablaGrupos" maxWidth="1.7976931348623157E308" prefHeight="310.0" style="-fx-background-color: #000000; -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
+                    <columns>
+                        <TableColumn fx:id="tablaGrupoTitulo" prefWidth="89.0" text="TÍTULO" />
+                        <TableColumn fx:id="tablaGrupoDescrip" prefWidth="90.0" text="DESC." />
+                        <TableColumn fx:id="tablaGrupoMon" minWidth="0.0" prefWidth="61.0" text="MONEDA" />
+                        <TableColumn fx:id="tablaGrupoCreacion" prefWidth="138.0" text="CREACIÓN" />
+                    </columns>
+                </TableView>
+
+                <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="8.0" style="-fx-padding: 5 0 0 0;">
+                    <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGrupoClick" prefHeight="42.0" styleClass="glass-button" text="Editar" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarButtonClick" prefHeight="42.0" styleClass="glass-button" text="Eliminar" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#irAMenuGrupo" prefHeight="42.0" styleClass="glass-button" text="Volver" HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
