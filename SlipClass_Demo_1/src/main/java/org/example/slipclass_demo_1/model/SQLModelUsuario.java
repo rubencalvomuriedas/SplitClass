@@ -158,5 +158,46 @@ public class SQLModelUsuario {
         return user;
     }
 
+    public static List<usuario> getUsuariosPorGrupo(int idGrupo) {
+        List<usuario> usuarios = new LinkedList<>();
+        String sql = "SELECT u.* FROM USUARIO u " +
+                "INNER JOIN MIEMBROS_GRUPO mg ON u.id_Usuario = mg.id_Usuario " +
+                "WHERE mg.id_Grupo = ? AND u.verificacionActividad = true";
+
+        try (Connection con = SQLDataAccess.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idGrupo);
+
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    int id = resultSet.getInt("id_Usuario");
+                    String codUsuario = resultSet.getString("codUsuario");
+                    String nombre = resultSet.getString("Nombre");
+                    String email = resultSet.getString("Email");
+                    String password = resultSet.getString("Password");
+                    String telefono = resultSet.getString("Telefono");
+                    int idIdioma = resultSet.getInt("id_idioma");
+                    String alias = resultSet.getString("Alias");
+                    String iban = resultSet.getString("IBAN");
+
+                    java.time.LocalDateTime fecha_creacion = resultSet.getTimestamp("Fecha_Creacion").toLocalDateTime();
+
+                    java.time.LocalDate fecha_nac = null;
+                    Date sqlDate = resultSet.getDate("Fecha_Nacimiento");
+                    if (sqlDate != null) {
+                        fecha_nac = sqlDate.toLocalDate();
+                    }
+
+                    usuario us = new usuario(id, codUsuario, nombre, email, password, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
+                    usuarios.add(us);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error en getUsuariosPorGrupo: " + e.getMessage());
+        }
+        return usuarios;
+    }
+
 
 }

@@ -117,9 +117,10 @@ public class SQLModelGrupo {
 
     public static List<grupo> getGruposPorUsuario(int idUsuario) {
         List<grupo> listaGrupos = new LinkedList<>();
+        // Añadimos g.Id_Estado != 4 para que no cargue los grupos borrados lógicamente
         String sql = "SELECT g.* FROM GRUPO g " +
                 "JOIN MIEMBROS_GRUPO mg ON g.Id_Grupo = mg.id_Grupo " +
-                "WHERE mg.id_Usuario = ?";
+                "WHERE mg.id_Usuario = ? AND g.Id_Estado != 4";
 
         try (Connection con = SQLDataAccess.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
@@ -164,14 +165,18 @@ public class SQLModelGrupo {
     }
 
     public static boolean eliminarGrupo(int idGrupo, int idUsuario) {
-        String sql = "DELETE FROM GRUPO WHERE Id_Grupo = ? AND Id_Grupo IN (SELECT id_Grupo FROM MIEMBROS_GRUPO WHERE id_Usuario = ?)";
+        String sql = "UPDATE GRUPO SET Id_Estado = 4, fecha_eliminacion = ? WHERE Id_Grupo = ? " +
+                "AND Id_Grupo IN (SELECT id_Grupo FROM MIEMBROS_GRUPO WHERE id_Usuario = ?)";
         try (Connection conn = SQLDataAccess.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, idGrupo);
-            ps.setInt(2, idUsuario);
+
+            ps.setDate(1, java.sql.Date.valueOf(java.time.LocalDate.now()));
+            ps.setInt(2, idGrupo);
+            ps.setInt(3, idUsuario);
+
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error al eliminar grupo: " + e.getMessage());
+            System.err.println("Error al eliminar (lógico) grupo: " + e.getMessage());
             return false;
         }
     }

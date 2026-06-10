@@ -82,14 +82,15 @@ public class SQLModelGasto {
     }
 
     public static boolean deleteGasto(int idGasto) {
-        String sql = "DELETE FROM GASTO WHERE Id_Gasto = ?";
+        // Cambiado de DELETE a UPDATE sobre la columna 'activo'
+        String sql = "UPDATE GASTO SET activo = false WHERE Id_Gasto = ?";
         try (Connection con = SQLDataAccess.getConnection();
              PreparedStatement stat = con.prepareStatement(sql)) {
 
             stat.setInt(1, idGasto);
             return stat.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error al eliminar gasto: " + e.getMessage());
+            System.err.println("Error al desactivar el gasto: " + e.getMessage());
             return false;
         }
     }
@@ -116,10 +117,10 @@ public class SQLModelGasto {
 
     public static List<gasto> getGastosPorUsuario(int idUsuario) {
         List<gasto> listaGastos = new LinkedList<>();
-        // Trae los gastos si el usuario pertenece al grupo donde se registró el gasto
+        // Añadimos g.activo = true al final de la consulta
         String sql = "SELECT DISTINCT g.* FROM GASTO g " +
                 "JOIN MIEMBROS_GRUPO mg ON g.Id_Grupo = mg.id_Grupo " +
-                "WHERE mg.id_Usuario = ?";
+                "WHERE mg.id_Usuario = ? AND g.activo = true";
 
         try (Connection conn = SQLDataAccess.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -146,5 +147,7 @@ public class SQLModelGasto {
         }
         return listaGastos;
     }
+
+
 
 }

@@ -38,28 +38,54 @@ public class controllerProvisional implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-
             cargarCategorias();
-            cargarUsuarios();
-            cargarGrupos();
+            cargarGrupos(); // Primero cargamos los grupos disponibles
+
+            // Agregamos el Listener al ComboBox de Grupos
+            comboGrupo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, nuevoGrupo) -> {
+                if (nuevoGrupo != null) {
+                    // 1. Buscamos los usuarios que pertenecen al grupo seleccionado
+                    List<usuario> miembros = SQLModelUsuario.getUsuariosPorGrupo(nuevoGrupo.getId_grupo());
+                    comboUsuario.setItems(FXCollections.observableArrayList(miembros));
+
+                    // 2. Intentamos preseleccionar por defecto al usuario logueado si es miembro
+                    usuario usuarioLogueado = SessionManager.getCurrentUser();
+                    if (usuarioLogueado != null) {
+                        for (usuario usr : miembros) {
+                            if (usr.getId_usuario() == usuarioLogueado.getId_usuario()) {
+                                comboUsuario.setValue(usr);
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    // Si deseleccionan el grupo, limpiamos el combo de usuarios
+                    comboUsuario.setItems(FXCollections.observableArrayList());
+                }
+            });
 
         } catch (Exception e) {
             System.err.println("¡ERROR crítico en el inicio del controlador!");
             e.printStackTrace();
         }
 
-        System.out.println("CONTROLLER PROVISIONAL");
-
-        // Al final de tu método initialize(), puedes preseleccionar al usuario actual en el combo:
-        usuario usuarioLogueado = SessionManager.getCurrentUser();
-        if (usuarioLogueado != null && comboUsuario.getItems() != null) {
-            for (usuario usr : comboUsuario.getItems()) {
-                if (usr.getId_usuario() == usuarioLogueado.getId_usuario()) {
-                    comboUsuario.setValue(usr);
-                    break;
-                }
+        // Configuración estética de las celdas del comboUsuario (Mantenemos el formato de nombres)
+        comboUsuario.setCellFactory(lv -> new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
             }
-        }
+        });
+        comboUsuario.setButtonCell(new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+
+        System.out.println("CONTROLLER PROVISIONAL CONFIGURADO");
     }
 
     private void cargarCategorias() {
