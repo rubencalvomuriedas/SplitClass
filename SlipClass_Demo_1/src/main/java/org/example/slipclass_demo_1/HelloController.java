@@ -341,7 +341,7 @@ public class HelloController implements Initializable {
         alerta.showAndWait();
     }
 
-    
+
     private grupo grupoEnEdicion = null;
 
 
@@ -356,5 +356,31 @@ public class HelloController implements Initializable {
         if (txtGastoDescript != null) {
             txtGastoDescript.setText(g.getDescripcion());
         }
+    }
+
+    @FXML
+    private void cerrarSesion(ActionEvent event) {
+        try {
+            // 1. Cargamos el archivo FXML de la vista inicial
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Parent root = loader.load();
+
+            // 2. Obtenemos el Stage actual (la ventana que se está mostrando)
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // 3. Creamos una nueva escena con el contenido cargado
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.err.println("Error al cerrar sesión: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void apagarapp(ActionEvent Event) {
+        Platform.exit();
     }
 }

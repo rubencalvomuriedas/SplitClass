@@ -9,22 +9,35 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
-   <children>
-      <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
-         </image>
-      </ImageView>
+    <children>
+        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
+            </image>
+        </ImageView>
 
-      <VBox layoutX="408.0" prefHeight="500.0" prefWidth="394.0" styleClass="sidebar-container">
-         <children>
-            <Label styleClass="welcome-title" text="Bienvenido" />
-            <Label styleClass="welcome-subtitle" text="¿Que desea hacer hoy?" />
-            <Button mnemonicParsing="false" onAction="#handleGrupos" prefHeight="88.0" prefWidth="346.0" styleClass="glass-button" text="Grupos" />
-            <Button mnemonicParsing="false" onAction="#handleGastos" prefHeight="118.0" prefWidth="343.0" styleClass="glass-button" text="Gastos" />
-            <Button mnemonicParsing="false" onAction="#salir" prefHeight="94.0" prefWidth="329.0" styleClass="glass-button" text="Salir" />
+        <VBox layoutX="406.0" prefHeight="500.0" prefWidth="394.0" styleClass="sidebar-container">
+            <children>
+                <Label styleClass="welcome-title" text="Bienvenido" />
+                <Label styleClass="welcome-subtitle" text="¿Que desea hacer hoy?" />
 
-         </children>
-      </VBox>
-   </children>
+                <Button mnemonicParsing="false" onAction="#handleGrupos" prefHeight="88.0" prefWidth="346.0" styleClass="glass-button" text="Grupos" />
+                <Button mnemonicParsing="false" onAction="#handleGastos" prefHeight="118.0" prefWidth="343.0" styleClass="glass-button" text="Gastos" />
+                <Button mnemonicParsing="false" onAction="#salir" prefHeight="94.0" prefWidth="329.0" styleClass="glass-button" text="Salir" />
+      
+              <Button mnemonicParsing="false" onAction="#cerrarSesion" styleClass="home-button">
+                  <graphic>
+                      <ImageView fitHeight="33.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                          <image>
+                              <Image url="@Imágenes/home.png" />
+                          </image>
+                      </ImageView>
+                  </graphic>
+               <VBox.margin>
+                  <Insets left="230.0" />
+               </VBox.margin>
+              </Button>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
