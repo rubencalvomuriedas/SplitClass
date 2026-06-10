@@ -13,6 +13,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.slipclass_demo_1.model.*;
+import org.example.slipclass_demo_1.model.utils.Alertas;
+import org.example.slipclass_demo_1.model.utils.Navigator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +23,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class controllerProvisional implements Initializable {
+
+    public Node root;
 
     private gasto newGasto;
     private boolean isNewGasto = true;
@@ -221,13 +225,11 @@ public class controllerProvisional implements Initializable {
 
 
     public void onVolverRegisterAction(ActionEvent event) {
-
+        Stage stage = (Stage) root.getScene().getWindow();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("ListaGastos.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/ListaGastos.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
         }
 
     }

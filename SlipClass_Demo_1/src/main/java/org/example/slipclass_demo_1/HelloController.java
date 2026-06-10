@@ -10,8 +10,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.example.slipclass_demo_1.model.*;
+import org.example.slipclass_demo_1.model.utils.Alertas;
+import org.example.slipclass_demo_1.model.utils.Navigator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
 
+    public Node root;
     // =========================================================================
     // 1. VARIABLES DE ESTADO VARIABLES GLOBALES
     // =========================================================================
@@ -81,15 +85,15 @@ public class HelloController implements Initializable {
     // -------------------------------------------------------------------------
     // --- PANTALLA: BIENVENIDA / INICIO (hello-view.fxml)
     // -------------------------------------------------------------------------
-    @FXML
-    public void onnIrALoginClick(ActionEvent event) {
-        cambiarPantalla(event, "login.fxml");
-    }
-
-    @FXML
-    public void onRegistrarseClick(ActionEvent event) {
-        cambiarPantalla(event, "registroUsuario.fxml");
-    }
+//    @FXML
+//    public void onnIrALoginClick(ActionEvent event) {
+//        cambiarPantalla(event, "login.fxml");
+//    }
+//
+//    @FXML
+//    public void onRegistrarseClick(ActionEvent event) {
+//        cambiarPantalla(event, "registroUsuario.fxml");
+//    }
 
     @FXML
     public void clickSobreNosotros(ActionEvent actionEvent) {
@@ -165,11 +169,11 @@ public class HelloController implements Initializable {
         }
         System.out.println("Usuario registrado.");
     }
-
-    @FXML
-    private void onVolver(ActionEvent event) {
-        cambiarPantalla(event, "hello-view.fxml");
-    }
+//
+//    @FXML
+//    private void onVolver(ActionEvent event) {
+//        cambiarPantalla(event, "hello-view.fxml");
+//    }
 
     private void limpiarCampos() {
         txtUsuario.clear();
@@ -181,61 +185,85 @@ public class HelloController implements Initializable {
     }
 
 
-    // -------------------------------------------------------------------------
-    // --- PANTALLAS: MENÚ USUARIO / MENÚ PRINCIPAL (menuUsuario.fxml / menuPrincipal.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    public void onVolverClick(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml");
-    }
-
-    @FXML
-    public void onTablaGrupooClick(ActionEvent event) {
-        cambiarPantalla(event, "Grupos_view.fxml");
-    }
-
+//    // -------------------------------------------------------------------------
+//    // --- PANTALLAS: MENÚ USUARIO / MENÚ PRINCIPAL (menuUsuario.fxml / menuPrincipal.fxml)
+//    // -------------------------------------------------------------------------
+//    @FXML
+//    public void onVolverClick(ActionEvent event) {
+//        cambiarPantalla(event, "menuUsuario.fxml");
+//    }
+//
+//    @FXML
+//    public void onTablaGrupooClick(ActionEvent event) {
+//        cambiarPantalla(event, "Grupos_view.fxml");
+//    }
+//
     @FXML
     private void handleGrupos(ActionEvent event) {
-        cambiarEscena(event, "menuGrupo.fxml");
+//        cambiarEscena(event, "menuGrupo.fxml");
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/menuGrupo.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
     }
-
+//
     @FXML
     private void handleGastos(ActionEvent event) {
-        cambiarEscena(event, "ListaGastos.fxml");
+//        cambiarEscena(event, "ListaGastos.fxml");
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/ListaGastos.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
     }
-
-    @FXML
-    private void handlePerfil(ActionEvent event) {
-        cambiarEscena(event, "Perfil.fxml");
-    }
-
+//
+//    @FXML
+//    private void handlePerfil(ActionEvent event) {
+////        cambiarEscena(event, "Perfil.fxml");
+//        Stage stage = (Stage) root.getScene().getWindow();
+//        try {
+//            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/ListaGastos.fxml");
+//        } catch (Exception ex) {
+//            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+//        }
+//    }
+//
     @FXML
     private void handleSalir(ActionEvent event) {
-        cambiarEscena(event, "hello-view.fxml");
+//        cambiarEscena(event, "hello-view.fxml");
+Stage stage = (Stage) root.getScene().getWindow();
+        try {
+        Navigator.changeScene(stage, "/org/example/slipclass_demo_1/ListaGastos.fxml");
+    } catch (Exception ex) {
+        Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
     }
-
-    @FXML
-    private void onVolverrClick(ActionEvent event) { // ¡Ojo! 2 'r's - Carga menú principal
-        cambiarEscena(event, "menuPrincipal.fxml");
     }
-
-
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: MENÚ GRUPOS (menuGrupo.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    public void onRegistroGrupoClick(ActionEvent event) {
-        cambiarPantalla(event, "registroGrupo.fxml");
-    }
-
-
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: REGISTRO GRUPO / DETALLE (registroGrupo.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    private void onVolverrrClick(ActionEvent event) { // ¡Ojo! 3 'r's - Vuelve al menú de grupos
-        cambiarEscena(event, "menuGrupo.fxml");
-    }
+//
+//    @FXML
+//    private void onVolverrClick(ActionEvent event) { // ¡Ojo! 2 'r's - Carga menú principal
+//        cambiarEscena(event, "menuPrincipal.fxml");
+//    }
+//
+//
+//    // -------------------------------------------------------------------------
+//    // --- PANTALLA: MENÚ GRUPOS (menuGrupo.fxml)
+//    // -------------------------------------------------------------------------
+//    @FXML
+//    public void onRegistroGrupoClick(ActionEvent event) {
+//        cambiarPantalla(event, "registroGrupo.fxml");
+//    }
+//
+//
+//    // -------------------------------------------------------------------------
+//    // --- PANTALLA: REGISTRO GRUPO / DETALLE (registroGrupo.fxml)
+//    // -------------------------------------------------------------------------
+//    @FXML
+//    private void onVolverrrClick(ActionEvent event) { // ¡Ojo! 3 'r's - Vuelve al menú de grupos
+//        cambiarEscena(event, "menuGrupo.fxml");
+//    }
 
     @FXML
     private void onCancelarrrClick(ActionEvent event) {
@@ -262,34 +290,39 @@ public class HelloController implements Initializable {
     // =========================================================================
     // 5. NAVEGACIÓN Y UTILIDADES GLOBALES
     // =========================================================================
-    private void cambiarPantalla(ActionEvent event, String archivoFXML) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(archivoFXML));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
-            mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
-        }
-    }
-
-    private void cambiarEscena(ActionEvent event, String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.err.println("Error al cargar la pantalla: " + fxmlFile);
-            e.printStackTrace();
-        }
-    }
+//    private void cambiarPantalla(ActionEvent event, String archivoFXML) {
+//        try {
+//            Parent root = FXMLLoader.load(getClass().getResource(archivoFXML));
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            stage.setScene(new Scene(root));
+//            stage.show();
+//        } catch (IOException e) {
+//            System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
+//            mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
+//        }
+//    }
+//
+//    private void cambiarEscena(ActionEvent event, String fxmlFile) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+//            Parent root = loader.load();
+//            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            System.err.println("Error al cargar la pantalla: " + fxmlFile);
+//            e.printStackTrace();
+//        }
+//    }
 
     private void irAPantallaPrincipal(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml");
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/menuUsuarios.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
     }
 
     private void mostrarAlerta(String titulo, String msj) {
@@ -306,5 +339,50 @@ public class HelloController implements Initializable {
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
+    }
+    @FXML
+    public void onRegistroGrupoClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/registroGrupo.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    public void onTablaGrupooClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/Grupos-view.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    public void onVolverrClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/menuGrupo.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    public void onRegistrarseClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/registro.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
+    }
+    @FXML
+    public void onnIrALoginClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        try {
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/login.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
+        }
     }
 }

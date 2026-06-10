@@ -5,17 +5,26 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import org.example.slipclass_demo_1.model.*;
+import org.example.slipclass_demo_1.model.utils.Alertas;
+import org.example.slipclass_demo_1.model.utils.Navigator;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class TableGrupos implements Initializable {
-
+    
+    public Node root;
+    public TextField txtGastoMonto;
+    public TextField txtGastoConcepto;
+    public Button guardar;
 
     @FXML
     private TableView<grupo> TablaGrupos;
@@ -35,8 +44,7 @@ public class TableGrupos implements Initializable {
     @FXML private TableColumn<grupo, String> tablaGrupoMon1;
     @FXML private TableColumn<grupo, LocalDate> tablaGrupoCreacion1;
 
-
-    @FXML private TextField txtGrupoTItulo, txtGrupoDescrip;
+    
     @FXML private ComboBox<String> comboMoneda;
 
     @FXML private ComboBox<usuario> comboUsuarioSelect;
@@ -67,59 +75,98 @@ public class TableGrupos implements Initializable {
             return;
         }
 
+//        try {
+//            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registroGrupo.fxml"));
+//            javafx.scene.Parent root = loader.load();
+//
+//            controllerProvisional formularioController = loader. getController();
+//
+//            //formularioController.cargarGrupoParaEditar(seleccionado);
+//
+//            javafx.scene.Scene scene = new javafx.scene.Scene(root);
+//            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+//            stage.setScene(scene);
+//            stage.show();
+//
+//        } catch (Exception e) {
+//            System.err.println("Error al cambiar a la pantalla de edición:");
+//            e.printStackTrace();
+//        }
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registroGrupo.fxml"));
-            javafx.scene.Parent root = loader.load();
 
-            controllerProvisional formularioController = loader. getController();
+            String fxml = "registroGrupo.fxml";
 
-            //formularioController.cargarGrupoParaEditar(seleccionado);
+            String titulo = "Registrar grupo";
 
-            javafx.scene.Scene scene = new javafx.scene.Scene(root);
-            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
+            Navigator.arbrirVentanaSecundaria(fxml, titulo, getClass());
 
-        } catch (Exception e) {
-            System.err.println("Error al cambiar a la pantalla de edición:");
-            e.printStackTrace();
+
+        } catch (IOException e) {
+            Alertas.showAlert("No se puede crear grupos", String.valueOf(e), Alert.AlertType.ERROR);
         }
     }
 
     public void onEliminarButtonClick(ActionEvent event) {
     }
 
-    public void irAMenuGrupo(ActionEvent event) {
+    @FXML
+    private void abrirVentanaCrearGrupo() {
+        try {
+
+            String fxml = "usuarios-formIntegrantes.fxml";
+
+            String titulo = "Gestionar usuarios";
+
+            Navigator.arbrirVentanaSecundaria(fxml, titulo, getClass());
+
+
+        } catch (IOException e) {
+            Alertas.showAlert("No se puede crear grupos", String.valueOf(e), Alert.AlertType.ERROR);
+        }
     }
 
     public void onVolverRegisterAction(ActionEvent event) {
     }
 
-    public void onCancelarGrupo(ActionEvent event) {
+    @FXML
+    private void onCancelarrrClick(ActionEvent event) {
+        txtGastoConcepto.clear();
+        txtGastoMonto.clear();
+        
+        Alertas.showAlert("Cancelado", "Registro de Grupo cancelado.", Alert.AlertType.INFORMATION);
     }
 
-    public void onConfirmarGrupo(ActionEvent event) {
-        if (txtGrupoTItulo.getText().isEmpty()) {
-            mostrarAlerta("Error", "El título es obligatorio.");
-            return;
-        }
+    @FXML
+    private void onVolverrrClick(ActionEvent event) { // ¡Ojo! 3 'r's - Vuelve al menú de grupos
+        try {
 
+            String fxml = "menuGrupo.fxml";
+
+            String titulo = "Menu grupos";
+
+            Navigator.arbrirVentanaSecundaria(fxml, titulo, getClass());
+
+
+        } catch (IOException e) {
+            Alertas.showAlert("No se puede crear grupos", String.valueOf(e), Alert.AlertType.ERROR);
+        }
+    }
+
+    public void onGuardarGrupo(ActionEvent event) {
         String moneda = "EUR";
 
         grupo nuevoGrupo = new grupo(
                 "",
-                txtGrupoTItulo.getText(),
-                txtGrupoDescrip.getText(),
+                txtGastoConcepto.getText(),
+                txtGastoMonto.getText(),
                 moneda,
-                null, null, 0
+                LocalDate.now(), null, 0
         );
 
-        int idUsuarioLogueado = 3;
-
-        if (SQLModelGrupo.createGrupoConCreador(nuevoGrupo, idUsuarioLogueado)) {
+        if (SQLModelGrupo.insertarGrupo(nuevoGrupo)) {
             mostrarAlerta("Éxito", "Grupo creado y vinculado correctamente.");
-            txtGrupoTItulo.clear();
-            txtGrupoDescrip.clear();
+            txtGastoConcepto.clear();
+            txtGastoMonto.clear();
         } else {
             mostrarAlerta("Error", "No se pudo crear el grupo.");
         }
@@ -210,6 +257,8 @@ public class TableGrupos implements Initializable {
     public void onCargarGruposFiltradoClick(ActionEvent event) {
 
     }
+
+
 
 
 }

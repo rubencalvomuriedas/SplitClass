@@ -37,7 +37,7 @@ public class HelloApplication extends Application {
         }
 
     }
-    
+
     private boolean launchTest() {
         boolean invalid = false;
         try {

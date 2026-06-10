@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGrupos">
    <children>
       <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -37,6 +37,7 @@
                <children>
                   <Label styleClass="welcome-subtitle" text="Descripción" />
                   <TextField fx:id="txtGastoMonto" prefHeight="40.0" promptText="Ej. Hemos ido a..." style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-text-fill: white; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 10; -fx-background-radius: 10; -fx-prompt-text-fill: #aaaaaa;" />
+
                </children>
             </VBox>
 
@@ -44,7 +45,7 @@
                <children>
                   <Button fx:id="volver" mnemonicParsing="false" onAction="#onVolverrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Volver" />
                   <Button fx:id="limpiar" mnemonicParsing="false" onAction="#onCancelarrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Cancelar" />
-                  <Button fx:id="guardar" mnemonicParsing="false" onAction="#onGuardarrrClick" prefHeight="45.0" prefWidth="110.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Guardar" />
+                  <Button fx:id="guardar" mnemonicParsing="false" onAction="#onGuardarGrupo" prefHeight="45.0" prefWidth="110.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Guardar" />
                </children>
             </HBox>
 

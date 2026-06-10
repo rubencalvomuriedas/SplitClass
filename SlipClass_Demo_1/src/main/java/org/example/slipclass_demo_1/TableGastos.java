@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,6 +19,8 @@ import org.example.slipclass_demo_1.model.SQLModelGasto;
 import org.example.slipclass_demo_1.model.categoria;
 import org.example.slipclass_demo_1.model.gasto;
 import org.example.slipclass_demo_1.model.grupo;
+import org.example.slipclass_demo_1.model.utils.Alertas;
+import org.example.slipclass_demo_1.model.utils.Navigator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,6 +31,7 @@ import java.util.ResourceBundle;
 public class TableGastos implements Initializable {
 
 //    @FXML private TextField txtGastoConcepto, txtGastoMonto, dpGastoFecha;
+    public Node root;
 
     @FXML private ComboBox<categoria> comboCategoria;
     @FXML private TableView<gasto> tablaGastos;
@@ -83,20 +87,11 @@ public class TableGastos implements Initializable {
 
 
     public void onNuevoGastoAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("registerGasto.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("Error al cargar la vista registerGasto.fxml: " + e.getMessage());
-            e.printStackTrace();
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/registerGasto.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
         }
     }
 
@@ -126,33 +121,21 @@ public class TableGastos implements Initializable {
             return;
         }
 
+        Stage stage = (Stage) root.getScene().getWindow();
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registerGasto.fxml"));
-            javafx.scene.Parent root = loader.load();
-
-            controllerProvisional formularioController = loader.getController();
-
-            formularioController.cargarGastoParaEditar(seleccionado);
-
-            javafx.scene.Scene scene = new javafx.scene.Scene(root);
-            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (Exception e) {
-            System.err.println("Error al cambiar a la pantalla de edición:");
-            e.printStackTrace();
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/registerGasto.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
         }
     }
 
     public void onVolverAMenuGasto(ActionEvent event) {
 
+        Stage stage = (Stage) root.getScene().getWindow();
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
+            Navigator.changeScene(stage, "/org/example/slipclass_demo_1/menuPrincipal.fxml");
+        } catch (Exception ex) {
+            Alertas.showAlert("", String.valueOf(ex), Alert.AlertType.ERROR);
         }
 
 

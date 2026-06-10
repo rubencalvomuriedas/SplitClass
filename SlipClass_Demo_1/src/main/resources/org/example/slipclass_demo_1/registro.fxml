@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.HelloController">
     <children>
         <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -38,7 +38,7 @@
                 <VBox spacing="10.0" style="-fx-padding: 10 0 0 0; -fx-alignment: center;">
                     <children>
                         <Button fx:id="finalRegistroEnviar" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onFinalizarRegistroClick" prefHeight="37.0" prefWidth="324.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Finalizar Registro" />
-                        <Button fx:id="btnVolver" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onVolver" prefHeight="40.0" styleClass="glass-button" text="Volver al inicio" />
+                        <Button fx:id="btnVolver" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="40.0" styleClass="glass-button" text="Volver al inicio" />
                     </children>
                 </VBox>
 

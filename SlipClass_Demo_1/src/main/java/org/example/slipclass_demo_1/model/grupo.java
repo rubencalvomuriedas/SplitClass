@@ -1,5 +1,6 @@
 package org.example.slipclass_demo_1.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +12,11 @@ public class grupo {
     private String descripcion;
     private String moneda;
 
-    private Date fecha_creacion;
-    private Date fecha_eliminacion;
+    private LocalDate fecha_creacion;
+    private LocalDate fecha_eliminacion;
     private List<estadoGrupo> estadoSelec; // Nuevo valor que determinara un grupo como realmente activo hasta que reciba un pago o movimiento
 
-    public grupo(int id_grupo, String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion, Date fecha_eliminacion, int idEstado) {
+    public grupo(int id_grupo, String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion, LocalDate fecha_eliminacion, int idEstado) {
         this.id_grupo = id_grupo;
         this.codGrupo = codGrupo;
         this.titulo = titulo;
@@ -38,7 +39,7 @@ public class grupo {
         this.titulo = titulo;
     }
 
-    public grupo(String codGrupo, String titulo, String descripcion, String moneda, Date fecha_creacion, Date fecha_eliminacion, int idEstado) {
+    public grupo(String codGrupo, String titulo, String descripcion, String moneda, LocalDate fecha_creacion, LocalDate fecha_eliminacion, int idEstado) {
         this.codGrupo = codGrupo;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -65,11 +66,11 @@ public class grupo {
         return moneda;
     }
 
-    public Date getFecha_creacion() {
+    public LocalDate getFecha_creacion() {
         return fecha_creacion;
     }
 
-    public Date getFecha_eliminacion() {
+    public LocalDate getFecha_eliminacion() {
         return fecha_eliminacion;
     }
 

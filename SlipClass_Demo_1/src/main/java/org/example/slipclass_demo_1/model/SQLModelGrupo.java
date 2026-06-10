@@ -35,7 +35,7 @@ public class SQLModelGrupo {
     public static List <grupo> getAllGruposTabla() {
 
             List<grupo> listaGrupos = new LinkedList<>();
-            String sql = "SELECT Id_Grupo, codGrupo, Titulo, Descripcion, Moneda, Fecha_creacion, fecha_eliminacion, Id_Estado FROM GRUPO";
+            String sql = "SELECT * FROM GRUPO";
 
             try (Connection con = SQLDataAccess.getConnection();
                  Statement stat = con.createStatement();
@@ -48,8 +48,8 @@ public class SQLModelGrupo {
                             rs.getString("Titulo"),
                             rs.getString("Descripcion"),
                             rs.getString("Moneda"),
-                            rs.getDate("Fecha_creacion"),
-                            rs.getDate("fecha_eliminacion"),
+                            rs.getDate("Fecha_creacion").toLocalDate(),
+                            rs.getDate("fecha_eliminacion").toLocalDate(),
                             rs.getInt("Id_Estado")
                     );
                     listaGrupos.add(g);
@@ -134,8 +134,8 @@ public class SQLModelGrupo {
                             rs.getString("Titulo"),
                             rs.getString("Descripcion"),
                             rs.getString("Moneda"),
-                            rs.getTimestamp("Fecha_creacion"),
-                            rs.getDate("fecha_eliminacion"),
+                            rs.getDate("Fecha_creacion").toLocalDate(),
+                            rs.getDate("fecha_eliminacion").toLocalDate(),
                             rs.getInt("Id_Estado")
                     );
                     listaGrupos.add(g);
@@ -146,6 +146,31 @@ public class SQLModelGrupo {
         }
         return listaGrupos;
     }
+    
+    public static boolean insertarGrupo(grupo g){
+        boolean creado = false;
+        
+        String sql = "INSERT INTO GRUPO (Titulo, Descripcion, Moneda) VALUES (?,?,?)";
+
+        try(Connection con = SQLDataAccess.getConnection();
+        PreparedStatement statement = con.prepareStatement(sql)){
+
+                    statement.setNString(1, g.getTitulo());
+                    statement.setNString(2, g.getDescripcion());
+                    statement.setNString(3, "Moneda");
+
+                    int filas = statement.executeUpdate();
+
+                    if(filas == 1){
+                        creado = true;
+                    }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return creado;
+    }
+    
 
     }
 
