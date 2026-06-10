@@ -36,7 +36,8 @@ public class HelloController implements Initializable {
     // --- [PANTALLA: LOGIN (login.fxml)] ---
     @FXML private TextField loginUsuario;
     @FXML private PasswordField loginPass;
-
+    @FXML private TextField txtGastoTitulo;
+    @FXML private TextField txtGastoDescript;
     // --- [PANTALLA: REGISTRO USUARIO (registroUsuario.fxml)] ---
     @FXML private ListView<usuario> listViewUsuarios; // (También usado como panel de gestión)
     @FXML private TextField txtUsuario, txtEmail, txtTelefono;
@@ -47,6 +48,10 @@ public class HelloController implements Initializable {
     @FXML private TextField txtGastoConcepto;
     @FXML private TextField txtGastoMonto;
 
+    @FXML
+    private TextField txtGrupoTItulo;
+    @FXML
+    private TextField txtGrupoDescrip;
 
     // =========================================================================
     // 3. INICIALIZACIÓN (MÉTODOS DE CARGA)
@@ -244,30 +249,54 @@ public class HelloController implements Initializable {
     @FXML
     public void onGuardarrrClick(ActionEvent event) {
         // 1. Validar campos
-        if (txtGastoConcepto.getText().isEmpty() || txtGastoMonto.getText().isEmpty()) {
+        if (txtGastoTitulo.getText().isEmpty() || txtGastoDescript.getText().isEmpty()) {
             mostrarAlerta("Error", "Debes completar título y descripción");
             return;
         }
 
-        // 2. Obtener usuario de la sesión (Esto evita errores de ID nulo)
         usuario userActual = SessionManager.getCurrentUser();
         if (userActual == null) {
-            mostrarAlerta("Error", "Sesión expirada. Por favor, inicia sesión de nuevo.");
+            mostrarAlerta("Error", "Sesión expirada.");
             return;
         }
 
-        // 3. Crear grupo
-        grupo g = new grupo();
-        g.setTitulo(txtGastoConcepto.getText());
-        g.setDescripcion(txtGastoMonto.getText());
-        g.setMoneda("EUR"); // Asegúrate de asignar este valor
+        // 2. Lógica de Edición vs Creación
+        if (this.grupoEnEdicion != null) {
+            // --- MODO EDICIÓN ---
+            this.grupoEnEdicion.setTitulo(txtGastoTitulo.getText());
+            this.grupoEnEdicion.setDescripcion(txtGastoDescript.getText());
 
+<<<<<<< HEAD
         // 4. Guardar usando la BD
         if (SQLModelGrupo.createGrupoConCreador(g, userActual.getId_usuario())) {
             mostrarAlerta("Éxito", "Grupo creado exitosamente.");
             limpiarCamposGrupo();
+=======
+            // Llamamos al método de update en tu modelo
+            if (SQLModelGrupo.updateGrupo(this.grupoEnEdicion, userActual.getId_usuario())) {
+                mostrarAlerta("Éxito", "Grupo actualizado exitosamente.");
+                // Limpiamos la variable para que la próxima vez sea una creación
+                this.grupoEnEdicion = null;
+                txtGastoTitulo.clear();
+                txtGastoDescript.clear();
+            } else {
+                mostrarAlerta("Error", "No se pudo actualizar el grupo.");
+            }
+>>>>>>> cf86afd (Editar y eliminar)
         } else {
-            mostrarAlerta("Error", "No se pudo guardar en la base de datos.");
+            // --- MODO CREACIÓN (Tu código original) ---
+            grupo g = new grupo();
+            g.setTitulo(txtGastoTitulo.getText());
+            g.setDescripcion(txtGastoDescript.getText());
+            g.setMoneda("EUR");
+
+            if (SQLModelGrupo.createGrupoConCreador(g, userActual.getId_usuario())) {
+                mostrarAlerta("Éxito", "Grupo creado exitosamente.");
+                txtGastoTitulo.clear();
+                txtGastoDescript.clear();
+            } else {
+                mostrarAlerta("Error", "No se pudo guardar.");
+            }
         }
     }
 
@@ -321,4 +350,21 @@ public class HelloController implements Initializable {
         alerta.showAndWait();
     }
 
+
+
+    private grupo grupoEnEdicion = null;
+
+
+    // Asegúrate de que los IDs aquí coincidan exactamente con el registroGrupo.fxml
+    public void prepararEdicion(grupo g) {
+        this.grupoEnEdicion = g; // Guardamos el grupo para saber que estamos editando
+
+        // Rellenamos los campos con los datos del grupo seleccionado
+        if (txtGastoTitulo != null) {
+            txtGastoTitulo.setText(g.getTitulo());
+        }
+        if (txtGastoDescript != null) {
+            txtGastoDescript.setText(g.getDescripcion());
+        }
+    }
 }

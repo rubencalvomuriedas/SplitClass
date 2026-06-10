@@ -3,7 +3,6 @@ package org.example.slipclass_demo_1.model;
 import org.example.slipclass_demo_1.configuration.SQLDataAccess;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class SQLModelGrupo {
                 grupo g = new grupo(
                         rs.getInt("Id_Grupo"),
                         rs.getString("codGrupo"),
-                        rs.getString("Titulo")
-                );
+                        rs.getString("Titulo"),
+                        rs.getString("Descripcion"), rs.getString("Moneda"), rs.getDate("Fecha_creacion"), rs.getDate("fecha_eliminacion"), rs.getInt("Id_Estado"));
                 listaGrupos.add(g);
             }
         } catch (SQLException e) {
@@ -148,12 +147,14 @@ public class SQLModelGrupo {
     }
 
     public static boolean updateGrupo(grupo g, int idUsuario) {
+        // Faltaba el tercer ? para el ID del grupo
         String sql = "UPDATE GRUPO SET Titulo = ?, Descripcion = ? WHERE Id_Grupo = ? " +
                 "AND Id_Grupo IN (SELECT id_Grupo FROM MIEMBROS_GRUPO WHERE id_Usuario = ?)";
         try (Connection conn = SQLDataAccess.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, g.getTitulo());
             ps.setString(2, g.getDescripcion());
+            ps.setInt(3, g.getId_grupo());
             ps.setInt(4, idUsuario);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -170,10 +171,11 @@ public class SQLModelGrupo {
             ps.setInt(2, idUsuario);
             return ps.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.err.println("Error al eliminar grupo: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
+
     }
 
 

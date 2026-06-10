@@ -71,6 +71,7 @@ public class TableGrupos implements Initializable {
         }
     }
 
+<<<<<<< HEAD
 
     public void onModificarGrupoClick(ActionEvent actionEvent) {
         grupo seleccionado = TablaGrupos.getSelectionModel().getSelectedItem();
@@ -101,6 +102,8 @@ public class TableGrupos implements Initializable {
 
 
 
+=======
+>>>>>>> cf86afd (Editar y eliminar)
     public void irAMenuGrupo(ActionEvent event) {
         cambiarPantalla(event, "menuGrupo.fxml");
         System.out.println("Volviendo al menú de grupos...");
@@ -109,24 +112,25 @@ public class TableGrupos implements Initializable {
     public void onCancelarGrupo(ActionEvent event) {
     }
 
+    @FXML
     public void onConfirmarGrupo(ActionEvent event) {
         if (txtGrupoTItulo.getText().isEmpty()) {
             mostrarAlerta("Error", "El título es obligatorio.");
             return;
         }
 
-        String moneda = "EUR";
+        // 1. Crear un objeto grupo vacío (usando el constructor que definimos antes)
+        grupo nuevoGrupo = new grupo();
 
-        grupo nuevoGrupo = new grupo(
-                "",
-                txtGrupoTItulo.getText(),
-                txtGrupoDescrip.getText(),
-                moneda,
-                null, null, 0
-        );
+        // 2. Rellenar los datos desde la interfaz
+        nuevoGrupo.setTitulo(txtGrupoTItulo.getText());
+        nuevoGrupo.setDescripcion(txtGrupoDescrip.getText());
+        nuevoGrupo.setMoneda("EUR"); // O el valor que elijas
 
-        int idUsuarioLogueado = 3;
+        // 3. Obtener el usuario de la sesión para vincularlo
+        int idUsuarioLogueado = SessionManager.getCurrentUser().getId_usuario();
 
+        // 4. Llamar al modelo para guardar
         if (SQLModelGrupo.createGrupoConCreador(nuevoGrupo, idUsuarioLogueado)) {
             mostrarAlerta("Éxito", "Grupo creado y vinculado correctamente.");
             txtGrupoTItulo.clear();
@@ -256,4 +260,28 @@ public class TableGrupos implements Initializable {
             mostrarAlerta("Error", "No se pudo eliminar el grupo.");
         }
     }
+
+    @FXML
+    public void onModificarGrupoClick(ActionEvent actionEvent) {
+        grupo seleccionado = TablaGrupos.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) return;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("registroGrupo.fxml"));
+            Parent root = loader.load();
+
+
+            HelloController controller = loader.getController();
+
+
+            controller.prepararEdicion(seleccionado);
+
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
