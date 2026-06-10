@@ -25,7 +25,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class newController implements Initializable {
+public class TableGastos implements Initializable {
 
 //    @FXML private TextField txtGastoConcepto, txtGastoMonto, dpGastoFecha;
 
