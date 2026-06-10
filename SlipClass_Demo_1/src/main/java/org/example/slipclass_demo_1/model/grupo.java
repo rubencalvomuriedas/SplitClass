@@ -47,6 +47,10 @@ public class grupo {
         this.fecha_eliminacion = fecha_eliminacion;
     }
 
+    public grupo() {
+
+    }
+
 
     public int getId_grupo() {
         return id_grupo;

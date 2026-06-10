@@ -147,6 +147,33 @@ public class SQLModelGrupo {
         return listaGrupos;
     }
 
+    public static boolean updateGrupo(grupo g, int idUsuario) {
+        String sql = "UPDATE GRUPO SET Titulo = ?, Descripcion = ? WHERE Id_Grupo = ? " +
+                "AND Id_Grupo IN (SELECT id_Grupo FROM MIEMBROS_GRUPO WHERE id_Usuario = ?)";
+        try (Connection conn = SQLDataAccess.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, g.getTitulo());
+            ps.setString(2, g.getDescripcion());
+            ps.setInt(4, idUsuario);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean eliminarGrupo(int idGrupo, int idUsuario) {
+        String sql = "DELETE FROM GRUPO WHERE Id_Grupo = ? AND Id_Grupo IN (SELECT id_Grupo FROM MIEMBROS_GRUPO WHERE id_Usuario = ?)";
+        try (Connection conn = SQLDataAccess.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, idGrupo);
+            ps.setInt(2, idUsuario);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error al eliminar grupo: " + e.getMessage());
+            return false;
+        }
+    }
     }
 
 

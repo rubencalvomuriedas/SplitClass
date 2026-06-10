@@ -191,7 +191,7 @@ public class HelloController implements Initializable {
     // -------------------------------------------------------------------------
     @FXML
     public void onVolverClick(ActionEvent event) {
-        cambiarPantalla(event, "menuUsuario.fxml");
+        cambiarPantalla(event, "hello-view.fxml");
     }
 
     @FXML
@@ -210,7 +210,7 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    private void salir() {
+    private void salir(ActionEvent event) {
         Platform.exit();
     }
 
@@ -245,16 +245,32 @@ public class HelloController implements Initializable {
     }
 
     @FXML
-    private void onGuardarrrClick(ActionEvent event) {
-        String titulo = txtGastoConcepto.getText().trim();
-        String descripcion = txtGastoMonto.getText().trim();
+    public void onGuardarrrClick(ActionEvent event) {
+        // 1. Validar campos
+        if (txtGastoConcepto.getText().isEmpty() || txtGastoMonto.getText().isEmpty()) {
+            mostrarAlerta("Error", "Debes completar título y descripción");
+            return;
+        }
 
-        if (titulo.isEmpty() || descripcion.isEmpty()) {
-            mostrarAlerta(Alert.AlertType.WARNING, "Campos incompletos", "Hay que rellenar todos los campos");
+        // 2. Obtener usuario de la sesión (Esto evita errores de ID nulo)
+        usuario userActual = SessionManager.getCurrentUser();
+        if (userActual == null) {
+            mostrarAlerta("Error", "Sesión expirada. Por favor, inicia sesión de nuevo.");
+            return;
+        }
+
+        // 3. Crear grupo
+        grupo g = new grupo();
+        g.setTitulo(txtGastoConcepto.getText());
+        g.setDescripcion(txtGastoMonto.getText());
+        g.setMoneda("EUR"); // Asegúrate de asignar este valor
+
+        // 4. Guardar usando la BD
+        if (SQLModelGrupo.createGrupoConCreador(g, userActual.getId_usuario())) {
+            mostrarAlerta("Éxito", "Grupo creado exitosamente.");
+            limpiarCampos();
         } else {
-            mostrarAlerta(Alert.AlertType.INFORMATION, "Éxito", "Nuevo Grupo creado correctamente.");
-            txtGastoConcepto.clear();
-            txtGastoMonto.clear();
+            mostrarAlerta("Error", "No se pudo guardar en la base de datos.");
         }
     }
 
@@ -307,4 +323,5 @@ public class HelloController implements Initializable {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
+
 }

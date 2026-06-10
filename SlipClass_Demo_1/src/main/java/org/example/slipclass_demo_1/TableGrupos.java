@@ -99,8 +99,6 @@ public class TableGrupos implements Initializable {
         }
     }
 
-    public void onEliminarButtonClick(ActionEvent event) {
-    }
 
 
     public void irAMenuGrupo(ActionEvent event) {
@@ -233,6 +231,29 @@ public class TableGrupos implements Initializable {
         } catch (IOException e) {
             System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
             mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
+        }
+    }
+
+    @FXML
+    public void onEliminarButtonClick(ActionEvent event) {
+        // 1. Obtener lo que el usuario seleccionó en la tabla
+        grupo seleccionado = TablaGrupos.getSelectionModel().getSelectedItem();
+
+        if (seleccionado == null) {
+            mostrarAlerta("Error", "Por favor, selecciona un grupo de la tabla primero.");
+            return;
+        }
+
+        // 2. Obtener el usuario actual
+        int idUsuario = SessionManager.getCurrentUser().getId_usuario();
+
+        // 3. Llamar al modelo para borrar (usando el ID del grupo y del usuario por seguridad)
+        if (SQLModelGrupo.eliminarGrupo(seleccionado.getId_grupo(), idUsuario)) {
+            // 4. Si se borró en BD, lo quitamos de la lista que muestra la tabla
+            TablaGrupos.getItems().remove(seleccionado);
+            mostrarAlerta("Éxito", "Grupo eliminado correctamente.");
+        } else {
+            mostrarAlerta("Error", "No se pudo eliminar el grupo.");
         }
     }
 }
