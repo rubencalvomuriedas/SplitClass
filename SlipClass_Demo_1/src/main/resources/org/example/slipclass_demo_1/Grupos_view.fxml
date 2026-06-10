@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGrupos">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGruposController">
     <children>
         <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -34,9 +34,9 @@
 
                 <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" spacing="8.0" style="-fx-padding: 5 0 0 0;">
                     <children>
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onModificarGrupoClick" prefHeight="42.0" styleClass="glass-button" text="Editar" HBox.hgrow="ALWAYS" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onEliminarButtonClick" prefHeight="42.0" styleClass="glass-button" text="Eliminar" HBox.hgrow="ALWAYS" />
-                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#abrirVentanaCrearGrupo" prefHeight="42.0" styleClass="glass-button" text="Volver" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="42.0" styleClass="glass-button" text="Editar" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="42.0" styleClass="glass-button" text="Eliminar" HBox.hgrow="ALWAYS" />
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false"  prefHeight="42.0" styleClass="glass-button" text="Volver" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
 

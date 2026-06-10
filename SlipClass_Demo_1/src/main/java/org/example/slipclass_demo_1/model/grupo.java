@@ -85,7 +85,7 @@ public class grupo {
         return moneda;
     }
 
-    public LocalDate getFecha_creacion() {
+    public LocalDate getFechaCreacion() {
         return fecha_creacion;
     }
 

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGrupos">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.RegistroGrupoController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -44,7 +44,7 @@
             <HBox alignment="CENTER" prefHeight="80.0" prefWidth="334.0" spacing="12.0">
                <children>
                   <Button fx:id="volver" mnemonicParsing="false" onAction="#onVolverrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Volver" />
-                  <Button fx:id="limpiar" mnemonicParsing="false" onAction="#onCancelarrrClick" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Cancelar" />
+                  <Button fx:id="limpiar" mnemonicParsing="false" onAction="#onCancelar" prefHeight="45.0" prefWidth="100.0" styleClass="glass-button" text="Cancelar" />
                   <Button fx:id="guardar" mnemonicParsing="false" onAction="#onGuardarGrupo" prefHeight="45.0" prefWidth="110.0" style="-fx-font-weight: bold;" styleClass="glass-button" text="Guardar" />
                </children>
             </HBox>
