@@ -42,7 +42,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onNuevoGastoAction" styleClass="glass-button" text="Nuevo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Button alignment="CENTER" maxWidth="Infinity" mnemonicParsing="false" onAction="#onNuevoGastoAction" styleClass="glass-button" text="Nuevo" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                         <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onModificarGastoAction" styleClass="glass-button" text="Modificar" GridPane.columnIndex="1" GridPane.rowIndex="0" />
                         <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onEliminarGastoAction" styleClass="glass-button" text="Eliminar" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                         <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#onVolverAMenuGasto" styleClass="glass-button" text="Volver" GridPane.columnIndex="1" GridPane.rowIndex="1" />

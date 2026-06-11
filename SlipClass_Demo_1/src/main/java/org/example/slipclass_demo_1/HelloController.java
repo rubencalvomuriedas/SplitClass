@@ -34,7 +34,7 @@ public class HelloController implements Initializable {
     // 2. INYCCIONES FXML (@FXML) - AGRUPADAS POR PANTALLA
     // =========================================================================
 
-    // --- [PANTALLA: LOGIN (login.fxml)] ---
+    // --- [PANTALLA: LOGIN (Login.fxml)] ---
     @FXML private TextField loginUsuario;
     @FXML private PasswordField loginPass;
     @FXML private TextField txtGastoTitulo;
@@ -45,7 +45,7 @@ public class HelloController implements Initializable {
     @FXML private PasswordField txtPass, txtPassConfirm;
     @FXML private DatePicker dpFechaNacimiento;
 
-    // --- [PANTALLA: NUEVO GRUPO / GASTOS (registroGrupo.fxml)] ---
+    // --- [PANTALLA: NUEVO GRUPO / GASTOS (RegisterGrupos.fxml)] ---
 
 
     // =========================================================================
@@ -82,16 +82,16 @@ public class HelloController implements Initializable {
     // =========================================================================
 
     // -------------------------------------------------------------------------
-    // --- PANTALLA: BIENVENIDA / INICIO (hello-view.fxml)
+    // --- PANTALLA: BIENVENIDA / INICIO (Inicio.fxml)
     // -------------------------------------------------------------------------
     @FXML
     public void onnIrALoginClick(ActionEvent event) {
-        cambiarPantalla(event, "login.fxml");
+        cambiarPantalla(event, "Login.fxml");
     }
 
     @FXML
     public void onRegistrarseClick(ActionEvent event) {
-        cambiarPantalla(event, "registro.fxml");
+        cambiarPantalla(event, "Register.fxml");
     }
 
     @FXML
@@ -105,7 +105,7 @@ public class HelloController implements Initializable {
     }
 
     // -------------------------------------------------------------------------
-    // --- PANTALLA: LOGIN (login.fxml)
+    // --- PANTALLA: LOGIN (Login.fxml)
     // -------------------------------------------------------------------------
     @FXML
     public void onIniciarSesionClick(ActionEvent event) {
@@ -173,7 +173,7 @@ public class HelloController implements Initializable {
 
     @FXML
     private void onVolver(ActionEvent event) {
-        cambiarPantalla(event, "hello-view.fxml");
+        cambiarPantalla(event, "Inicio.fxml");
     }
 
     private void limpiarCampos() {
@@ -192,26 +192,26 @@ public class HelloController implements Initializable {
 
 
     // -------------------------------------------------------------------------
-    // --- PANTALLAS: MENÚ USUARIO / MENÚ PRINCIPAL (menuUsuario.fxml / menuPrincipal.fxml)
+    // --- PANTALLAS: MENÚ USUARIO / MENÚ PRINCIPAL (menuUsuario.fxml / MenuPrincipal.fxml)
     // -------------------------------------------------------------------------
     @FXML
     public void onVolverClick(ActionEvent event) {
-        cambiarPantalla(event, "hello-view.fxml");
+        cambiarPantalla(event, "Inicio.fxml");
     }
 
     @FXML
     public void onTablaGrupooClick(ActionEvent event) {
-        cambiarPantalla(event, "Grupos_view.fxml");
+        cambiarPantalla(event, "TableViewGrupos.fxml");
     }
 
     @FXML
     private void handleGrupos(ActionEvent event) {
-        cambiarEscena(event, "menuGrupo.fxml");
+        cambiarEscena(event, "MenuGrupo.fxml");
     }
 
     @FXML
     private void handleGastos(ActionEvent event) {
-        cambiarEscena(event, "ListaGastos.fxml");
+        cambiarEscena(event, "TableViewGastos.fxml");
     }
 
     @FXML
@@ -221,25 +221,25 @@ public class HelloController implements Initializable {
 
     @FXML
     private void onVolverrClick(ActionEvent event) { // ¡Ojo! 2 'r's - Carga menú principal
-        cambiarEscena(event, "menuPrincipal.fxml");
+        cambiarEscena(event, "MenuPrincipal.fxml");
     }
 
 
     // -------------------------------------------------------------------------
-    // --- PANTALLA: MENÚ GRUPOS (menuGrupo.fxml)
+    // --- PANTALLA: MENÚ GRUPOS (MenuGrupo.fxml)
     // -------------------------------------------------------------------------
     @FXML
     public void onRegistroGrupoClick(ActionEvent event) {
-        cambiarPantalla(event, "registroGrupo.fxml");
+        cambiarPantalla(event, "RegisterGrupos.fxml");
     }
 
 
     // -------------------------------------------------------------------------
-    // --- PANTALLA: REGISTRO GRUPO / DETALLE (registroGrupo.fxml)
+    // --- PANTALLA: REGISTRO GRUPO / DETALLE (RegisterGrupos.fxml)
     // -------------------------------------------------------------------------
     @FXML
     private void onVolverrrClick(ActionEvent event) { // ¡Ojo! 3 'r's - Vuelve al menú de grupos
-        cambiarEscena(event, "menuGrupo.fxml");
+        cambiarEscena(event, "MenuGrupo.fxml");
     }
 
     @FXML
@@ -323,7 +323,7 @@ public class HelloController implements Initializable {
     }
 
     private void irAPantallaPrincipal(ActionEvent event) {
-        cambiarPantalla(event, "menuPrincipal.fxml");
+        cambiarPantalla(event, "MenuPrincipal.fxml");
     }
 
     private void mostrarAlerta(String titulo, String msj) {
@@ -346,7 +346,7 @@ public class HelloController implements Initializable {
     private grupo grupoEnEdicion = null;
 
 
-    // Asegúrate de que los IDs aquí coincidan exactamente con el registroGrupo.fxml
+    // Asegúrate de que los IDs aquí coincidan exactamente con el RegisterGrupos.fxml
     public void prepararEdicion(grupo g) {
         this.grupoEnEdicion = g; // Guardamos el grupo para saber que estamos editando
 
@@ -363,7 +363,7 @@ public class HelloController implements Initializable {
     private void cerrarSesion(ActionEvent event) {
         try {
             // 1. Cargamos el archivo FXML de la vista inicial
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Inicio.fxml"));
             Parent root = loader.load();
 
             // 2. Obtenemos el Stage actual (la ventana que se está mostrando)

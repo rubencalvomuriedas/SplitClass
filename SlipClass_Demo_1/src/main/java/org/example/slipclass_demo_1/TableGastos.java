@@ -92,7 +92,7 @@ public class TableGastos implements Initializable {
 
     public void onNuevoGastoAction(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("registerGasto.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterGasto.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -103,7 +103,7 @@ public class TableGastos implements Initializable {
             stage.show();
 
         } catch (IOException e) {
-            System.out.println("Error al cargar la vista registerGasto.fxml: " + e.getMessage());
+            System.out.println("Error al cargar la vista RegisterGasto.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -155,7 +155,7 @@ public class TableGastos implements Initializable {
         }
 
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registerGasto.fxml"));
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("RegisterGasto.fxml"));
             javafx.scene.Parent root = loader.load();
 
             controllerProvisional formularioController = loader.getController();
@@ -176,7 +176,7 @@ public class TableGastos implements Initializable {
     public void onVolverAMenuGasto(ActionEvent event) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("menuPrincipal.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {

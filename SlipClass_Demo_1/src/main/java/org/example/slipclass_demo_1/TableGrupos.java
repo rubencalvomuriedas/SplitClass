@@ -93,7 +93,7 @@ public class TableGrupos implements Initializable {
         }
 
         try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("registroGrupo.fxml"));
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("RegisterGrupos.fxml"));
             javafx.scene.Parent root = loader.load();
 
             HelloController formularioController = loader.getController();
@@ -113,7 +113,7 @@ public class TableGrupos implements Initializable {
 
 
     public void irAMenuGrupo(ActionEvent event) {
-        cambiarPantalla(event, "menuGrupo.fxml");
+        cambiarPantalla(event, "MenuGrupo.fxml");
         System.out.println("Volviendo al menú de grupos...");
     }
 

@@ -271,7 +271,7 @@ public class controllerProvisional implements Initializable {
     public void onVolverRegisterAction(ActionEvent event) {
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("ListaGastos.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("TableViewGastos.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (IOException e) {
