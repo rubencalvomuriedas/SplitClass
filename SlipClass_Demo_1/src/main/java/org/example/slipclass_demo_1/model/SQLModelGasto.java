@@ -5,19 +5,8 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Clase de acceso a datos (DAO) para la gestión de gastos y categorías.
- * Proporciona métodos CRUD para interactuar con la tabla GASTO en la base de datos.
- *
- * @author TuNombre
- * @version 1.0
- */
 public class SQLModelGasto {
 
-    /**
-     * Recupera todos los gastos almacenados en la base de datos.
-     * @return Una lista de objetos {@link gasto}.
-     */
     public static List<gasto> getAllGastos() {
         List<gasto> listaGastos = new LinkedList<>();
         String sql = "SELECT Id_Gasto, codGasto, Concepto, Monto_total, Fecha, Id_Grupo, Id_Categoria, Id_Usuario_Pagador FROM GASTO";
@@ -45,10 +34,6 @@ public class SQLModelGasto {
         return listaGastos;
     }
 
-    /**
-     * Obtiene todas las categorías de gasto disponibles.
-     * @return Una lista de objetos {@link categoria}.
-     */
     public static List<categoria> getAllCategorias() {
         List<categoria> listaCategorias = new LinkedList<>();
         String sql = "SELECT id_categoria, Nombre FROM CATEGORIA";
@@ -58,7 +43,10 @@ public class SQLModelGasto {
              ResultSet rs = stat.executeQuery(sql)) {
 
             while (rs.next()) {
-                listaCategorias.add(new categoria(rs.getInt("id_categoria"), rs.getString("Nombre")));
+                int id = rs.getInt("id_categoria");
+                String nombre = rs.getString("Nombre");
+
+                listaCategorias.add(new categoria(id, nombre));
             }
         } catch (SQLException e) {
             System.err.println("Error en getAllCategorias: " + e.getMessage());
@@ -66,11 +54,7 @@ public class SQLModelGasto {
         return listaCategorias;
     }
 
-    /**
-     * Registra un nuevo gasto en la base de datos generando automáticamente su código.
-     * @param g Objeto {@link gasto} con la información a insertar.
-     * @return true si la inserción fue exitosa, false en caso contrario.
-     */
+
     public static boolean createGasto(gasto g) {
         String sql = "INSERT INTO GASTO (codGasto, Concepto, Monto_total, Fecha, Id_Grupo, Id_Categoria, Id_Usuario_Pagador) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
@@ -78,10 +62,13 @@ public class SQLModelGasto {
              PreparedStatement stat = con.prepareStatement(sql)){
 
             String nuevoCodigo = CodeGenerator.generarCodigo(con, "GASTO", "codGasto", "GST");
+
             stat.setString(1, nuevoCodigo);
             stat.setString(2, g.getConcepto());
             stat.setDouble(3, g.getMonto_total());
             stat.setDate(4, Date.valueOf(g.getFecha()));
+
+            // CORRECCIÓN AQUÍ: Asegúrate de usar los getters correctos de tu modelo gasto
             stat.setInt(5, g.getId_grupo());
             stat.setInt(6, g.getId_categoria());
             stat.setInt(7, g.getId_usuarioPagador());
@@ -94,15 +81,12 @@ public class SQLModelGasto {
         }
     }
 
-    /**
-     * Realiza un borrado lógico desactivando el gasto.
-     * @param idGasto ID del gasto a desactivar.
-     * @return true si se actualizó el registro, false en caso contrario.
-     */
     public static boolean deleteGasto(int idGasto) {
+        // Cambiado de DELETE a UPDATE sobre la columna 'activo'
         String sql = "UPDATE GASTO SET activo = false WHERE Id_Gasto = ?";
         try (Connection con = SQLDataAccess.getConnection();
              PreparedStatement stat = con.prepareStatement(sql)) {
+
             stat.setInt(1, idGasto);
             return stat.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -111,11 +95,6 @@ public class SQLModelGasto {
         }
     }
 
-    /**
-     * Actualiza la información de un gasto existente.
-     * @param g Objeto {@link gasto} con los nuevos datos.
-     * @return true si la actualización fue exitosa, false en caso contrario.
-     */
     public static boolean updateGasto(gasto g) {
         String sql = "UPDATE GASTO SET Concepto = ?, Monto_total = ?, Fecha = ?, Id_Grupo = ?, Id_Categoria = ?, Id_Usuario_Pagador = ? WHERE Id_Gasto = ?";
         try (Connection con = SQLDataAccess.getConnection();
@@ -136,13 +115,9 @@ public class SQLModelGasto {
         }
     }
 
-    /**
-     * Obtiene los gastos asociados a los grupos en los que participa un usuario específico.
-     * @param idUsuario ID del usuario para filtrar los gastos.
-     * @return Lista de gastos activos del usuario.
-     */
     public static List<gasto> getGastosPorUsuario(int idUsuario) {
         List<gasto> listaGastos = new LinkedList<>();
+        // Añadimos g.activo = true al final de la consulta
         String sql = "SELECT DISTINCT g.* FROM GASTO g " +
                 "JOIN MIEMBROS_GRUPO mg ON g.Id_Grupo = mg.id_Grupo " +
                 "WHERE mg.id_Usuario = ? AND g.activo = true";
@@ -151,13 +126,20 @@ public class SQLModelGasto {
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, idUsuario);
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    listaGastos.add(new gasto(
-                            rs.getInt("Id_Gasto"), rs.getString("codGasto"), rs.getString("Concepto"),
-                            rs.getDouble("Monto_total"), rs.getDate("Fecha").toLocalDate(),
-                            rs.getInt("Id_Grupo"), rs.getInt("Id_Categoria"), rs.getInt("Id_Usuario_Pagador")
-                    ));
+                    gasto g = new gasto(
+                            rs.getInt("Id_Gasto"),
+                            rs.getString("codGasto"),
+                            rs.getString("Concepto"),
+                            rs.getDouble("Monto_total"),
+                            rs.getDate("Fecha").toLocalDate(),
+                            rs.getInt("Id_Grupo"),
+                            rs.getInt("Id_Categoria"),
+                            rs.getInt("Id_Usuario_Pagador")
+                    );
+                    listaGastos.add(g);
                 }
             }
         } catch (SQLException e) {
@@ -165,4 +147,7 @@ public class SQLModelGasto {
         }
         return listaGastos;
     }
+
+
+
 }

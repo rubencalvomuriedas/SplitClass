@@ -10,25 +10,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="listado_grupos_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGrupos">
+<AnchorPane fx:id="listado_grupos_view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGrupos">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="754.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="500.0" fitWidth="754.0" layoutX="-94.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
             </image>
         </ImageView>
 
-        <VBox layoutX="386.0" prefHeight="500.0" prefWidth="416.0" spacing="15.0" style="-fx-padding: 25 18 25 18; -fx-alignment: top-center;" styleClass="sidebar-container">
+        <VBox layoutX="265.0" prefHeight="500.0" prefWidth="538.0" spacing="15.0" style="-fx-padding: 25 18 25 18; -fx-alignment: top-center;" styleClass="sidebar-container">
             <children>
 
                 <Label style="-fx-padding: 0 0 5 0;" styleClass="welcome-title" text="Grupos" />
 
-                <TableView fx:id="TablaGrupos" maxWidth="1.7976931348623157E308" prefHeight="310.0" style="-fx-background-color: #000000; -fx-border-color: rgba(255, 255, 255, 0.2); -fx-border-radius: 10; -fx-background-radius: 10;">
+                <TableView fx:id="TablaGrupos" maxWidth="1.7976931348623157E308" prefHeight="310.0" style="-fx-border-radius: 10; -fx-background-radius: 10;">
                     <columns>
-                        <TableColumn fx:id="tablaGrupoTitulo" prefWidth="89.0" text="TÍTULO" />
-                        <TableColumn fx:id="tablaGrupoDescrip" prefWidth="90.0" text="DESC." />
-                        <TableColumn fx:id="tablaGrupoMon" minWidth="0.0" prefWidth="61.0" text="MONEDA" />
-                        <TableColumn fx:id="tablaGrupoCreacion" prefWidth="138.0" text="CREACIÓN" />
+                  <TableColumn fx:id="codGrupoTable" prefWidth="75.0" text="CÓDIGO" />
+                        <TableColumn fx:id="tablaGrupoTitulo" prefWidth="97.59998321533203" text="TÍTULO" />
+                        <TableColumn fx:id="tablaGrupoDescrip" prefWidth="82.40005493164062" text="DESC." />
+                        <TableColumn fx:id="tablaGrupoMon" minWidth="0.0" prefWidth="63.20001220703125" text="MONEDA" />
+                        <TableColumn fx:id="tablaGrupoCreacion" prefWidth="111.99993896484375" text="CREACIÓN" />
+                  <TableColumn fx:id="estadoColumGrupos" prefWidth="75.0" text="ESTADO" />
                     </columns>
                 </TableView>
 

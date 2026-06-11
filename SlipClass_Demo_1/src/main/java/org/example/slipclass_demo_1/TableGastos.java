@@ -23,22 +23,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Controlador encargado de la gestión de la tabla de gastos.
- * Permite visualizar, eliminar, editar y navegar hacia la creación de nuevos gastos
- * dentro del sistema SplitClass.
- * * @author TuNombre
- * @version 1.0
- */
 public class TableGastos implements Initializable {
+
 
     @FXML private ComboBox<categoria> comboCategoria;
     @FXML private TableView<gasto> tablaGastos;
+    @FXML private TableColumn<gasto, String> codigoGastosColum;
     @FXML private TableColumn<gasto, LocalDate> colFecha;
     @FXML private TableColumn<gasto, String> colConcepto;
     @FXML private TableColumn<gasto, Double> colMonto;
+    @FXML private TableColumn<gasto, Integer> categoriaGastoColum;
 
     @FXML private TableView<grupo> listado_grupos_view;
+
     @FXML private TableColumn<grupo, String> columnId;
     @FXML private TableColumn<grupo, String> columnNombre;
     @FXML private TableColumn<grupo, String> columnNºUsuarios;
@@ -46,68 +43,77 @@ public class TableGastos implements Initializable {
     @FXML private TableColumn<grupo, LocalDate> columnCreacion;
     @FXML private TableColumn<grupo, LocalDate> columnEliminacion;
 
-    /**
-     * Inicializa el controlador configurando las columnas de la tabla y cargando
-     * los gastos asociados al usuario que ha iniciado sesión.
-     * * @param location La ubicación relativa del archivo FXML.
-     * @param resources Los recursos específicos de la localización.
-     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        codigoGastosColum.setCellValueFactory(new PropertyValueFactory<>("cod_Gasto"));
         colConcepto.setCellValueFactory(new PropertyValueFactory<>("concepto"));
         colMonto.setCellValueFactory(new PropertyValueFactory<>("monto_total"));
         colFecha.setCellValueFactory(new PropertyValueFactory<>("fecha"));
+        categoriaGastoColum.setCellValueFactory(new PropertyValueFactory<>("id_categoria"));
 
         org.example.slipclass_demo_1.model.usuario u = org.example.slipclass_demo_1.SessionManager.getCurrentUser();
 
         if (u != null) {
             List<gasto> gastosFiltrados = SQLModelGasto.getGastosPorUsuario(u.getId_usuario());
             tablaGastos.setItems(FXCollections.observableArrayList(gastosFiltrados));
+            System.out.println("Gastos cargados para el usuario actual: " + gastosFiltrados.size());
         } else {
             System.out.println("No hay ningún usuario activo en sesión.");
         }
     }
 
-    /**
-     * Carga todas las categorías disponibles desde la base de datos en el ComboBox.
-     */
+
+
+
     private void cargarCategorias(){
         List<categoria> lista = SQLModelGasto.getAllCategorias();
+
         ObservableList<categoria> observableLista = FXCollections.observableArrayList(lista);
+
         comboCategoria.setItems(observableLista);
     }
 
-    public void onCancelarGasto(ActionEvent actionEvent) {}
-
-    public void onConfirmarGasto(ActionEvent actionEvent) {
-        categoria seleccionada = comboCategoria.getValue();
-        if (seleccionada != null) {
-            System.out.println("Categoría seleccionada: " + seleccionada.getNombre());
-        }
+    public void onCancelarGasto(ActionEvent actionEvent) {
     }
 
-    /**
-     * Navega a la vista de registro de un nuevo gasto.
-     * @param actionEvent El evento de acción que dispara la navegación.
-     */
+    public void onConfirmarGasto(ActionEvent actionEvent) {
+
+        categoria seleccionada = comboCategoria.getValue();
+
+        if (seleccionada != null) {
+            System.out.println("Categoría seleccionada: " + seleccionada.getNombre());
+            System.out.println("ID a enviar a la FK de Gastos: " + seleccionada.getId_categoria());
+        } else {
+            System.out.println("No se ha seleccionado ninguna categoría.");
+        }
+
+    }
+
+
     public void onNuevoGastoAction(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterGasto.fxml"));
             Parent root = loader.load();
+
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
+            System.out.println("Error al cargar la vista RegisterGasto.fxml: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    /**
-     * Elimina el gasto seleccionado de la tabla y de la base de datos tras confirmación.
-     * @param actionEvent El evento de acción.
-     */
     public void onEliminarGastoAction(ActionEvent actionEvent) {
+
         gasto seleccionado = tablaGastos.getSelectionModel().getSelectedItem();
+
         if (seleccionado == null) {
             mostrarAlerta("Aviso", "Selecciona un gasto de la tabla primero.");
             return;
@@ -115,13 +121,23 @@ public class TableGastos implements Initializable {
 
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("Confirmar borrado");
-        confirm.setContentText("¿Seguro que quieres borrar el gasto '" + seleccionado.getConcepto() + "'?");
+        confirm.setHeaderText(null);
+        confirm.setContentText(
+                "¿Seguro que quieres borrar el gasto '" +
+                        seleccionado.getConcepto() + "'?"
+        );
 
         confirm.showAndWait().ifPresent(respuesta -> {
+
             if (respuesta == ButtonType.OK) {
+
                 if (SQLModelGasto.deleteGasto(seleccionado.getId_gasto())) {
+
                     mostrarAlerta("Éxito", "Gasto eliminado correctamente.");
+
                     tablaGastos.getItems().remove(seleccionado);
+
+
                 } else {
                     mostrarAlerta("Error", "No se pudo eliminar el gasto.");
                 }
@@ -129,32 +145,35 @@ public class TableGastos implements Initializable {
         });
     }
 
-    /**
-     * Abre el formulario de edición cargando los datos del gasto seleccionado.
-     * @param actionEvent El evento de acción.
-     */
     public void onModificarGastoAction(ActionEvent actionEvent) {
         gasto seleccionado = tablaGastos.getSelectionModel().getSelectedItem();
-        if (seleccionado == null) return;
+
+        if (seleccionado == null) {
+            System.out.println("Por favor, selecciona un gasto de la tabla para editar.");
+            return;
+        }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterGasto.fxml"));
-            Parent root = loader.load();
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("RegisterGasto.fxml"));
+            javafx.scene.Parent root = loader.load();
+
             controllerProvisional formularioController = loader.getController();
+
             formularioController.cargarGastoParaEditar(seleccionado);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
+
+            javafx.scene.Scene scene = new javafx.scene.Scene(root);
+            javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
             stage.show();
+
         } catch (Exception e) {
+            System.err.println("Error al cambiar a la pantalla de edición:");
             e.printStackTrace();
         }
     }
 
-    /**
-     * Navega de regreso al menú principal.
-     * @param event El evento de acción.
-     */
     public void onVolverAMenuGasto(ActionEvent event) {
+
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -162,13 +181,10 @@ public class TableGastos implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
     }
 
-    /**
-     * Muestra un mensaje de alerta informativo al usuario.
-     * @param titulo Título de la ventana.
-     * @param msj Mensaje a mostrar.
-     */
     private void mostrarAlerta(String titulo, String msj) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);

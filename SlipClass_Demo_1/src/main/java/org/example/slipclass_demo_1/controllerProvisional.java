@@ -10,128 +10,224 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.example.slipclass_demo_1.model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Controlador provisional para la gestión de formularios de gastos.
- * Permite tanto la creación de nuevos gastos como la edición de los existentes,
- * vinculando categorías, grupos y usuarios pagadores.
- *
- * @author TuNombre
- * @version 1.0
- */
 public class controllerProvisional implements Initializable {
 
     private gasto newGasto;
     private boolean isNewGasto = true;
-    private int idGastoEnEdicion;
+    private ObservableList<gasto> gastosObservableList = FXCollections.observableArrayList();
 
     @FXML private ComboBox<categoria> comboCategoria;
     @FXML private ComboBox<grupo> comboGrupo;
     @FXML private ComboBox<usuario> comboUsuario;
+
     @FXML private TextField txtGastoConcepto, txtGastoMonto;
     @FXML private DatePicker dpGastoFecha;
 
-    /**
-     * Inicializa los componentes, carga los datos necesarios en los ComboBoxes
-     * y configura los listeners para la selección dinámica de miembros por grupo.
-     */
+    private int idGastoEnEdicion;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             cargarCategorias();
             cargarGrupos();
 
-            // Listener para actualizar usuarios disponibles según el grupo seleccionado
+
             comboGrupo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, nuevoGrupo) -> {
                 if (nuevoGrupo != null) {
+
                     List<usuario> miembros = SQLModelUsuario.getUsuariosPorGrupo(nuevoGrupo.getId_grupo());
                     comboUsuario.setItems(FXCollections.observableArrayList(miembros));
 
-                    // Auto-selecciona al usuario logueado si es parte del grupo
+
                     usuario usuarioLogueado = SessionManager.getCurrentUser();
                     if (usuarioLogueado != null) {
-                        miembros.stream()
-                                .filter(u -> u.getId_usuario() == usuarioLogueado.getId_usuario())
-                                .findFirst()
-                                .ifPresent(comboUsuario::setValue);
+                        for (usuario usr : miembros) {
+                            if (usr.getId_usuario() == usuarioLogueado.getId_usuario()) {
+                                comboUsuario.setValue(usr);
+                                break;
+                            }
+                        }
                     }
                 } else {
+
                     comboUsuario.setItems(FXCollections.observableArrayList());
                 }
             });
+
         } catch (Exception e) {
+            System.err.println("¡ERROR crítico en el inicio del controlador!");
             e.printStackTrace();
         }
 
-        // Configuración de visualización para ComboBoxes
-        configurarRenderizadoComboBoxes();
-    }
 
-    private void configurarRenderizadoComboBoxes() {
-        // Lógica de renderizado para usuarios y categorías...
+        comboUsuario.setCellFactory(lv -> new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+        comboUsuario.setButtonCell(new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+
+        System.out.println("CONTROLLER PROVISIONAL CONFIGURADO");
     }
 
     private void cargarCategorias() {
-        comboCategoria.setItems(FXCollections.observableArrayList(SQLModelGasto.getAllCategorias()));
+        List<categoria> lista = SQLModelGasto.getAllCategorias();
+        ObservableList<categoria> observableLista = FXCollections.observableArrayList(lista);
+        comboCategoria.setItems(observableLista);
+
+        comboCategoria.setCellFactory(lv -> new ListCell<categoria>() {
+            @Override
+            protected void updateItem(categoria item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+        comboCategoria.setButtonCell(new ListCell<categoria>() {
+            @Override
+            protected void updateItem(categoria item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+    }
+
+    private void cargarUsuarios() {
+        List<usuario> lista = SQLModelUsuario.getAllUsuarios();
+        ObservableList<usuario> observableList = FXCollections.observableArrayList(lista);
+        comboUsuario.setItems(observableList);
+
+        comboUsuario.setCellFactory(lv -> new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
+        comboUsuario.setButtonCell(new ListCell<usuario>() {
+            @Override
+            protected void updateItem(usuario item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getNombre());
+            }
+        });
     }
 
     private void cargarGrupos() {
         usuario usuarioLogueado = SessionManager.getCurrentUser();
+
         if (usuarioLogueado != null) {
-            comboGrupo.setItems(FXCollections.observableArrayList(SQLModelGrupo.getGruposPorUsuario(usuarioLogueado.getId_usuario())));
+            List<grupo> lista = SQLModelGrupo.getGruposPorUsuario(usuarioLogueado.getId_usuario());
+
+            ObservableList<grupo> observableLista = FXCollections.observableArrayList(lista);
+            comboGrupo.setItems(observableLista);
+        } else {
+            System.err.println("Advertencia: No hay ningún usuario logueado en SessionManager.");
+            comboGrupo.setItems(FXCollections.observableArrayList());
         }
+
+
+        comboGrupo.setCellFactory(lv -> new ListCell<grupo>() {
+            @Override
+            protected void updateItem(grupo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getTitulo());
+            }
+        });
+        comboGrupo.setButtonCell(new ListCell<grupo>() {
+            @Override
+            protected void updateItem(grupo item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? "" : item.getTitulo());
+            }
+        });
     }
 
-    /**
-     * Procesa la confirmación del formulario, creando o actualizando un gasto.
-     */
+    public void onCancelarGasto(ActionEvent actionEvent) {
+        limpiarCampos();
+    }
+
     public void onConfirmarGasto(ActionEvent actionEvent) {
         if (txtGastoConcepto.getText().isEmpty() || txtGastoMonto.getText().isEmpty() || dpGastoFecha.getValue() == null) {
             mostrarAlerta("Campos incompletos", "Por favor, complete todos los campos.");
             return;
         }
 
-        int idCat = comboCategoria.getValue().getId_categoria();
-        int idGrp = comboGrupo.getValue().getId_grupo();
-        int idUsr = comboUsuario.getValue().getId_usuario();
+        categoria catSeleccionada = comboCategoria.getValue();
+        grupo grupoSeleccionado = comboGrupo.getValue();
+        usuario usuarioSeleccionado = comboUsuario.getValue();
+
+        if (catSeleccionada == null || grupoSeleccionado == null || usuarioSeleccionado == null) {
+            mostrarAlerta("Error", "Debes seleccionar una categoría, un grupo y un pagador.");
+            return;
+        }
+
+        int idCat = catSeleccionada.getId_categoria();
+        int idGrp = grupoSeleccionado.getId_grupo();
+        int idUsr = usuarioSeleccionado.getId_usuario();
 
         if (isNewGasto) {
-            this.newGasto = new gasto(txtGastoConcepto.getText(), Double.parseDouble(txtGastoMonto.getText()),
-                    dpGastoFecha.getValue(), idCat, idGrp, idUsr);
+            this.newGasto = new gasto(
+                    txtGastoConcepto.getText(),
+                    Double.parseDouble(txtGastoMonto.getText()),
+                    dpGastoFecha.getValue(),
+                    idCat,
+                    idGrp,
+                    idUsr
+            );
+
             if (SQLModelGasto.createGasto(this.newGasto)) {
                 mostrarAlerta("Éxito", "Gasto creado correctamente.");
                 limpiarCampos();
+            } else {
+                mostrarAlerta("Error", "No se pudo crear el gasto.");
             }
         } else {
-            gasto gastoEditado = new gasto(this.idGastoEnEdicion, "", txtGastoConcepto.getText(),
-                    Double.parseDouble(txtGastoMonto.getText()), dpGastoFecha.getValue(),
-                    idGrp, idCat, idUsr);
+
+            gasto gastoEditado = new gasto(
+                    this.idGastoEnEdicion,
+                    "",
+                    txtGastoConcepto.getText(),
+                    Double.parseDouble(txtGastoMonto.getText()),
+                    dpGastoFecha.getValue(),
+                    idGrp,
+                    idCat,
+                    idUsr
+            );
+
             if (SQLModelGasto.updateGasto(gastoEditado)) {
-                mostrarAlerta("Éxito", "Gasto actualizado.");
+                mostrarAlerta("Éxito", "Gasto actualizado correctamente.");
                 isNewGasto = true;
                 limpiarCampos();
+            } else {
+                mostrarAlerta("Error", "No se pudo actualizar el gasto.");
             }
         }
     }
 
-    /**
-     * Prepara el formulario para editar un gasto existente.
-     * @param g El gasto a editar.
-     */
-    public void cargarGastoParaEditar(gasto g) {
-        this.isNewGasto = false;
-        this.idGastoEnEdicion = g.getId_gasto();
-        txtGastoConcepto.setText(g.getConcepto());
-        txtGastoMonto.setText(String.valueOf(g.getMonto_total()));
-        dpGastoFecha.setValue(g.getFecha());
-        // Lógica de selección de valores en combos...
+    private void mostrarAlerta(String titulo, String msj) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(titulo);
+        alert.setHeaderText(null);
+        alert.setContentText(msj);
+        alert.show();
     }
 
     private void limpiarCampos() {
@@ -143,14 +239,44 @@ public class controllerProvisional implements Initializable {
         comboUsuario.getSelectionModel().clearSelection();
     }
 
-    private void mostrarAlerta(String titulo, String msj) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setContentText(msj);
-        alert.show();
+    public void cargarGastoParaEditar(gasto g) {
+        this.isNewGasto = false;
+        this.idGastoEnEdicion = g.getId_gasto();
+
+        txtGastoConcepto.setText(g.getConcepto());
+        txtGastoMonto.setText(String.valueOf(g.getMonto_total()));
+        dpGastoFecha.setValue(g.getFecha());
+
+        for (categoria cat : comboCategoria.getItems()) {
+            if (cat.getId_categoria() == g.getId_categoria()) {
+                comboCategoria.setValue(cat);
+                break;
+            }
+        }
+        for (grupo grp : comboGrupo.getItems()) {
+            if (grp.getId_grupo() == g.getId_grupo()) {
+                comboGrupo.setValue(grp);
+                break;
+            }
+        }
+        for (usuario usr : comboUsuario.getItems()) {
+            if (usr.getId_usuario() == g.getId_usuarioPagador()) {
+                comboUsuario.setValue(usr);
+                break;
+            }
+        }
     }
 
+
     public void onVolverRegisterAction(ActionEvent event) {
-        // Lógica de navegación...
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("TableViewGastos.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

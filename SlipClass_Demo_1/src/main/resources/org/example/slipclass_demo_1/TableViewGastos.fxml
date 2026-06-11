@@ -14,21 +14,23 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="803.0" style="-fx-background-color: white;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.slipclass_demo_1.TableGastos">
     <children>
-        <ImageView fitHeight="500.0" fitWidth="754.0" layoutX="-60.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="500.0" fitWidth="754.0" layoutX="-88.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Imágenes/70723aaa-cc18-462b-a3c1-f3796dacbcee.jpg" />
             </image>
         </ImageView>
 
-        <VBox layoutX="379.0" layoutY="-3.0" prefHeight="506.0" prefWidth="424.0" spacing="20.0" style="-fx-padding: 30;" styleClass="sidebar-container">
+        <VBox layoutX="298.0" layoutY="-3.0" prefHeight="506.0" prefWidth="505.0" spacing="20.0" style="-fx-padding: 30;" styleClass="sidebar-container">
             <children>
-                <Label styleClass="welcome-title" text="Gastos" />
+                <Label prefHeight="32.0" prefWidth="235.0" styleClass="welcome-title" text="Gastos" />
 
                 <TableView fx:id="tablaGastos" prefHeight="250.0" prefWidth="340.0" styleClass="glass-table">
                     <columns>
-                        <TableColumn fx:id="colFecha" prefWidth="85.0" text="Fecha" />
-                        <TableColumn fx:id="colConcepto" prefWidth="130.0" text="Concepto" />
-                        <TableColumn fx:id="colMonto" prefWidth="120.0" text="Monto (€)" />
+                  <TableColumn fx:id="codigoGastosColum" prefWidth="75.0" text="Código" />
+                        <TableColumn fx:id="colConcepto" prefWidth="112.79993438720703" text="Concepto" />
+                        <TableColumn fx:id="colFecha" prefWidth="72.800048828125" text="Fecha" />
+                        <TableColumn fx:id="colMonto" prefWidth="84.0001220703125" text="Monto (€)" />
+                  <TableColumn fx:id="categoriaGastoColum" prefWidth="114.39990234375" text="Categoria" />
                     </columns>
                 </TableView>
 
