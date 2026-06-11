@@ -1,19 +1,28 @@
 package org.example.slipclass_demo_1.model;
 
-import com.google.protobuf.StructOrBuilder;
 import org.example.slipclass_demo_1.configuration.SQLDataAccess;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Clase de acceso a datos (DAO) para la gestión de usuarios.
+ * Proporciona métodos para el registro, actualización, autenticación y
+ * consulta de usuarios dentro de la base de datos.
+ *
+ * @author TuNombre
+ * @version 1.0
+ */
 public class SQLModelUsuario {
 
+    /**
+     * Recupera todos los usuarios activos registrados en el sistema.
+     * @return Una lista de objetos {@link usuario}.
+     */
     public static List<usuario> getAllUsuarios() {
         List<usuario> usuarios = new LinkedList<>();
-
         String sql = "SELECT * FROM USUARIO WHERE verificacionActividad = true";
 
         try (Connection connection = SQLDataAccess.getConnection();
@@ -21,52 +30,32 @@ public class SQLModelUsuario {
              ResultSet resultSet = stat.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("id_Usuario");
-                String codUsuario = resultSet.getString("codUsuario");
-                String nombre = resultSet.getString("Nombre");
-                String email = resultSet.getString("Email");
-                String password = resultSet.getString("Password");
-                String telefono = resultSet.getString("Telefono");
-                int idIdioma = resultSet.getInt("id_idioma");
-                String alias = resultSet.getString("Alias");
-                String iban = resultSet.getString("IBAN");
-
-                LocalDateTime fecha_creacion = resultSet.getTimestamp("Fecha_Creacion").toLocalDateTime();
-
-                LocalDate fecha_nac = null;
-                Date sqlDate = resultSet.getDate("Fecha_Nacimiento");
-                if (sqlDate != null) {
-                    fecha_nac = sqlDate.toLocalDate();
-                }
-
-                usuario us = new usuario(id, codUsuario, nombre, email, password, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
-                usuarios.add(us);
+                usuarios.add(mapResultSetToUsuario(resultSet));
             }
         } catch (SQLException e) {
             System.err.println("SQLException en getAllUsuarios: " + e.getMessage());
         }
-
         return usuarios;
     }
+
+    /**
+     * Registra un nuevo usuario en la base de datos.
+     * @param us Objeto {@link usuario} con los datos del nuevo usuario.
+     * @return true si el usuario se creó correctamente, false en caso contrario.
+     */
     public static boolean createUsuario(usuario us) {
-        boolean result = false;
-
-
-        String sql = "INSERT INTO USUARIO (codUsuario, Nombre, Email, Password, Telefono, id_idioma, Alias, IBAN, Fecha_Nacimiento, verificacionActividad) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO USUARIO (codUsuario, Nombre, Email, Password, Telefono, id_idioma, Alias, IBAN, Fecha_Nacimiento, verificacionActividad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = SQLDataAccess.getConnection();
             PreparedStatement stat = connection.prepareStatement(sql)) {
 
             String nuevoCodigo = CodeGenerator.generarCodigo(connection, "USUARIO", "codUsuario", "USR");
-
             stat.setString(1, nuevoCodigo);
             stat.setString(2, us.getNombre());
             stat.setString(3, us.getEmail());
             stat.setString(4, us.getPassword());
             stat.setString(5, us.getTelefono());
-            int idiomaAInsertar = (us.getIdIdioma() <= 0) ? 1 : us.getIdIdioma();
-            stat.setInt(6, idiomaAInsertar);
+            stat.setInt(6, (us.getIdIdioma() <= 0) ? 1 : us.getIdIdioma());
             stat.setString(7, us.getAlias());
             stat.setString(8, us.getIban());
 
@@ -77,21 +66,20 @@ public class SQLModelUsuario {
             }
             stat.setBoolean(10, true);
 
-            stat.executeUpdate();
-            result = true;
-
+            return stat.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
+            return false;
         }
-
-        return result;
     }
 
+    /**
+     * Actualiza la información básica de un usuario existente.
+     * @param us Objeto {@link usuario} con los datos actualizados.
+     * @return true si la actualización fue exitosa.
+     */
     public static boolean updateUsuario(usuario us) {
-        boolean result = false;
-        String sql = "UPDATE usuario SET nombre = ?, email = ?, " +
-                "password = ?, fecha_nacimiento = ?, telefono = ? WHERE id_usuario = ?";
-
+        String sql = "UPDATE usuario SET nombre = ?, email = ?, password = ?, fecha_nacimiento = ?, telefono = ? WHERE id_usuario = ?";
         try (Connection conn = SQLDataAccess.getConnection();
              PreparedStatement stat = conn.prepareStatement(sql)){
 
@@ -100,25 +88,23 @@ public class SQLModelUsuario {
             stat.setString(3, us.getPassword());
             stat.setDate(4, Date.valueOf(us.getFecha_nacimiento()));
             stat.setString(5, us.getTelefono());
-
             stat.setInt(6, us.getId_usuario());
 
-            int filasAfectadas = stat.executeUpdate();
-            result = (filasAfectadas > 0);
-
+            return stat.executeUpdate() > 0;
         } catch (SQLException e) {
             System.err.println("SQLException: " + e.getMessage());
+            return false;
         }
-
-
-        return result;
     }
 
+    /**
+     * Valida las credenciales de un usuario.
+     * @param email Correo electrónico del usuario.
+     * @param password Contraseña del usuario.
+     * @return El objeto {@link usuario} si el login es correcto, null en caso contrario.
+     */
     public static usuario login(String email, String password){
-        usuario user = null;
-
         String sql = "SELECT * FROM usuario WHERE email = ? AND password = ?";
-
         try (Connection con = SQLDataAccess.getConnection();
              PreparedStatement stat = con.prepareStatement(sql)) {
 
@@ -126,71 +112,29 @@ public class SQLModelUsuario {
             stat.setString(2, password);
 
             try (ResultSet rs = stat.executeQuery()) {
-                if (rs.next()) {
-                    // 1. Extraemos el ID y todos los campos requeridos por el constructor completo
-                    int id = rs.getInt("id_Usuario");
-                    String codUsuario = rs.getString("codUsuario");
-                    String nombre = rs.getString("Nombre");
-                    String mail = rs.getString("Email");
-                    String pass = rs.getString("Password");
-                    String telefono = rs.getString("Telefono");
-                    int idIdioma = rs.getInt("id_idioma");
-                    String alias = rs.getString("Alias");
-                    String iban = rs.getString("IBAN");
-
-                    LocalDateTime fecha_creacion = rs.getTimestamp("Fecha_Creacion").toLocalDateTime();
-
-                    LocalDate fecha_nac = null;
-                    Date sqlDate = rs.getDate("Fecha_Nacimiento");
-                    if (sqlDate != null) {
-                        fecha_nac = sqlDate.toLocalDate();
-                    }
-
-                    // 2. Usamos el constructor que incluye el 'id' para que no se quede en 0
-                    user = new usuario(id, codUsuario, nombre, mail, pass, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
-                }
+                if (rs.next()) return mapResultSetToUsuario(rs);
             }
-
         } catch (SQLException e) {
             System.err.println("SQLException en login: " + e.getMessage());
         }
-
-        return user;
+        return null;
     }
 
+    /**
+     * Obtiene los usuarios miembros de un grupo específico.
+     * @param idGrupo ID del grupo a consultar.
+     * @return Lista de objetos {@link usuario}.
+     */
     public static List<usuario> getUsuariosPorGrupo(int idGrupo) {
         List<usuario> usuarios = new LinkedList<>();
-        String sql = "SELECT u.* FROM USUARIO u " +
-                "INNER JOIN MIEMBROS_GRUPO mg ON u.id_Usuario = mg.id_Usuario " +
-                "WHERE mg.id_Grupo = ? AND u.verificacionActividad = true";
+        String sql = "SELECT u.* FROM USUARIO u INNER JOIN MIEMBROS_GRUPO mg ON u.id_Usuario = mg.id_Usuario WHERE mg.id_Grupo = ? AND u.verificacionActividad = true";
 
         try (Connection con = SQLDataAccess.getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
-
             ps.setInt(1, idGrupo);
-
-            try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id_Usuario");
-                    String codUsuario = resultSet.getString("codUsuario");
-                    String nombre = resultSet.getString("Nombre");
-                    String email = resultSet.getString("Email");
-                    String password = resultSet.getString("Password");
-                    String telefono = resultSet.getString("Telefono");
-                    int idIdioma = resultSet.getInt("id_idioma");
-                    String alias = resultSet.getString("Alias");
-                    String iban = resultSet.getString("IBAN");
-
-                    java.time.LocalDateTime fecha_creacion = resultSet.getTimestamp("Fecha_Creacion").toLocalDateTime();
-
-                    java.time.LocalDate fecha_nac = null;
-                    Date sqlDate = resultSet.getDate("Fecha_Nacimiento");
-                    if (sqlDate != null) {
-                        fecha_nac = sqlDate.toLocalDate();
-                    }
-
-                    usuario us = new usuario(id, codUsuario, nombre, email, password, telefono, idIdioma, alias, iban, fecha_creacion, fecha_nac);
-                    usuarios.add(us);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    usuarios.add(mapResultSetToUsuario(rs));
                 }
             }
         } catch (SQLException e) {
@@ -199,5 +143,16 @@ public class SQLModelUsuario {
         return usuarios;
     }
 
-
+    /**
+     * Método auxiliar para mapear un ResultSet a un objeto Usuario.
+     */
+    private static usuario mapResultSetToUsuario(ResultSet rs) throws SQLException {
+        LocalDate fecha_nac = (rs.getDate("Fecha_Nacimiento") != null) ? rs.getDate("Fecha_Nacimiento").toLocalDate() : null;
+        return new usuario(
+                rs.getInt("id_Usuario"), rs.getString("codUsuario"), rs.getString("Nombre"),
+                rs.getString("Email"), rs.getString("Password"), rs.getString("Telefono"),
+                rs.getInt("id_idioma"), rs.getString("Alias"), rs.getString("IBAN"),
+                rs.getTimestamp("Fecha_Creacion").toLocalDateTime(), fecha_nac
+        );
+    }
 }

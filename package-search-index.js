@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"org.example.slipclass_demo_1","l":"org.example.slipclass_demo_1"},{"m":"org.example.slipclass_demo_1","l":"org.example.slipclass_demo_1.configuration"},{"m":"org.example.slipclass_demo_1","l":"org.example.slipclass_demo_1.model"}];updateSearchResults();

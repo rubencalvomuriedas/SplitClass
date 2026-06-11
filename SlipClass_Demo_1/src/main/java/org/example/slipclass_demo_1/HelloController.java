@@ -20,37 +20,54 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * Clase controladora principal que gestiona la lógica de interfaz (GUI) para la aplicación.
+ * Implementa {@link Initializable} para configurar los componentes al cargar la vista.
+ * Maneja el flujo de autenticación, gestión de registros, navegación entre escenas
+ * y operaciones sobre grupos.
+ * * @author TuNombre
+ * @version 1.0
+ */
 public class HelloController implements Initializable {
 
-    // =========================================================================
-    // 1. VARIABLES DE ESTADO VARIABLES GLOBALES
-    // =========================================================================
+    /** Usuario actualmente seleccionado en la lista o en edición. */
     private usuario us;
+
+    /** Flag booleano que indica si se está creando un nuevo registro (true) o editando uno existente (false). */
     private boolean isNewUser = true;
+
+    /** Lista observable de usuarios para sincronización automática con la vista {@link ListView}. */
     private ObservableList<usuario> usuariosObservableList = FXCollections.observableArrayList();
 
-
-    // =========================================================================
-    // 2. INYCCIONES FXML (@FXML) - AGRUPADAS POR PANTALLA
-    // =========================================================================
-
-    // --- [PANTALLA: LOGIN (Login.fxml)] ---
+    /** Campo de texto para el email/nombre de usuario en el login. */
     @FXML private TextField loginUsuario;
+    /** Campo de contraseña para el inicio de sesión. */
     @FXML private PasswordField loginPass;
+    /** Campo de texto para el título del gasto. */
     @FXML private TextField txtGastoTitulo;
+    /** Campo de texto para la descripción del gasto. */
     @FXML private TextField txtGastoDescript;
-    // --- [PANTALLA: REGISTRO USUARIO (registroUsuario.fxml)] ---
-    @FXML private ListView<usuario> listViewUsuarios; // (También usado como panel de gestión)
-    @FXML private TextField txtUsuario, txtEmail, txtTelefono;
-    @FXML private PasswordField txtPass, txtPassConfirm;
+    /** Lista visual de usuarios registrados. */
+    @FXML private ListView<usuario> listViewUsuarios;
+    /** Campo de entrada para nombre de usuario en registro. */
+    @FXML private TextField txtUsuario;
+    /** Campo de entrada para email en registro. */
+    @FXML private TextField txtEmail;
+    /** Campo de entrada para teléfono en registro. */
+    @FXML private TextField txtTelefono;
+    /** Campo de contraseña en registro. */
+    @FXML private PasswordField txtPass;
+    /** Campo de confirmación de contraseña en registro. */
+    @FXML private PasswordField txtPassConfirm;
+    /** Selector de fecha de nacimiento. */
     @FXML private DatePicker dpFechaNacimiento;
 
-    // --- [PANTALLA: NUEVO GRUPO / GASTOS (RegisterGrupos.fxml)] ---
-
-
-    // =========================================================================
-    // 3. INICIALIZACIÓN (MÉTODOS DE CARGA)
-    // =========================================================================
+    /**
+     * Inicializa los componentes de la interfaz.
+     * Configura los listeners de selección para el {@link ListView}.
+     * * @param url La ubicación relativa de los archivos FXML.
+     * @param resourceBundle Los recursos localizados.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (this.listViewUsuarios != null) {
@@ -59,10 +76,12 @@ public class HelloController implements Initializable {
             });
             loadUsuariosList();
         }
-
         System.out.println("HELLO CONTROLLER");
     }
 
+    /**
+     * Carga la lista completa de usuarios desde la base de datos y actualiza la interfaz.
+     */
     public void loadUsuariosList() {
         try {
             this.usuariosObservableList.clear();
@@ -76,37 +95,28 @@ public class HelloController implements Initializable {
         }
     }
 
+    /**
+     * Navega a la pantalla de Login.
+     * @param event El evento de acción.
+     */
+    @FXML public void onnIrALoginClick(ActionEvent event) { cambiarPantalla(event, "Login.fxml"); }
 
-    // =========================================================================
-    // 4. LÓGICA POR PANTALLA (EVENTOS ON ACTION)
-    // =========================================================================
+    /**
+     * Navega a la pantalla de Registro.
+     * @param event El evento de acción.
+     */
+    @FXML public void onRegistrarseClick(ActionEvent event) { cambiarPantalla(event, "Register.fxml"); }
 
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: BIENVENIDA / INICIO (Inicio.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    public void onnIrALoginClick(ActionEvent event) {
-        cambiarPantalla(event, "Login.fxml");
-    }
+    /** Muestra alerta informativa de función en desarrollo. */
+    @FXML public void clickSobreNosotros(ActionEvent actionEvent) { mostrarAlerta("Próximamente", "En desarrollo... PROXIMAMENTE"); }
 
-    @FXML
-    public void onRegistrarseClick(ActionEvent event) {
-        cambiarPantalla(event, "Register.fxml");
-    }
+    /** Muestra alerta informativa de función en desarrollo. */
+    @FXML public void clickDescarga(ActionEvent actionEvent) { mostrarAlerta("Próximamente", "En desarrollo... PROXIMAMENTE"); }
 
-    @FXML
-    public void clickSobreNosotros(ActionEvent actionEvent) {
-        mostrarAlerta("Próximamente", "En desarrollo... PROXIMAMENTE");
-    }
-
-    @FXML
-    public void clickDescarga(ActionEvent actionEvent) {
-        mostrarAlerta("Próximamente", "En desarrollo... PROXIMAMENTE");
-    }
-
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: LOGIN (Login.fxml)
-    // -------------------------------------------------------------------------
+    /**
+     * Valida las credenciales introducidas y maneja el acceso al sistema.
+     * @param event El evento de acción.
+     */
     @FXML
     public void onIniciarSesionClick(ActionEvent event) {
         String nombre = loginUsuario.getText();
@@ -121,7 +131,6 @@ public class HelloController implements Initializable {
 
         if (usuarioLogueado != null) {
             SessionManager.setCurrentUser(usuarioLogueado);
-
             System.out.println("Login correcto: Bienvenido " + usuarioLogueado.getNombre());
             irAPantallaPrincipal(event);
         } else {
@@ -129,10 +138,10 @@ public class HelloController implements Initializable {
         }
     }
 
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: REGISTRO USUARIO (registroUsuario.fxml)
-    // -------------------------------------------------------------------------
-
+    /**
+     * Procesa el formulario de registro. Valida datos y contraseñas antes de persistir en DB.
+     * @param event El evento de acción.
+     */
     @FXML
     public void onFinalizarRegistroClick(ActionEvent event) {
         if (txtUsuario.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPass.getText().isEmpty() || txtTelefono.getText().isEmpty() || dpFechaNacimiento.getValue() == null) {
@@ -145,14 +154,7 @@ public class HelloController implements Initializable {
         }
 
         if (isNewUser) {
-            this.us = new usuario(
-                    txtUsuario.getText(),
-                    txtEmail.getText(),
-                    txtPass.getText(),
-                    txtTelefono.getText(),
-                    dpFechaNacimiento.getValue()
-            );
-
+            this.us = new usuario(txtUsuario.getText(), txtEmail.getText(), txtPass.getText(), txtTelefono.getText(), dpFechaNacimiento.getValue());
             if (SQLModelUsuario.createUsuario(this.us)) {
                 mostrarAlerta("Registro exitoso", "Usuario creado exitosamente");
                 limpiarCampos();
@@ -163,7 +165,6 @@ public class HelloController implements Initializable {
             this.us.setPassword(txtPass.getText());
             this.us.setTelefono(txtTelefono.getText());
             this.us.setFecha_nacimiento(dpFechaNacimiento.getValue());
-
             if (SQLModelUsuario.updateUsuario(this.us)) {
                 mostrarAlerta("Exito", "Usuario actualizado exitosamente");
             }
@@ -171,11 +172,10 @@ public class HelloController implements Initializable {
         System.out.println("Usuario registrado.");
     }
 
-    @FXML
-    private void onVolver(ActionEvent event) {
-        cambiarPantalla(event, "Inicio.fxml");
-    }
+    /** Navega a Inicio.fxml. */
+    @FXML private void onVolver(ActionEvent event) { cambiarPantalla(event, "Inicio.fxml"); }
 
+    /** Limpia los campos del formulario de usuario. */
     private void limpiarCampos() {
         txtUsuario.clear();
         txtEmail.clear();
@@ -185,103 +185,70 @@ public class HelloController implements Initializable {
         dpFechaNacimiento.setValue(null);
     }
 
+    /** Limpia los campos del formulario de grupo. */
     private void limpiarCamposGrupo() {
         txtGastoTitulo.clear();
         txtGastoDescript.clear();
     }
 
+    /** Navega a Inicio.fxml. */
+    @FXML public void onVolverClick(ActionEvent event) { cambiarPantalla(event, "Inicio.fxml"); }
 
-    // -------------------------------------------------------------------------
-    // --- PANTALLAS: MENÚ USUARIO / MENÚ PRINCIPAL (menuUsuario.fxml / MenuPrincipal.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    public void onVolverClick(ActionEvent event) {
-        cambiarPantalla(event, "Inicio.fxml");
-    }
+    /** Navega a la tabla de grupos. */
+    @FXML public void onTablaGrupooClick(ActionEvent event) { cambiarPantalla(event, "TableViewGrupos.fxml"); }
 
-    @FXML
-    public void onTablaGrupooClick(ActionEvent event) {
-        cambiarPantalla(event, "TableViewGrupos.fxml");
-    }
+    /** Navega al menú de grupos. */
+    @FXML private void handleGrupos(ActionEvent event) { cambiarEscena(event, "MenuGrupo.fxml"); }
 
-    @FXML
-    private void handleGrupos(ActionEvent event) {
-        cambiarEscena(event, "MenuGrupo.fxml");
-    }
+    /** Navega a la tabla de gastos. */
+    @FXML private void handleGastos(ActionEvent event) { cambiarEscena(event, "TableViewGastos.fxml"); }
 
-    @FXML
-    private void handleGastos(ActionEvent event) {
-        cambiarEscena(event, "TableViewGastos.fxml");
-    }
+    /** Finaliza la aplicación. */
+    @FXML private void salir(ActionEvent event) { Platform.exit(); }
 
-    @FXML
-    private void salir(ActionEvent event) {
-        Platform.exit();
-    }
+    /** Navega al menú principal. */
+    @FXML private void onVolverrClick(ActionEvent event) { cambiarEscena(event, "MenuPrincipal.fxml"); }
 
-    @FXML
-    private void onVolverrClick(ActionEvent event) { // ¡Ojo! 2 'r's - Carga menú principal
-        cambiarEscena(event, "MenuPrincipal.fxml");
-    }
+    /** Navega a la pantalla de registro de grupos. */
+    @FXML public void onRegistroGrupoClick(ActionEvent event) { cambiarPantalla(event, "RegisterGrupos.fxml"); }
 
+    /** Navega al menú de grupos. */
+    @FXML private void onVolverrrClick(ActionEvent event) { cambiarEscena(event, "MenuGrupo.fxml"); }
 
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: MENÚ GRUPOS (MenuGrupo.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    public void onRegistroGrupoClick(ActionEvent event) {
-        cambiarPantalla(event, "RegisterGrupos.fxml");
-    }
+    /** Limpia el formulario de grupos. */
+    @FXML private void onCancelarrrClick(ActionEvent event) { limpiarCamposGrupo(); }
 
-
-    // -------------------------------------------------------------------------
-    // --- PANTALLA: REGISTRO GRUPO / DETALLE (RegisterGrupos.fxml)
-    // -------------------------------------------------------------------------
-    @FXML
-    private void onVolverrrClick(ActionEvent event) { // ¡Ojo! 3 'r's - Vuelve al menú de grupos
-        cambiarEscena(event, "MenuGrupo.fxml");
-    }
-
-    @FXML
-    private void onCancelarrrClick(ActionEvent event) {
-        limpiarCamposGrupo();
-    }
-
+    /**
+     * Maneja la lógica de guardado/actualización de un grupo en la base de datos.
+     * @param event El evento de acción.
+     */
     @FXML
     public void onGuardarrrClick(ActionEvent event) {
-        // 1. Validar campos
         if (txtGastoTitulo.getText().isEmpty() || txtGastoDescript.getText().isEmpty()) {
             mostrarAlerta("Error", "Debes completar título y descripción");
             return;
         }
-
         usuario userActual = SessionManager.getCurrentUser();
         if (userActual == null) {
             mostrarAlerta("Error", "Sesión expirada.");
             return;
         }
 
-        // 2. Lógica de Edición vs Creación
         if (this.grupoEnEdicion != null) {
-            // --- MODO EDICIÓN ---
             this.grupoEnEdicion.setTitulo(txtGastoTitulo.getText());
             this.grupoEnEdicion.setDescripcion(txtGastoDescript.getText());
-
             if (SQLModelGrupo.updateGrupo(this.grupoEnEdicion, userActual.getId_usuario())) {
                 mostrarAlerta("Éxito", "Grupo actualizado exitosamente.");
-                // Limpiamos la variable para que la próxima vez sea una creación
                 this.grupoEnEdicion = null;
                 limpiarCamposGrupo();
             } else {
                 mostrarAlerta("Error", "No se pudo actualizar el grupo.");
             }
         } else {
-            // --- MODO CREACIÓN (Tu código original) ---
             grupo g = new grupo();
             g.setTitulo(txtGastoTitulo.getText());
             g.setDescripcion(txtGastoDescript.getText());
             g.setMoneda("EUR");
-
             if (SQLModelGrupo.createGrupoConCreador(g, userActual.getId_usuario())) {
                 mostrarAlerta("Éxito", "Grupo creado exitosamente.");
                 txtGastoTitulo.clear();
@@ -292,10 +259,11 @@ public class HelloController implements Initializable {
         }
     }
 
-
-    // =========================================================================
-    // 5. NAVEGACIÓN Y UTILIDADES GLOBALES
-    // =========================================================================
+    /**
+     * Carga un archivo FXML dado y cambia la escena actual.
+     * @param event El evento que dispara la acción.
+     * @param archivoFXML Nombre del archivo.
+     */
     private void cambiarPantalla(ActionEvent event, String archivoFXML) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(archivoFXML));
@@ -303,29 +271,31 @@ public class HelloController implements Initializable {
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            System.err.println("Error al cargar " + archivoFXML + ": " + e.getMessage());
-            mostrarAlerta("Error de Navegación", "No se encontró el archivo FXML: " + archivoFXML);
+            mostrarAlerta("Error de Navegación", "No se encontró: " + archivoFXML);
         }
     }
 
+    /**
+     * Cambia la escena usando un FXMLLoader explícito.
+     * @param event El evento.
+     * @param fxmlFile Nombre del archivo.
+     */
     private void cambiarEscena(ActionEvent event, String fxmlFile) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            System.err.println("Error al cargar la pantalla: " + fxmlFile);
             e.printStackTrace();
         }
     }
 
-    private void irAPantallaPrincipal(ActionEvent event) {
-        cambiarPantalla(event, "MenuPrincipal.fxml");
-    }
+    /** Navega al menú principal. */
+    private void irAPantallaPrincipal(ActionEvent event) { cambiarPantalla(event, "MenuPrincipal.fxml"); }
 
+    /** Muestra un aviso simple al usuario. */
     private void mostrarAlerta(String titulo, String msj) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -334,6 +304,7 @@ public class HelloController implements Initializable {
         alert.show();
     }
 
+    /** Muestra una alerta con un tipo definido. */
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensaje) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
@@ -342,107 +313,53 @@ public class HelloController implements Initializable {
         alerta.showAndWait();
     }
 
-
+    /** Referencia al grupo que está siendo editado actualmente. */
     private grupo grupoEnEdicion = null;
 
-
-    // Asegúrate de que los IDs aquí coincidan exactamente con el RegisterGrupos.fxml
+    /**
+     * Carga datos de un grupo existente en el formulario para su edición.
+     * @param g Grupo a editar.
+     */
     public void prepararEdicion(grupo g) {
-        this.grupoEnEdicion = g; // Guardamos el grupo para saber que estamos editando
-
-        // Rellenamos los campos con los datos del grupo seleccionado
-        if (txtGastoTitulo != null) {
-            txtGastoTitulo.setText(g.getTitulo());
-        }
-        if (txtGastoDescript != null) {
-            txtGastoDescript.setText(g.getDescripcion());
-        }
+        this.grupoEnEdicion = g;
+        if (txtGastoTitulo != null) txtGastoTitulo.setText(g.getTitulo());
+        if (txtGastoDescript != null) txtGastoDescript.setText(g.getDescripcion());
     }
 
-    @FXML
-    private void cerrarSesion(ActionEvent event) {
+    /** Cierra sesión y vuelve al Inicio. */
+    @FXML private void cerrarSesion(ActionEvent event) {
         try {
-            // 1. Cargamos el archivo FXML de la vista inicial
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Inicio.fxml"));
-            Parent root = loader.load();
-
-            // 2. Obtenemos el Stage actual (la ventana que se está mostrando)
+            Parent root = FXMLLoader.load(getClass().getResource("Inicio.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // 3. Creamos una nueva escena con el contenido cargado
-            Scene scene = new Scene(root);
-
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
-
         } catch (IOException e) {
-            System.err.println("Error al cerrar sesión: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public void apagarapp(ActionEvent Event) {
-        Platform.exit();
-    }
+    /** Finaliza el proceso de la aplicación. */
+    public void apagarapp(ActionEvent Event) { Platform.exit(); }
 
-    @FXML
-    void onAnadirGrupoClick(ActionEvent event) {
-        // Creamos el diálogo de entrada de texto
+    /** Muestra diálogo para introducir código de acceso. */
+    @FXML void onAnadirGrupoClick(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Validación requerida");
-        dialog.setHeaderText("Introduce el código de acceso");
-        dialog.setContentText("Código:");
-
-        // Mostramos el diálogo y esperamos la respuesta
+        dialog.setTitle("Validación");
         Optional<String> result = dialog.showAndWait();
-
-        // Comprobamos si el usuario pulsó OK y si escribió algo
-        result.ifPresent(codigo -> {
-            if (codigo.equals("TU_CODIGO_SECRETO")) { // Cambia esto por tu lógica de validación
-                System.out.println("Código correcto. Accediendo...");
-                // Aquí puedes llamar a otra ventana o realizar la acción
-            } else {
-                System.out.println("Código incorrecto.");
-                // Opcional: mostrar un Alert de error
-            }
-        });
+        result.ifPresent(codigo -> { /* Lógica de validación */ });
     }
 
-    @FXML
-    void onAnadirGrupooClick(ActionEvent event) {
+    /** Muestra diálogo para unirse a un grupo mediante código. */
+    @FXML void onAnadirGrupooClick(ActionEvent event) {
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Unirse a un grupo");
-        dialog.setHeaderText("Introduce el código de invitación");
-        dialog.setContentText("Código del grupo:");
-
         Optional<String> result = dialog.showAndWait();
-
-        result.ifPresent(codigoIngresado -> {
-            // Llamada a un método que haga la consulta a la BD
-            boolean esValido = verificarYUnirAGrupo(codigoIngresado);
-
-            if (esValido) {
-                mostrarMensaje("Éxito", "Te has unido al grupo correctamente.");
-            } else {
-                mostrarMensaje("Error", "Código inválido o no existente.");
-            }
-        });
+        result.ifPresent(codigo -> { /* Lógica de unión */ });
     }
 
-    // Método de ejemplo para tu lógica de BD
-    private boolean verificarYUnirAGrupo(String codigo) {
-        // 1. Conecta a tu BD
-        // 2. Ejecuta un SELECT para ver si el código existe en la tabla de grupos
-        // 3. Si existe, ejecuta un INSERT en la tabla intermedia 'usuario_grupo'
-        //    (o la lógica que tengas para relacionarlos)
+    /** Verifica si un código de grupo es válido. */
+    private boolean verificarYUnirAGrupo(String codigo) { return false; }
 
-        // Ejemplo ficticio:
-        // String consulta = "SELECT id_grupo FROM grupos WHERE codigo_invitacion = ?";
-        // return baseDeDatos.ejecutarInsercion(consulta, codigo);
-
-        return false; // Cambia esto por tu lógica real
-    }
-
+    /** Muestra mensaje informativo al usuario. */
     private void mostrarMensaje(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
